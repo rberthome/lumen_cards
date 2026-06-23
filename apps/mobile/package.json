@@ -1,0 +1,48 @@
+{
+  "name": "lumen_cards",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "dependencies": {
+    "@lumen_cards/types": "*",
+    "@hookform/resolvers": "^5.4.0",
+    "@tanstack/react-query": "^5.101.1",
+    "expo": "~56.0.12",
+    "expo-localization": "^56.0.6",
+    "expo-status-bar": "~56.0.4",
+    "i18n-js": "^4.5.3",
+    "react": "19.2.3",
+    "react-hook-form": "^7.80.0",
+    "react-native": "0.85.3",
+    "zod": "^4.4.3",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@types/react": "~19.2.17",
+    "@typescript-eslint/eslint-plugin": "^8.62.0",
+    "@typescript-eslint/parser": "^8.62.0",
+    "eslint": "^10.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
+    "prettier": "^3.8.4",
+    "typescript": "~6.0.3"
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "prepare": "cd ../.. && husky"
+  },
+  "private": true,
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{ts,tsx,json,md}": "prettier --write"
+  }
+}

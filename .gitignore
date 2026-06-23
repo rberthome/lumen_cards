@@ -3,6 +3,11 @@
 # dependencies
 node_modules/
 
+# Laravel API
+apps/api/.env
+apps/api/storage/*.key
+apps/api/vendor/
+
 # Expo
 .expo/
 dist/

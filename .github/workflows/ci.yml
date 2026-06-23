@@ -5,8 +5,12 @@ on:
     branches: [main, develop]
 
 jobs:
-  ci:
+  mobile:
+    name: Mobile (Expo)
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/mobile
     steps:
       - uses: actions/checkout@v4
 
@@ -14,6 +18,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: apps/mobile/package-lock.json
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
@@ -26,3 +31,33 @@ jobs:
 
       - name: Tests
         run: npm test -- --passWithNoTests
+
+  api:
+    name: API (Laravel)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/api
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: pdo, pdo_pgsql, zip
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Copy env
+        run: cp .env.example .env && php artisan key:generate
+
+      - name: PHP Lint (Pint)
+        run: ./vendor/bin/pint --test
+
+      - name: Tests
+        run: php artisan test
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ':memory:'
