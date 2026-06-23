@@ -1,0 +1,53 @@
+{
+  "app": { "name": "LumenCards", "tagline": "The light of knowledge" },
+  "nav": {
+    "landing": "Home", "admin": "Administration", "login": "Login", "logout": "Logout",
+    "users": "Users", "stats": "Statistics"
+  },
+  "landing": {
+    "hero": {
+      "title": "The light of knowledge", "subtitle": "Learn philosophy, Kabbalah and Masonic symbolism through spaced repetition.",
+      "cta_primary": "Download the app", "cta_secondary": "Learn more"
+    },
+    "features": {
+      "title": "Why LumenCards?",
+      "sm2": { "title": "SM-2 Spaced Repetition", "desc": "The algorithm adapts the revision pace to your actual progress." },
+      "ai": { "title": "AI Generation", "desc": "Turn a personal reflection into a flashcard instantly." },
+      "levels": { "title": "Masonic Levels", "desc": "Progress from Apprentice to Grand Master through your learning." }
+    },
+    "philosophy": {
+      "title": "An initiatic journey", "subtitle": "From Kant to the Kabbalah",
+      "desc": "LumenCards is designed for those who seek to deepen their understanding of the great philosophical and spiritual traditions."
+    },
+    "cta": { "title": "Begin your journey", "desc": "Available on iOS and Android.", "button": "Download for free" }
+  },
+  "admin": {
+    "title": "Dashboard", "users": "Users", "stats": "Global statistics",
+    "user_count": "{count} users", "delete_user": "Delete user",
+    "export_user": "Export data", "confirm_delete": "Confirm deletion",
+    "search_placeholder": "Search a user..."
+  },
+  "auth": {
+    "login": "Login", "email": "Email address", "password": "Password",
+    "submit": "Sign in", "invalid_credentials": "Invalid credentials"
+  },
+  "rgpd": {
+    "right_to_forget": "Right to erasure",
+    "right_to_forget_desc": "This action will permanently delete all data for this user: account, reviewed cards, statistics and sessions. This action is irreversible.",
+    "data_export": "Data export",
+    "data_export_desc": "Downloads a JSON file containing all user data (right to data portability, GDPR art. 20).",
+    "confirm": "I confirm — irreversible action",
+    "warning": "Warning: irreversible action",
+    "anonymized": "Data has been anonymized"
+  },
+  "errors": {
+    "generic": "Something went wrong", "network": "Connection issue",
+    "unauthorized": "Unauthorized", "not_found": "Not found"
+  },
+  "common": {
+    "save": "Save", "cancel": "Cancel", "delete": "Delete",
+    "confirm": "Confirm", "back": "Back", "loading": "Loading...",
+    "retry": "Retry", "yes": "Yes", "no": "No", "search": "Search",
+    "actions": "Actions", "created_at": "Created", "level": "Level", "xp": "XP"
+  }
+}
