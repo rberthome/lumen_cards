@@ -48,11 +48,11 @@ web:
 	docker compose up -d web
 
 web-local:
-	npm run dev --prefix apps/web
+	cd apps/web && npm run dev
 
 # ── Mobile Expo ─────────────────────────────────────────────────
 mobile:
-	npm run start --prefix apps/mobile
+	cd apps/mobile && npm run start
 
 # ── Types partagés ──────────────────────────────────────────────
 types-generate:
@@ -63,18 +63,18 @@ types-generate:
 
 # ── Qualité ─────────────────────────────────────────────────────
 lint:
-	npm run lint --prefix apps/mobile
-	npm run lint --prefix apps/web
+	cd apps/mobile && npm run lint
+	cd apps/web && npm run lint
 
 typecheck:
-	npm run typecheck --prefix apps/mobile
-	npm run typecheck --prefix apps/web
+	cd apps/mobile && npm run typecheck
+	cd apps/web && npm run typecheck
 
 # ── Install ──────────────────────────────────────────────────────
 install:
 	cp -n .env.example .env 2>/dev/null || true
-	npm install --prefix apps/mobile --legacy-peer-deps
-	npm install --prefix apps/web
+	cd apps/mobile && npm install --legacy-peer-deps
+	cd apps/web && npm install
 	docker compose up -d db redis
 	docker compose run --rm api composer install
 	docker compose run --rm api php artisan key:generate

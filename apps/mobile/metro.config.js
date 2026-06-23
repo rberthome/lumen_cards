@@ -14,4 +14,9 @@ config.resolver.nodeModulesPaths = [
   path.resolve(monorepoRoot, 'node_modules'),
 ];
 
+// Resolve local monorepo packages without npm registry
+config.resolver.extraNodeModules = {
+  '@lumen_cards/types': path.resolve(monorepoRoot, 'packages/types'),
+};
+
 module.exports = config;
