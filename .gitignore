@@ -3,6 +3,17 @@
 # dependencies
 node_modules/
 
+# Laravel API
+apps/api/.env
+apps/api/storage/*.key
+apps/api/vendor/
+
+# Monorepo root env
+.env
+
+# Vue.js build
+apps/web/dist/
+
 # Expo
 .expo/
 dist/

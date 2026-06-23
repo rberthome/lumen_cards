@@ -1,2 +1,1 @@
-npx lint-staged
-npx tsc --noEmit
+cd apps/mobile && npx lint-staged && npx tsc --noEmit

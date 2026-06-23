@@ -1,0 +1,43 @@
+networks:
+  lumen_api:
+    driver: bridge
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        UID: ${UID:-1000}
+    environment:
+      XDG_CONFIG_HOME: /tmp
+    volumes:
+      - '.:/app'
+    networks:
+      - lumen_api
+    ports:
+      - ${APP_PORT:-8090}:8080
+
+  postgres:
+    image: 'postgres:17'
+    environment:
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD}'
+    networks:
+      - lumen_api
+
+  postgres-testing:
+    image: 'postgres:17'
+    environment:
+      POSTGRES_DB: 'lumen_testing'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD}'
+    networks:
+      - lumen_api
+
+  mailpit:
+    image: 'axllent/mailpit:latest'
+    networks:
+      - lumen_api
+    ports:
+      - '${MAILPIT_PORT:-8026}:8025'

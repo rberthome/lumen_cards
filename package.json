@@ -1,45 +1,18 @@
 {
   "name": "lumen_cards",
-  "version": "1.0.0",
-  "main": "index.ts",
-  "dependencies": {
-    "@hookform/resolvers": "^5.4.0",
-    "@tanstack/react-query": "^5.101.1",
-    "expo": "~56.0.12",
-    "expo-localization": "^56.0.6",
-    "expo-status-bar": "~56.0.4",
-    "i18n-js": "^4.5.3",
-    "react": "19.2.3",
-    "react-hook-form": "^7.80.0",
-    "react-native": "0.85.3",
-    "zod": "^4.4.3",
-    "zustand": "^5.0.14"
+  "private": true,
+  "workspaces": [
+    "apps/mobile",
+    "apps/web",
+    "packages/*"
+  ],
+  "scripts": {
+    "mobile": "npm run start --workspace=apps/mobile",
+    "types:generate": "cd apps/api && docker compose exec app php artisan typescript:transform && cp resources/ts/generated.d.ts ../../packages/types/generated.d.ts",
+    "lint": "npm run lint --workspace=apps/mobile",
+    "typecheck": "npm run typecheck --workspace=apps/mobile"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.5",
-    "@types/react": "~19.2.17",
-    "@typescript-eslint/eslint-plugin": "^8.62.0",
-    "@typescript-eslint/parser": "^8.62.0",
-    "eslint": "^10.5.0",
-    "eslint-config-prettier": "^10.1.8",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.8",
-    "prettier": "^3.8.4",
-    "typescript": "~6.0.3"
-  },
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "prepare": "husky"
-  },
-  "private": true,
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{ts,tsx,json,md}": "prettier --write"
+    "prettier": "^3.8.4"
   }
 }
