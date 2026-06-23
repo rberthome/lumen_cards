@@ -1,0 +1,116 @@
+import { StyleSheet } from 'react-native';
+import { colors, spacing, typography, shadows } from '@/design-system/tokens';
+
+export const styles = StyleSheet.create({
+  container: { flex: 1, padding: spacing[4] },
+  progressBar: {
+    height: 4,
+    backgroundColor: colors.neutral[100],
+    borderRadius: 2,
+    marginBottom: spacing[1],
+    overflow: 'hidden',
+  },
+  progressFill: { height: '100%', backgroundColor: colors.gold[500], borderRadius: 2 },
+  progressText: {
+    textAlign: 'right',
+    fontSize: typography.fontSize.xs,
+    color: colors.neutral[400],
+    marginBottom: spacing[4],
+  },
+  cardWrapper: { flex: 1, marginBottom: spacing[4] },
+  card: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backfaceVisibility: 'hidden',
+    borderRadius: 20,
+    ...shadows.gold,
+  },
+  cardFront: { backgroundColor: colors.neutral[0] },
+  cardBack: { backgroundColor: colors.indigo[900] },
+  cardContent: { flexGrow: 1, padding: spacing[6], justifyContent: 'center', alignItems: 'center' },
+  cardLabel: {
+    fontSize: typography.fontSize.xs,
+    letterSpacing: 2,
+    textTransform: 'uppercase',
+    color: colors.gold[500],
+    marginBottom: spacing[4],
+    fontWeight: typography.fontWeight.semibold,
+  },
+  cardText: {
+    fontSize: typography.fontSize.xl,
+    color: colors.neutral[900],
+    textAlign: 'center',
+    lineHeight: typography.fontSize.xl * typography.lineHeight.relaxed,
+    fontWeight: typography.fontWeight.medium,
+  },
+  source: {
+    fontSize: typography.fontSize.xs,
+    color: colors.neutral[400],
+    marginTop: spacing[4],
+    fontStyle: 'italic',
+  },
+  explanation: {
+    marginTop: spacing[5],
+    borderTopWidth: 1,
+    borderTopColor: colors.indigo[700],
+    paddingTop: spacing[4],
+    width: '100%',
+  },
+  explanationLabel: {
+    fontSize: typography.fontSize.xs,
+    color: colors.gold[400],
+    letterSpacing: 1.5,
+    textTransform: 'uppercase',
+    marginBottom: spacing[2],
+  },
+  explanationText: {
+    fontSize: typography.fontSize.sm,
+    color: colors.neutral[200],
+    lineHeight: typography.fontSize.sm * typography.lineHeight.relaxed,
+  },
+  revealBtn: {
+    backgroundColor: colors.indigo[600],
+    paddingVertical: spacing[4],
+    borderRadius: 16,
+    alignItems: 'center',
+  },
+  revealText: {
+    color: colors.neutral[0],
+    fontSize: typography.fontSize.lg,
+    fontWeight: typography.fontWeight.bold,
+  },
+  actions: { flexDirection: 'row', gap: spacing[3] },
+  actionBtn: { flex: 1, paddingVertical: spacing[4], borderRadius: 16, alignItems: 'center' },
+  actionNo: {
+    backgroundColor: colors.semantic.error + '20',
+    borderWidth: 2,
+    borderColor: colors.semantic.error,
+  },
+  actionYes: {
+    backgroundColor: colors.semantic.success + '20',
+    borderWidth: 2,
+    borderColor: colors.semantic.success,
+  },
+  actionNoText: {
+    color: colors.semantic.error,
+    fontWeight: typography.fontWeight.bold,
+    fontSize: typography.fontSize.base,
+  },
+  actionYesText: {
+    color: colors.semantic.success,
+    fontWeight: typography.fontWeight.bold,
+    fontSize: typography.fontSize.base,
+  },
+  continueBtn: {
+    backgroundColor: colors.gold[500],
+    paddingVertical: spacing[4],
+    borderRadius: 16,
+    alignItems: 'center',
+  },
+  continueText: {
+    color: colors.neutral[0],
+    fontWeight: typography.fontWeight.bold,
+    fontSize: typography.fontSize.lg,
+  },
+});

@@ -2,6 +2,7 @@ import type { FeatureFlag } from './featureFlags.types';
 
 export const featureFlagsConfig: Record<FeatureFlag, boolean> = {
   AI_CARD_GENERATION: true,
+  REVIEW_SESSION: true,
   SPACED_REPETITION_V2: false,
   STATS_ADVANCED: false,
   SOCIAL_SHARING: false,
