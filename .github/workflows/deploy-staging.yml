@@ -5,21 +5,36 @@ on:
     branches: [develop]
 
 jobs:
-  deploy:
+  deploy-mobile:
+    name: Mobile → Staging
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/mobile
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
-
-      - name: Build (Expo export)
+          cache-dependency-path: apps/mobile/package-lock.json
+      - run: npm ci --legacy-peer-deps
+      - name: Build Expo
         run: npx expo export --platform web
+      - name: Deploy
+        run: echo "TODO: EAS Update staging channel"
 
-      - name: Deploy to staging
-        run: echo "TODO: configure your staging deploy (EAS, Netlify, etc.)"
+  deploy-api:
+    name: API → Staging
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+      - run: composer install --no-dev --prefer-dist
+      - name: Deploy
+        run: echo "TODO: configure staging deploy (Docker/Forge/Vapor)"

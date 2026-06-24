@@ -1,0 +1,53 @@
+{
+  "app": { "name": "LumenCards", "tagline": "La lumière de la connaissance" },
+  "nav": {
+    "landing": "Accueil", "admin": "Administration", "login": "Connexion", "logout": "Déconnexion",
+    "users": "Utilisateurs", "stats": "Statistiques"
+  },
+  "landing": {
+    "hero": {
+      "title": "La lumière de la connaissance", "subtitle": "Apprenez la philosophie, la Kabbale et le symbolisme maçonnique par la répétition espacée.",
+      "cta_primary": "Télécharger l'app", "cta_secondary": "En savoir plus"
+    },
+    "features": {
+      "title": "Pourquoi LumenCards ?",
+      "sm2": { "title": "Répétition espacée SM-2", "desc": "L'algorithme adapte le rythme de révision à votre progression réelle." },
+      "ai": { "title": "Génération IA", "desc": "Transformez une réflexion personnelle en flashcard en un instant." },
+      "levels": { "title": "Niveaux maçonniques", "desc": "Progressez d'Apprenti à Grand Maître au fil de votre apprentissage." }
+    },
+    "philosophy": {
+      "title": "Un voyage initiatique", "subtitle": "De Kant à la Kabbale",
+      "desc": "LumenCards est conçu pour ceux qui cherchent à approfondir leur compréhension des grandes traditions philosophiques et spirituelles."
+    },
+    "cta": { "title": "Commencez votre voyage", "desc": "Disponible sur iOS et Android.", "button": "Télécharger gratuitement" }
+  },
+  "admin": {
+    "title": "Tableau de bord", "users": "Utilisateurs", "stats": "Statistiques globales",
+    "user_count": "{count} utilisateurs", "delete_user": "Supprimer l'utilisateur",
+    "export_user": "Exporter les données", "confirm_delete": "Confirmer la suppression",
+    "search_placeholder": "Rechercher un utilisateur..."
+  },
+  "auth": {
+    "login": "Connexion", "email": "Adresse e-mail", "password": "Mot de passe",
+    "submit": "Se connecter", "invalid_credentials": "Identifiants incorrects"
+  },
+  "rgpd": {
+    "right_to_forget": "Droit à l'oubli",
+    "right_to_forget_desc": "Cette action supprimera définitivement toutes les données de cet utilisateur : compte, cartes révisées, statistiques et sessions. Cette action est irréversible.",
+    "data_export": "Export des données",
+    "data_export_desc": "Télécharge un fichier JSON contenant toutes les données de l'utilisateur (droit à la portabilité, art. 20 RGPD).",
+    "confirm": "Je confirme — action irréversible",
+    "warning": "Attention : action irréversible",
+    "anonymized": "Les données ont été anonymisées"
+  },
+  "errors": {
+    "generic": "Une erreur est survenue", "network": "Problème de connexion",
+    "unauthorized": "Accès non autorisé", "not_found": "Introuvable"
+  },
+  "common": {
+    "save": "Enregistrer", "cancel": "Annuler", "delete": "Supprimer",
+    "confirm": "Confirmer", "back": "Retour", "loading": "Chargement...",
+    "retry": "Réessayer", "yes": "Oui", "no": "Non", "search": "Rechercher",
+    "actions": "Actions", "created_at": "Créé le", "level": "Niveau", "xp": "XP"
+  }
+}

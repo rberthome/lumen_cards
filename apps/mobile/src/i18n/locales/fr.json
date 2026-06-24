@@ -1,0 +1,106 @@
+{
+  "app": {
+    "name": "LumenCards",
+    "tagline": "La lumière de la connaissance"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "review": "Réviser",
+    "decks": "Decks",
+    "stats": "Statistiques",
+    "settings": "Paramètres"
+  },
+  "card": {
+    "front": "Recto",
+    "back": "Verso",
+    "reveal": "Révéler la réponse",
+    "correct": "Je savais",
+    "incorrect": "Je ne savais pas",
+    "source": "Source"
+  },
+  "review": {
+    "session_start": "Commencer la révision",
+    "session_complete": "Session terminée !",
+    "cards_reviewed": "{{count}} cartes révisées",
+    "streak": "Série de {{count}} jours",
+    "well_done": "Bravo, Frère !",
+    "keep_going": "Continue sur cette voie",
+    "config_title": "Session de révision",
+    "due_today": "{{count}} cartes dues aujourd'hui",
+    "choose_size": "Combien de cartes veux-tu réviser ?",
+    "size_5": "5 cartes",
+    "size_10": "10 cartes",
+    "size_20": "20 cartes",
+    "size_all": "Toutes ({{count}})",
+    "reveal": "Révéler le verso",
+    "knew": "Je savais",
+    "didnt_know": "Je ne savais pas",
+    "explanation": "Explication",
+    "continue": "Continuer",
+    "accuracy": "Précision",
+    "xp_earned": "XP gagnés",
+    "duration": "Durée",
+    "new_session": "Nouvelle session",
+    "finish": "Terminer",
+    "loading": "Chargement des cartes…",
+    "submitting": "Calcul des résultats…",
+    "error_load": "Erreur lors du chargement",
+    "progress": "{{current}} / {{total}}"
+  },
+  "deck": {
+    "create": "Créer un deck",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "cards_count": "{{count}} cartes",
+    "due_today": "{{count}} dues aujourd'hui",
+    "categories": {
+      "philosophy": "Philosophie",
+      "kabbalah": "Kabbale",
+      "masonic": "Maçonnique",
+      "spiritual": "Spirituel",
+      "kant": "Kant",
+      "custom": "Personnel"
+    }
+  },
+  "ai_generator": {
+    "title": "Générer depuis une réflexion",
+    "placeholder": "Partage ta pensée, une citation, une réflexion du jour...",
+    "generate": "Générer les cartes",
+    "generating": "Illumination en cours...",
+    "cards_created": "{{count}} cartes créées",
+    "review_before_save": "Vérifie avant d'enregistrer"
+  },
+  "stats": {
+    "title": "Ta progression",
+    "total_cards": "Cartes totales",
+    "mastered": "Maîtrisées",
+    "in_progress": "En cours",
+    "accuracy": "Précision",
+    "streak_days": "Jours consécutifs",
+    "time_studied": "Temps d'étude",
+    "level": "Niveau"
+  },
+  "levels": {
+    "apprentice": "Apprenti",
+    "companion": "Compagnon",
+    "master": "Maître",
+    "grand_master": "Grand Maître"
+  },
+  "errors": {
+    "generic": "Une erreur est survenue",
+    "network": "Problème de connexion",
+    "not_found": "Introuvable",
+    "ai_generation": "La génération a échoué, réessaie"
+  },
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "loading": "Chargement...",
+    "retry": "Réessayer",
+    "yes": "Oui",
+    "no": "Non"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "app": {
+    "name": "LumenCards",
+    "tagline": "The light of knowledge"
+  },
+  "navigation": {
+    "home": "Home",
+    "review": "Review",
+    "decks": "Decks",
+    "stats": "Statistics",
+    "settings": "Settings"
+  },
+  "card": {
+    "front": "Front",
+    "back": "Back",
+    "reveal": "Reveal answer",
+    "correct": "I knew it",
+    "incorrect": "I didn't know",
+    "source": "Source"
+  },
+  "review": {
+    "session_start": "Start review",
+    "session_complete": "Session complete!",
+    "cards_reviewed": "{{count}} cards reviewed",
+    "streak": "{{count}}-day streak",
+    "well_done": "Well done, Brother!",
+    "keep_going": "Keep walking the path",
+    "config_title": "Review session",
+    "due_today": "{{count}} cards due today",
+    "choose_size": "How many cards do you want to review?",
+    "size_5": "5 cards",
+    "size_10": "10 cards",
+    "size_20": "20 cards",
+    "size_all": "All ({{count}})",
+    "reveal": "Reveal answer",
+    "knew": "I knew it",
+    "didnt_know": "I didn't know",
+    "explanation": "Explanation",
+    "continue": "Continue",
+    "accuracy": "Accuracy",
+    "xp_earned": "XP earned",
+    "duration": "Duration",
+    "new_session": "New session",
+    "finish": "Finish",
+    "loading": "Loading cards…",
+    "submitting": "Calculating results…",
+    "error_load": "Error loading cards",
+    "progress": "{{current}} / {{total}}"
+  },
+  "deck": {
+    "create": "Create a deck",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cards_count": "{{count}} cards",
+    "due_today": "{{count}} due today",
+    "categories": {
+      "philosophy": "Philosophy",
+      "kabbalah": "Kabbalah",
+      "masonic": "Masonic",
+      "spiritual": "Spiritual",
+      "kant": "Kant",
+      "custom": "Personal"
+    }
+  },
+  "ai_generator": {
+    "title": "Generate from a reflection",
+    "placeholder": "Share a thought, quote, or daily reflection...",
+    "generate": "Generate cards",
+    "generating": "Illuminating...",
+    "cards_created": "{{count}} cards created",
+    "review_before_save": "Review before saving"
+  },
+  "stats": {
+    "title": "Your progress",
+    "total_cards": "Total cards",
+    "mastered": "Mastered",
+    "in_progress": "In progress",
+    "accuracy": "Accuracy",
+    "streak_days": "Consecutive days",
+    "time_studied": "Study time",
+    "level": "Level"
+  },
+  "levels": {
+    "apprentice": "Apprentice",
+    "companion": "Companion",
+    "master": "Master",
+    "grand_master": "Grand Master"
+  },
+  "errors": {
+    "generic": "Something went wrong",
+    "network": "Connection issue",
+    "not_found": "Not found",
+    "ai_generation": "Generation failed, please retry"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "back": "Back",
+    "loading": "Loading...",
+    "retry": "Retry",
+    "yes": "Yes",
+    "no": "No"
+  }
+}
