@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\DeckCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,15 +13,22 @@ class Deck extends Model
 
     protected $fillable = [
         'user_id',
+        'category_id',
         'title',
         'description',
         'category',
         'cover_emoji',
+        'is_published',
     ];
 
     protected $casts = [
-        'category' => DeckCategory::class,
+        'is_published' => 'boolean',
     ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function user(): BelongsTo
     {

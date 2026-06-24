@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DeckController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\StatController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::post('auth/register', [AuthController::class, 'register']);
@@ -20,4 +22,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('review/submit', [ReviewController::class, 'submit']);
 
     Route::get('stats', [StatController::class, 'index']);
+
+    Route::middleware(AdminMiddleware::class)->prefix('admin')->group(function () {
+        Route::get('users', [AdminController::class, 'users']);
+        Route::delete('users/{id}', [AdminController::class, 'deleteUser']);
+        Route::get('users/{id}/export', [AdminController::class, 'exportUser']);
+        Route::get('stats', [AdminController::class, 'stats']);
+    });
 });

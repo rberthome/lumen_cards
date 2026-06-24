@@ -4,6 +4,7 @@ export interface FlagAdapter {
 
 export type FeatureFlag =
   | 'AI_CARD_GENERATION'
+  | 'REVIEW_SESSION'
   | 'SPACED_REPETITION_V2'
   | 'STATS_ADVANCED'
   | 'SOCIAL_SHARING'

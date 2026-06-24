@@ -75,7 +75,6 @@ install:
 	cp -n .env.example .env 2>/dev/null || true
 	cp -n apps/api/.env.example apps/api/.env 2>/dev/null || true
 	cd apps/mobile && npm install --legacy-peer-deps
-	cd apps/web && npm install
 	docker compose up -d db redis
 	docker compose run --rm api composer install
 	docker compose run --rm api php artisan key:generate

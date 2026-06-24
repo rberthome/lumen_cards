@@ -33,7 +33,7 @@ async function onConfirm() {
         {{ t('rgpd.confirm') }}
       </label>
       <div class="flex gap-3 justify-end">
-        <Button variant="ghost" @click="$emit('close')">{{ t('common.cancel') }}</Button>
+        <Button variant="secondary" @click="$emit('close')">{{ t('common.cancel') }}</Button>
         <Button variant="danger" :disabled="!confirmed" :loading="loading" @click="onConfirm">
           {{ t('common.delete') }}
         </Button>
