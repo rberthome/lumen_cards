@@ -23,9 +23,25 @@ const router = createRouter({
       ],
     },
     {
+      path: '/app',
+      component: () => import('@/features/study/AppLayout.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        { path: '', redirect: '/app/decks' },
+        { path: 'decks', component: () => import('@/features/study/views/DeckListView.vue') },
+        { path: 'decks/:id', component: () => import('@/features/study/views/DeckDetailView.vue'), props: true },
+        { path: 'review/:deckId', component: () => import('@/features/study/views/ReviewView.vue'), props: true },
+        { path: 'stats', component: () => import('@/features/study/views/StatsView.vue') },
+      ],
+    },
+    {
       path: '/login',
       component: () => import('@/features/auth/views/LoginView.vue'),
       meta: { layout: 'auth' },
+    },
+    {
+      path: '/register',
+      component: () => import('@/features/auth/views/RegisterView.vue'),
     },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],

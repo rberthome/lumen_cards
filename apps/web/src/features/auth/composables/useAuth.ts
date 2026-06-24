@@ -9,10 +9,18 @@ export function useAuth() {
   const toast = useToastStore();
   const { loading, error, execute } = useAsync();
 
+  function redirectAfterAuth() {
+    return auth.isAdmin ? router.push('/admin') : router.push('/app/decks');
+  }
+
   async function login(email: string, password: string) {
     await execute(() => auth.login(email, password));
-    await auth.fetchUser();
-    await router.push('/admin');
+    await redirectAfterAuth();
+  }
+
+  async function register(name: string, email: string, password: string, passwordConfirm: string) {
+    await execute(() => auth.register(name, email, password, passwordConfirm));
+    await redirectAfterAuth();
   }
 
   async function logout() {
@@ -21,5 +29,5 @@ export function useAuth() {
     await router.push('/login');
   }
 
-  return { login, logout, loading, error, isAuthenticated: auth.isAuthenticated };
+  return { login, register, logout, loading, error, isAuthenticated: auth.isAuthenticated };
 }

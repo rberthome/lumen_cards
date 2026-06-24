@@ -2,19 +2,36 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { authApi } from '../api/authApi';
 
-interface AuthUser { id: number; name: string; email: string; role: string }
+export interface AuthUser {
+  id: number;
+  name: string;
+  email: string;
+  role_slug: string | null;
+  role_name: string | null;
+  permissions: string[];
+}
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<AuthUser | null>(null);
   const token = ref<string | null>(localStorage.getItem('auth_token'));
 
   const isAuthenticated = computed(() => !!token.value);
-  const isAdmin = computed(() => user.value?.role === 'admin');
+  const isAdmin = computed(() => !!user.value?.role_slug);
+
+  function setAuthData(tokenValue: string, userData: AuthUser) {
+    token.value = tokenValue;
+    user.value = userData;
+    localStorage.setItem('auth_token', tokenValue);
+  }
 
   async function login(email: string, password: string) {
     const { data } = await authApi.login(email, password);
-    token.value = data.token;
-    localStorage.setItem('auth_token', data.token);
+    setAuthData(data.token, data.user);
+  }
+
+  async function register(name: string, email: string, password: string, passwordConfirm: string) {
+    const { data } = await authApi.register(name, email, password, passwordConfirm);
+    setAuthData(data.token, data.user);
   }
 
   async function logout() {
@@ -27,8 +44,8 @@ export const useAuthStore = defineStore('auth', () => {
   async function fetchUser() {
     if (!token.value) return;
     const { data } = await authApi.me();
-    user.value = data;
+    user.value = data.data;
   }
 
-  return { user, token, isAuthenticated, isAdmin, login, logout, fetchUser };
+  return { user, token, isAuthenticated, isAdmin, login, register, logout, fetchUser };
 });

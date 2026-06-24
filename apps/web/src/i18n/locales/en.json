@@ -54,7 +54,27 @@
   },
   "auth": {
     "login": "Login", "email": "Email address", "password": "Password",
-    "submit": "Sign in", "invalid_credentials": "Invalid credentials"
+    "submit": "Sign in", "invalid_credentials": "Invalid credentials",
+    "name": "Full name", "password_confirm": "Confirm password",
+    "register": "Create account", "register_subtitle": "Begin your initiatic journey",
+    "already_account": "Already have an account?", "no_account": "No account yet?"
+  },
+  "study": {
+    "my_decks": "My decks", "my_stats": "My statistics",
+    "cards": "cards", "due_today": "due", "up_to_date": "Up to date",
+    "cards_due": "cards due today",
+    "review": "Review", "search_decks": "Search a deck...",
+    "no_decks": "No decks available",
+    "review_due": "Review ({count} due)", "review_all": "Review all",
+    "start_session": "Start a session", "choose_size": "How many cards do you want to review?",
+    "size_all": "All", "start": "Start",
+    "reveal": "Reveal answer", "knew": "I knew it ✓", "didnt_know": "I didn't know ✗",
+    "explanation": "Explanation", "next": "Next card",
+    "session_done": "Session complete!",
+    "accuracy": "Accuracy", "cards_reviewed": "Cards reviewed", "streak": "Day streak",
+    "back_to_deck": "Back", "restart": "Restart",
+    "streak": "Streak", "accuracy": "Accuracy", "cards_seen": "Cards seen",
+    "mastered": "Mastered", "in_progress": "In progress", "total_time": "Total time"
   },
   "rgpd": {
     "right_to_forget": "Right to erasure",
