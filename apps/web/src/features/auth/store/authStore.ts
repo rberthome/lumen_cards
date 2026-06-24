@@ -16,7 +16,12 @@ export const useAuthStore = defineStore('auth', () => {
   const token = ref<string | null>(localStorage.getItem('auth_token'));
 
   const isAuthenticated = computed(() => !!token.value);
-  const isAdmin = computed(() => !!user.value?.role_slug);
+  const isAdmin = computed(() => user.value?.role_slug === 'admin');
+  const canAccessAdmin = computed(() => (user.value?.permissions.length ?? 0) > 0);
+
+  function hasPermission(permission: string): boolean {
+    return user.value?.permissions.includes(permission) ?? false;
+  }
 
   function setAuthData(tokenValue: string, userData: AuthUser) {
     token.value = tokenValue;
@@ -47,5 +52,5 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = data.data;
   }
 
-  return { user, token, isAuthenticated, isAdmin, login, register, logout, fetchUser };
+  return { user, token, isAuthenticated, isAdmin, canAccessAdmin, hasPermission, login, register, logout, fetchUser };
 });

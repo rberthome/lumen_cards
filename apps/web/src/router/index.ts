@@ -12,9 +12,9 @@ const router = createRouter({
     {
       path: '/admin',
       component: () => import('@/features/admin/AdminLayout.vue'),
-      meta: { requiresAuth: true },
+      meta: { requiresAuth: true, requiresAdmin: true },
       children: [
-        { path: '', redirect: '/admin/users' },
+        { path: '', redirect: '/admin/decks' },
         { path: 'users', component: () => import('@/features/admin/views/AdminUsersView.vue') },
         { path: 'stats', component: () => import('@/features/admin/views/AdminStatsView.vue') },
         { path: 'categories', component: () => import('@/features/admin/views/AdminCategoriesView.vue') },
@@ -47,10 +47,20 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to) => {
+router.beforeEach(async (to) => {
   const auth = useAuthStore();
+
+  // Hydrate l'utilisateur (rôle + permissions) au premier chargement / reload.
+  if (auth.isAuthenticated && !auth.user) {
+    try { await auth.fetchUser(); } catch { /* token invalide → traité ci-dessous */ }
+  }
+
   if (to.meta.requiresAuth && !auth.isAuthenticated) {
     return { path: '/login', query: { redirect: to.fullPath } };
+  }
+
+  if (to.meta.requiresAdmin && !auth.canAccessAdmin) {
+    return { path: '/app/decks' };
   }
 });
 

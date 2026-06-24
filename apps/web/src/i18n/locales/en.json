@@ -2,7 +2,7 @@
   "app": { "name": "LumenCards", "tagline": "The light of knowledge" },
   "nav": {
     "landing": "Home", "admin": "Administration", "login": "Login", "logout": "Logout",
-    "users": "Users", "stats": "Statistics"
+    "users": "Users", "stats": "Statistics", "moderation": "Moderation"
   },
   "landing": {
     "hero": {
@@ -74,7 +74,10 @@
     "accuracy": "Accuracy", "cards_reviewed": "Cards reviewed", "streak": "Day streak",
     "back_to_deck": "Back", "restart": "Restart",
     "streak": "Streak", "accuracy": "Accuracy", "cards_seen": "Cards seen",
-    "mastered": "Mastered", "in_progress": "In progress", "total_time": "Total time"
+    "mastered": "Mastered", "in_progress": "In progress", "total_time": "Total time",
+    "all_categories": "All", "xp_earned": "XP earned",
+    "level_label": "Level {level}", "level_up": "Level up!",
+    "day_streak": "day streak"
   },
   "rgpd": {
     "right_to_forget": "Right to erasure",

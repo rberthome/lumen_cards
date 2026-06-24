@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { RouterView, RouterLink, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '@/features/auth/store/authStore';
@@ -9,13 +10,17 @@ const route = useRoute();
 const auth = useAuthStore();
 const { logout } = useAuth();
 
-const navItems = [
-  { path: '/admin/users', label: 'nav.users', icon: '👥' },
-  { path: '/admin/stats', label: 'nav.stats', icon: '📊' },
-  { path: '/admin/categories', label: 'admin.categories', icon: '🗂️' },
-  { path: '/admin/decks', label: 'admin.decks', icon: '📚' },
-  { path: '/admin/cards', label: 'admin.cards', icon: '🃏' },
+const allNavItems = [
+  { path: '/admin/users', label: 'nav.users', icon: '👥', perm: 'user:manage' },
+  { path: '/admin/stats', label: 'nav.stats', icon: '📊', perm: 'user:manage' },
+  { path: '/admin/categories', label: 'admin.categories', icon: '🗂️', perm: 'category:manage' },
+  { path: '/admin/decks', label: 'admin.decks', icon: '📚', perm: 'deck:edit' },
+  { path: '/admin/cards', label: 'admin.cards', icon: '🃏', perm: 'card:edit' },
 ];
+
+// Le modérateur ne voit que decks + cartes ; l'admin voit tout.
+const navItems = computed(() => allNavItems.filter((item) => auth.hasPermission(item.perm)));
+const panelLabel = computed(() => (auth.isAdmin ? t('nav.admin') : t('nav.moderation')));
 </script>
 
 <template>
@@ -23,7 +28,7 @@ const navItems = [
     <aside class="flex w-56 flex-col border-r border-neutral-200 bg-white px-3 py-6">
       <div class="mb-8 px-3">
         <span class="font-serif text-lg font-bold text-gold-600">LumenCards</span>
-        <p class="text-xs text-neutral-400">Administration</p>
+        <p class="text-xs text-neutral-400">{{ panelLabel }}</p>
       </div>
 
       <nav class="flex flex-1 flex-col gap-1">

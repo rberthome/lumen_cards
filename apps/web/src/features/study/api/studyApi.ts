@@ -1,9 +1,14 @@
 import { apiClient } from '@/lib/apiClient';
-import type { DeckDto, ReviewSessionDto, ReviewResultDto, UserStatDto } from '@lumen_cards/types';
+import type { CategoryDto, DeckDto, ReviewSessionDto, ReviewResultDto, UserStatDto } from '@lumen_cards/types';
 
 export const studyApi = {
-  listDecks: () =>
-    apiClient.get<{ data: DeckDto[] }>('/decks'),
+  listDecks: (categoryId?: number) =>
+    apiClient.get<{ data: DeckDto[] }>('/decks', {
+      params: categoryId ? { category_id: categoryId } : undefined,
+    }),
+
+  listCategories: () =>
+    apiClient.get<{ data: CategoryDto[] }>('/categories'),
 
   getDeck: (id: number) =>
     apiClient.get<{ data: DeckDto }>(`/decks/${id}`),

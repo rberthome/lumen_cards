@@ -3,6 +3,8 @@ import { watch, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Button } from '@/design-system';
 import ReviewProgress from '../components/ReviewProgress.vue';
+import FlipCard from '../components/FlipCard.vue';
+import SessionResult from '../components/SessionResult.vue';
 import { useReview } from '../composables/useReview';
 
 const props = defineProps<{ deckId: string }>();
@@ -74,50 +76,48 @@ function choiceClass(choice: string): string {
       <button class="text-sm text-neutral-400 hover:text-neutral-600 text-center" @click="goBack">{{ t('common.back') }}</button>
     </template>
 
-    <!-- CARD FRONT -->
-    <template v-else-if="store.phase === 'front' && store.currentCard">
+    <!-- QCM mode -->
+    <template v-else-if="store.phase === 'front' && store.currentCard && store.currentCard.show_choices">
       <ReviewProgress v-bind="store.progress" />
-
-      <!-- QCM mode -->
-      <template v-if="store.currentCard.show_choices">
-        <div class="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm text-center min-h-36 flex items-center justify-center">
-          <p class="text-xl font-medium text-neutral-900 leading-relaxed">{{ store.currentCard.front }}</p>
-        </div>
-        <div class="flex flex-col gap-3">
-          <button
-            v-for="choice in store.shuffledChoices"
-            :key="choice"
-            :disabled="store.selectedChoice !== null"
-            :class="[
-              'rounded-xl border-2 py-4 px-5 text-left font-medium transition-all duration-300',
-              choiceClass(choice),
-            ]"
-            @click="pickChoice(choice)"
-          >
-            {{ choice }}
-          </button>
-        </div>
-      </template>
-
-      <!-- Classic mode -->
-      <template v-else>
-        <div class="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm text-center min-h-48 flex items-center justify-center">
-          <p class="text-xl font-medium text-neutral-900 leading-relaxed">{{ store.currentCard.front }}</p>
-        </div>
-        <Button @click="store.revealCard()">{{ t('study.reveal') }}</Button>
-      </template>
+      <div class="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm text-center min-h-36 flex items-center justify-center">
+        <p class="text-xl font-medium text-neutral-900 leading-relaxed">{{ store.currentCard.front }}</p>
+      </div>
+      <div class="flex flex-col gap-3">
+        <button
+          v-for="choice in store.shuffledChoices"
+          :key="choice"
+          :disabled="store.selectedChoice !== null"
+          :class="[
+            'rounded-xl border-2 py-4 px-5 text-left font-medium transition-all duration-300',
+            choiceClass(choice),
+          ]"
+          @click="pickChoice(choice)"
+        >
+          {{ choice }}
+        </button>
+      </div>
     </template>
 
-    <!-- CARD BACK (classic only) -->
-    <template v-else-if="store.phase === 'back' && store.currentCard">
+    <!-- Classic mode — carte qui se retourne (front <-> back) -->
+    <template v-else-if="(store.phase === 'front' || store.phase === 'back') && store.currentCard && !store.currentCard.show_choices">
       <ReviewProgress v-bind="store.progress" />
-      <div class="flex flex-col gap-3">
-        <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
-          <p class="text-base text-neutral-500 mb-3 pb-3 border-b border-neutral-100">{{ store.currentCard.front }}</p>
-          <p class="text-lg font-medium text-neutral-900 leading-relaxed">{{ store.currentCard.back }}</p>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-3">
+
+      <FlipCard :flipped="store.phase === 'back'">
+        <template #front>
+          <div class="h-full w-full rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm flex items-center justify-center">
+            <p class="text-xl font-medium text-neutral-900 leading-relaxed text-center">{{ store.currentCard.front }}</p>
+          </div>
+        </template>
+        <template #back>
+          <div class="h-full w-full rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm flex flex-col justify-center overflow-auto">
+            <p class="text-base text-neutral-500 mb-3 pb-3 border-b border-neutral-100">{{ store.currentCard.front }}</p>
+            <p class="text-lg font-medium text-neutral-900 leading-relaxed">{{ store.currentCard.back }}</p>
+          </div>
+        </template>
+      </FlipCard>
+
+      <Button v-if="store.phase === 'front'" @click="store.revealCard()">{{ t('study.reveal') }}</Button>
+      <div v-else class="grid grid-cols-2 gap-3">
         <Button variant="danger" @click="store.answerCard(false)">{{ t('study.didnt_know') }}</Button>
         <Button @click="store.answerCard(true)">{{ t('study.knew') }}</Button>
       </div>
@@ -142,34 +142,12 @@ function choiceClass(choice: string): string {
       <div v-if="submitting || !store.result" class="flex items-center justify-center py-20">
         <div class="h-8 w-8 animate-spin rounded-full border-2 border-gold-400 border-t-transparent" />
       </div>
-      <template v-else>
-        <div class="text-center">
-          <p class="text-5xl mb-4">{{ store.result.accuracy >= 0.8 ? '🏆' : store.result.accuracy >= 0.5 ? '⭐' : '💪' }}</p>
-          <h2 class="text-2xl font-bold text-neutral-900">{{ t('study.session_done') }}</h2>
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div class="rounded-xl bg-gold-50 p-4 text-center">
-            <p class="text-2xl font-bold text-gold-700">+{{ store.result.xp_earned }}</p>
-            <p class="text-xs text-neutral-500 mt-1">XP gagnés</p>
-          </div>
-          <div class="rounded-xl bg-green-50 p-4 text-center">
-            <p class="text-2xl font-bold text-green-700">{{ Math.round(store.result.accuracy * 100) }}%</p>
-            <p class="text-xs text-neutral-500 mt-1">{{ t('study.accuracy') }}</p>
-          </div>
-          <div class="rounded-xl bg-neutral-50 p-4 text-center">
-            <p class="text-2xl font-bold text-neutral-700">{{ store.result.cards_reviewed }}</p>
-            <p class="text-xs text-neutral-500 mt-1">{{ t('study.cards_reviewed') }}</p>
-          </div>
-          <div class="rounded-xl bg-indigo-50 p-4 text-center">
-            <p class="text-2xl font-bold text-indigo-700">{{ store.result.streak_days }}</p>
-            <p class="text-xs text-neutral-500 mt-1">{{ t('study.streak') }}</p>
-          </div>
-        </div>
-        <div class="flex gap-3">
-          <Button variant="secondary" class="flex-1" @click="goBack">{{ t('study.back_to_deck') }}</Button>
-          <Button class="flex-1" @click="store.reset(); startSession()">{{ t('study.restart') }}</Button>
-        </div>
-      </template>
+      <SessionResult
+        v-else
+        :result="store.result"
+        @back="goBack"
+        @restart="store.reset(); startSession()"
+      />
     </template>
 
   </div>

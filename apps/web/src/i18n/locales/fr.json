@@ -2,7 +2,7 @@
   "app": { "name": "LumenCards", "tagline": "La lumière de la connaissance" },
   "nav": {
     "landing": "Accueil", "admin": "Administration", "login": "Connexion", "logout": "Déconnexion",
-    "users": "Utilisateurs", "stats": "Statistiques"
+    "users": "Utilisateurs", "stats": "Statistiques", "moderation": "Modération"
   },
   "landing": {
     "hero": {
@@ -74,7 +74,10 @@
     "accuracy": "Précision", "cards_reviewed": "Cartes révisées", "streak": "Jours consécutifs",
     "back_to_deck": "Retour", "restart": "Recommencer",
     "streak": "Streak", "accuracy": "Précision", "cards_seen": "Cartes vues",
-    "mastered": "Maîtrisées", "in_progress": "En cours", "total_time": "Temps total"
+    "mastered": "Maîtrisées", "in_progress": "En cours", "total_time": "Temps total",
+    "all_categories": "Toutes", "xp_earned": "XP gagnés",
+    "level_label": "Niveau {level}", "level_up": "Niveau supérieur atteint !",
+    "day_streak": "jours d'affilée"
   },
   "rgpd": {
     "right_to_forget": "Droit à l'oubli",

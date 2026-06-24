@@ -2,7 +2,6 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { studyApi } from '../api/studyApi';
 import { useReviewStore } from '../store/reviewStore';
-import type { SessionSize } from '../store/reviewStore';
 
 export function useReview(deckId: number) {
   const store = useReviewStore();

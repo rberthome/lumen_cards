@@ -3,11 +3,13 @@ import { RouterView, RouterLink, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '@/features/auth/store/authStore';
 import { useAuth } from '@/features/auth/composables/useAuth';
+import { useStats } from './composables/useStats';
 
 const { t } = useI18n();
 const route = useRoute();
 const auth = useAuthStore();
 const { logout } = useAuth();
+const { stats } = useStats();
 
 const navItems = [
   { path: '/app/decks', label: 'study.my_decks', icon: '📚' },
@@ -38,6 +40,13 @@ const navItems = [
         </nav>
 
         <div class="flex items-center gap-3">
+          <span
+            v-if="stats && stats.streak_days > 0"
+            class="flex items-center gap-1 rounded-full bg-gold-50 px-2.5 py-1 text-sm font-semibold text-gold-700"
+            :title="`${stats.streak_days} ${t('study.day_streak')}`"
+          >
+            🔥 {{ stats.streak_days }}
+          </span>
           <span class="text-sm text-neutral-500">{{ auth.user?.name }}</span>
           <button
             class="text-sm text-neutral-400 hover:text-neutral-700"

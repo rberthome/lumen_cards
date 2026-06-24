@@ -10,7 +10,7 @@ export function useAuth() {
   const { loading, error, execute } = useAsync();
 
   function redirectAfterAuth() {
-    return auth.isAdmin ? router.push('/admin') : router.push('/app/decks');
+    return auth.canAccessAdmin ? router.push('/admin') : router.push('/app/decks');
   }
 
   async function login(email: string, password: string) {
