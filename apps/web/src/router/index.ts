@@ -11,11 +11,15 @@ const router = createRouter({
     },
     {
       path: '/admin',
-      meta: { requiresAuth: true, layout: 'admin' },
+      component: () => import('@/features/admin/AdminLayout.vue'),
+      meta: { requiresAuth: true },
       children: [
         { path: '', redirect: '/admin/users' },
         { path: 'users', component: () => import('@/features/admin/views/AdminUsersView.vue') },
         { path: 'stats', component: () => import('@/features/admin/views/AdminStatsView.vue') },
+        { path: 'categories', component: () => import('@/features/admin/views/AdminCategoriesView.vue') },
+        { path: 'decks', component: () => import('@/features/admin/views/AdminDecksView.vue') },
+        { path: 'cards', component: () => import('@/features/admin/views/AdminCardsView.vue') },
       ],
     },
     {

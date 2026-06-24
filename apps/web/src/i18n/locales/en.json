@@ -25,7 +25,32 @@
     "title": "Dashboard", "users": "Users", "stats": "Global statistics",
     "user_count": "{count} users", "delete_user": "Delete user",
     "export_user": "Export data", "confirm_delete": "Confirm deletion",
-    "search_placeholder": "Search a user..."
+    "search_placeholder": "Search a user...",
+    "categories": "Categories", "decks": "Decks", "cards": "Cards",
+    "new_category": "New category", "edit_category": "Edit category",
+    "new_deck": "New deck", "edit_deck": "Edit deck",
+    "new_card": "New card", "edit_card": "Edit card",
+    "publish": "Publish", "unpublish": "Unpublish", "published": "Published", "draft": "Draft",
+    "deck_count": "{count} deck(s)", "card_count": "{count} card(s)",
+    "no_category": "No category",
+    "search_decks": "Search a deck...", "search_cards": "Search a card...",
+    "filter_by_category": "Filter by category", "filter_by_deck": "Filter by deck",
+    "all_categories": "All categories", "all_decks": "All decks"
+  },
+  "category": {
+    "name": "Name", "slug": "Slug", "description": "Description",
+    "cover_emoji": "Emoji", "sort_order": "Display order"
+  },
+  "deck": {
+    "title": "Title", "description": "Description", "category": "Category",
+    "cover_emoji": "Emoji", "is_published": "Published", "card_count": "Cards"
+  },
+  "card": {
+    "front": "Front", "back": "Back", "explanation": "Explanation",
+    "wrong_answer_1": "Wrong answer 1", "wrong_answer_2": "Wrong answer 2",
+    "wrong_answer_3": "Wrong answer 3", "source": "Source", "tags": "Tags (comma)",
+    "difficulty": "Difficulty", "difficulty_easy": "Easy", "difficulty_medium": "Medium",
+    "difficulty_hard": "Hard", "deck": "Deck"
   },
   "auth": {
     "login": "Login", "email": "Email address", "password": "Password",
