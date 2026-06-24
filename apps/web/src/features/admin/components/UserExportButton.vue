@@ -10,7 +10,7 @@ const { exportUser } = useUserExport();
 </script>
 
 <template>
-  <Button variant="ghost" size="sm" @click="exportUser(props.user.id, props.user.name)">
+  <Button variant="secondary" size="sm" @click="exportUser(props.user.id, props.user.name)">
     {{ t('admin.export_user') }}
   </Button>
 </template>

@@ -22,7 +22,7 @@ defineProps<{
           <th class="px-4 py-3"><span class="sr-only">Actions</span></th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-neutral-100">
+      <tbody class="divide-y divide-neutral-100 bg-white">
         <tr v-if="loading">
           <td :colspan="columns.length + 1" class="px-4 py-8 text-center text-neutral-400">
             <span class="inline-block h-5 w-5 animate-spin rounded-full border-2 border-gold-400 border-t-transparent" />
