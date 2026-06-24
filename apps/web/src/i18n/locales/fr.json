@@ -25,7 +25,32 @@
     "title": "Tableau de bord", "users": "Utilisateurs", "stats": "Statistiques globales",
     "user_count": "{count} utilisateurs", "delete_user": "Supprimer l'utilisateur",
     "export_user": "Exporter les données", "confirm_delete": "Confirmer la suppression",
-    "search_placeholder": "Rechercher un utilisateur..."
+    "search_placeholder": "Rechercher un utilisateur...",
+    "categories": "Catégories", "decks": "Decks", "cards": "Cartes",
+    "new_category": "Nouvelle catégorie", "edit_category": "Modifier la catégorie",
+    "new_deck": "Nouveau deck", "edit_deck": "Modifier le deck",
+    "new_card": "Nouvelle carte", "edit_card": "Modifier la carte",
+    "publish": "Publier", "unpublish": "Dépublier", "published": "Publié", "draft": "Brouillon",
+    "deck_count": "{count} deck(s)", "card_count": "{count} carte(s)",
+    "no_category": "Sans catégorie",
+    "search_decks": "Rechercher un deck...", "search_cards": "Rechercher une carte...",
+    "filter_by_category": "Filtrer par catégorie", "filter_by_deck": "Filtrer par deck",
+    "all_categories": "Toutes les catégories", "all_decks": "Tous les decks"
+  },
+  "category": {
+    "name": "Nom", "slug": "Slug", "description": "Description",
+    "cover_emoji": "Emoji", "sort_order": "Ordre d'affichage"
+  },
+  "deck": {
+    "title": "Titre", "description": "Description", "category": "Catégorie",
+    "cover_emoji": "Emoji", "is_published": "Publié", "card_count": "Cartes"
+  },
+  "card": {
+    "front": "Recto", "back": "Verso", "explanation": "Explication",
+    "wrong_answer_1": "Mauvaise réponse 1", "wrong_answer_2": "Mauvaise réponse 2",
+    "wrong_answer_3": "Mauvaise réponse 3", "source": "Source", "tags": "Tags (virgule)",
+    "difficulty": "Difficulté", "difficulty_easy": "Facile", "difficulty_medium": "Moyen",
+    "difficulty_hard": "Difficile", "deck": "Deck"
   },
   "auth": {
     "login": "Connexion", "email": "Adresse e-mail", "password": "Mot de passe",
