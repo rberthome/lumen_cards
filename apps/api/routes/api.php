@@ -9,7 +9,7 @@ use App\Http\Controllers\DeckCrudController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatController;
-use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\HasPermission;
 use Illuminate\Support\Facades\Route;
 
 Route::post('auth/register', [AuthController::class, 'register']);
@@ -29,22 +29,41 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('categories', [CategoryController::class, 'index']);
 
-    Route::middleware(AdminMiddleware::class)->prefix('admin')->group(function () {
-        Route::get('users', [AdminController::class, 'users']);
-        Route::delete('users/{id}', [AdminController::class, 'deleteUser']);
-        Route::get('users/{id}/export', [AdminController::class, 'exportUser']);
-        Route::get('stats', [AdminController::class, 'stats']);
+    Route::prefix('admin')->group(function () {
+        // Decks — éditorial (modérateur + admin). Suppression réservée à l'admin.
+        Route::get('decks', [DeckCrudController::class, 'index'])->middleware(HasPermission::class.':deck,edit');
+        Route::post('decks', [DeckCrudController::class, 'store'])->middleware(HasPermission::class.':deck,create');
+        Route::put('decks/{id}', [DeckCrudController::class, 'update'])->middleware(HasPermission::class.':deck,edit');
+        Route::patch('decks/{id}/publish', [DeckCrudController::class, 'publish'])->middleware(HasPermission::class.':deck,publish');
+        Route::delete('decks/{id}', [DeckCrudController::class, 'destroy'])->middleware(HasPermission::class.':deck,delete');
 
-        Route::apiResource('categories', CategoryController::class)->except(['index']);
-        Route::apiResource('decks', DeckCrudController::class);
-        Route::patch('decks/{id}/publish', [DeckCrudController::class, 'publish']);
-        Route::apiResource('cards', CardCrudController::class);
+        // Cards — éditorial (modérateur + admin). Suppression réservée à l'admin.
+        Route::get('cards', [CardCrudController::class, 'index'])->middleware(HasPermission::class.':card,edit');
+        Route::post('cards', [CardCrudController::class, 'store'])->middleware(HasPermission::class.':card,create');
+        Route::put('cards/{id}', [CardCrudController::class, 'update'])->middleware(HasPermission::class.':card,edit');
+        Route::delete('cards/{id}', [CardCrudController::class, 'destroy'])->middleware(HasPermission::class.':card,delete');
 
-        Route::get('roles', [RoleController::class, 'index']);
-        Route::get('roles/{id}', [RoleController::class, 'show']);
-        Route::post('roles', [RoleController::class, 'store']);
-        Route::put('roles/{id}', [RoleController::class, 'update']);
-        Route::delete('roles/{id}', [RoleController::class, 'destroy']);
-        Route::post('roles/{id}/assign', [RoleController::class, 'assignToUser']);
+        // Catégories — admin uniquement (index reste public hors groupe admin).
+        Route::middleware(HasPermission::class.':category,manage')->group(function () {
+            Route::apiResource('categories', CategoryController::class)->except(['index']);
+        });
+
+        // Utilisateurs + stats — admin uniquement.
+        Route::middleware(HasPermission::class.':user,manage')->group(function () {
+            Route::get('users', [AdminController::class, 'users']);
+            Route::delete('users/{id}', [AdminController::class, 'deleteUser']);
+            Route::get('users/{id}/export', [AdminController::class, 'exportUser']);
+            Route::get('stats', [AdminController::class, 'stats']);
+        });
+
+        // Rôles & permissions — admin uniquement.
+        Route::middleware(HasPermission::class.':role,manage')->group(function () {
+            Route::get('roles', [RoleController::class, 'index']);
+            Route::get('roles/{id}', [RoleController::class, 'show']);
+            Route::post('roles', [RoleController::class, 'store']);
+            Route::put('roles/{id}', [RoleController::class, 'update']);
+            Route::delete('roles/{id}', [RoleController::class, 'destroy']);
+            Route::post('roles/{id}/assign', [RoleController::class, 'assignToUser']);
+        });
     });
 });

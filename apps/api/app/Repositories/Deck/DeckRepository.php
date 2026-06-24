@@ -10,18 +10,23 @@ use Illuminate\Support\Collection;
 
 readonly class DeckRepository implements DeckRepositoryInterface
 {
-    public function findForUser(int $userId): Collection
+    public function findForUser(int $userId, ?int $categoryId = null): Collection
     {
-        $decks = Deck::where(function ($q) use ($userId) {
-            $q->whereNull('user_id')->orWhere('user_id', $userId);
-        })->withCount('cards')->get();
+        $decks = Deck::where('is_published', true)
+            ->when($categoryId, fn ($q) => $q->where('category_id', $categoryId))
+            ->where(function ($q) use ($userId) {
+                $q->whereNull('user_id')->orWhere('user_id', $userId);
+            })
+            ->with('category')
+            ->withCount('cards')
+            ->get();
 
         return $decks->map(fn (Deck $deck) => $this->toDto($deck, $userId));
     }
 
     public function findById(int $deckId, int $userId): DeckDto
     {
-        $deck = Deck::withCount('cards')->findOrFail($deckId);
+        $deck = Deck::with('category')->withCount('cards')->findOrFail($deckId);
 
         return $this->toDto($deck, $userId);
     }
@@ -30,12 +35,12 @@ readonly class DeckRepository implements DeckRepositoryInterface
     {
         $deck = Deck::create([
             'user_id'     => $userId,
+            'category_id' => $dto->category_id,
             'title'       => $dto->title,
             'description' => $dto->description,
-            'category'    => $dto->category,
             'cover_emoji' => $dto->cover_emoji,
         ]);
-        $deck->loadCount('cards');
+        $deck->load('category')->loadCount('cards');
 
         return $this->toDto($deck, $userId);
     }
@@ -52,7 +57,8 @@ readonly class DeckRepository implements DeckRepositoryInterface
             user_id: $deck->user_id,
             title: $deck->title,
             description: $deck->description,
-            category: $deck->category->value,
+            category_id: $deck->category_id,
+            category_name: $deck->category?->name,
             card_count: $deck->cards_count ?? 0,
             due_today: $dueToday,
             cover_emoji: $deck->cover_emoji,

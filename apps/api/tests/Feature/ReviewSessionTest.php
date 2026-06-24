@@ -23,12 +23,10 @@ class ReviewSessionTest extends TestCase
 
         $response->assertOk()
             ->assertJsonStructure([
-                'data' => [
-                    'id',
-                    'cards' => [['id', 'front', 'back', 'interval', 'repetition', 'ease_factor']],
-                    'session_size',
-                    'deck_id',
-                ],
+                'id',
+                'cards' => [['id', 'front', 'back', 'interval', 'repetition', 'ease_factor']],
+                'session_size',
+                'deck_id',
             ]);
     }
 
@@ -48,7 +46,7 @@ class ReviewSessionTest extends TestCase
 
         $response->assertOk()
             ->assertJsonStructure([
-                'data' => ['xp_earned', 'accuracy', 'cards_reviewed', 'duration_ms', 'streak_days', 'level'],
+                'xp_earned', 'accuracy', 'cards_reviewed', 'duration_ms', 'streak_days', 'level',
             ]);
 
         $this->assertDatabaseHas('card_progress', [

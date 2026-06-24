@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 interface DeckRepositoryInterface
 {
     /** @return Collection<int, DeckDto> */
-    public function findForUser(int $userId): Collection;
+    public function findForUser(int $userId, ?int $categoryId = null): Collection;
 
     public function findById(int $deckId, int $userId): DeckDto;
 

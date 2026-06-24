@@ -16,13 +16,16 @@ class Deck extends Model
         'category_id',
         'title',
         'description',
-        'category',
         'cover_emoji',
         'is_published',
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
+    ];
+
+    protected $attributes = [
+        'is_published' => false,
     ];
 
     public function category(): BelongsTo

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Card;
+use App\Models\Category;
 use App\Models\Deck;
 use Illuminate\Database\Seeder;
 
@@ -10,35 +11,52 @@ class DeckSeeder extends Seeder
 {
     public function run(): void
     {
+        // Catégories (FK)
+        $kantCat = Category::firstOrCreate(
+            ['slug' => 'kant'],
+            ['name' => 'Kant', 'cover_emoji' => '⚖️', 'sort_order' => 1]
+        );
+        $kabbalahCat = Category::firstOrCreate(
+            ['slug' => 'kabbalah'],
+            ['name' => 'Kabbale', 'cover_emoji' => '✡️', 'sort_order' => 2]
+        );
+        $masonicCat = Category::firstOrCreate(
+            ['slug' => 'masonic'],
+            ['name' => 'Maçonnique', 'cover_emoji' => '🔺', 'sort_order' => 3]
+        );
+
         // Deck Kant
         $kant = Deck::create([
-            'user_id'     => null,
-            'title'       => 'Kant — Philosophie Critique',
-            'description' => 'Les concepts fondamentaux de la philosophie critique de Kant.',
-            'category'    => 'kant',
-            'cover_emoji' => '⚖️',
+            'user_id'      => null,
+            'category_id'  => $kantCat->id,
+            'title'        => 'Kant — Philosophie Critique',
+            'description'  => 'Les concepts fondamentaux de la philosophie critique de Kant.',
+            'cover_emoji'  => '⚖️',
+            'is_published' => true,
         ]);
 
         $this->kantCards($kant->id);
 
         // Deck Kabbale
         $kabbalah = Deck::create([
-            'user_id'     => null,
-            'title'       => 'Kabbale — Mystique Juive',
-            'description' => 'Les enseignements de la tradition kabbalistique.',
-            'category'    => 'kabbalah',
-            'cover_emoji' => '✡️',
+            'user_id'      => null,
+            'category_id'  => $kabbalahCat->id,
+            'title'        => 'Kabbale — Mystique Juive',
+            'description'  => 'Les enseignements de la tradition kabbalistique.',
+            'cover_emoji'  => '✡️',
+            'is_published' => true,
         ]);
 
         $this->kabbalahCards($kabbalah->id);
 
         // Deck Maçonnique
         $masonic = Deck::create([
-            'user_id'     => null,
-            'title'       => 'Symbolisme Maçonnique',
-            'description' => 'Les symboles et enseignements de la Franc-Maçonnerie.',
-            'category'    => 'masonic',
-            'cover_emoji' => '🔺',
+            'user_id'      => null,
+            'category_id'  => $masonicCat->id,
+            'title'        => 'Symbolisme Maçonnique',
+            'description'  => 'Les symboles et enseignements de la Franc-Maçonnerie.',
+            'cover_emoji'  => '🔺',
+            'is_published' => true,
         ]);
 
         $this->masonicCards($masonic->id);

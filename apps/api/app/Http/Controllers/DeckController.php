@@ -14,7 +14,9 @@ class DeckController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        $decks = $this->repository->findForUser($request->user()->id);
+        $categoryId = $request->query('category_id') ? (int) $request->query('category_id') : null;
+
+        $decks = $this->repository->findForUser($request->user()->id, $categoryId);
 
         return response()->json(['data' => $decks->map->toArray()->values()]);
     }
