@@ -32,6 +32,7 @@ export function useReview(deckId: number) {
       const { data } = await studyApi.submitReview({
         session_id: store.sessionId,
         items: store.reviewLog,
+        total_duration_ms: Date.now() - store.sessionStartTime,
       });
       store.setResult(data);
     } catch {

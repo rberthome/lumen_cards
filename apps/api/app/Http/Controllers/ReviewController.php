@@ -37,12 +37,10 @@ class ReviewController extends Controller
         ]);
 
         return response()->json([
-            'data' => [
-                'id'           => $session->id,
-                'cards'        => $cards->map->toArray()->values(),
-                'session_size' => $cards->count(),
-                'deck_id'      => $deck->id,
-            ],
+            'id'           => $session->id,
+            'cards'        => $cards->map->toArray()->values(),
+            'session_size' => $cards->count(),
+            'deck_id'      => $deck->id,
         ]);
     }
 
@@ -63,6 +61,6 @@ class ReviewController extends Controller
             totalDurationMs: $request->validated('total_duration_ms'),
         );
 
-        return response()->json(['data' => $result->toArray()]);
+        return response()->json($result->toArray());
     }
 }

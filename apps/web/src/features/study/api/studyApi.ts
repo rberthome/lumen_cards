@@ -16,6 +16,7 @@ export const studyApi = {
   submitReview: (payload: {
     session_id: number;
     items: { card_id: number; knew: boolean; time_spent_ms: number }[];
+    total_duration_ms: number;
   }) =>
     apiClient.post<ReviewResultDto>('/review/submit', payload),
 

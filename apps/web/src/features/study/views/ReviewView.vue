@@ -18,6 +18,31 @@ watch(() => store.phase, async (phase) => {
     await submitAndFinish();
   }
 });
+
+async function pickChoice(choice: string) {
+  if (store.selectedChoice !== null) return;
+  const knew = store.selectChoice(choice);
+  await new Promise<void>((r) => setTimeout(r, 650));
+  store.answerCard(knew);
+}
+
+function choiceClass(choice: string): string {
+  const card = store.currentCard;
+  if (!card) return '';
+  const selected = store.selectedChoice;
+  const isCorrect = choice === card.back;
+
+  if (selected === null) {
+    return 'border-neutral-200 bg-white text-neutral-700 hover:border-gold-300 hover:bg-gold-50 cursor-pointer';
+  }
+  if (isCorrect) {
+    return 'border-green-400 bg-green-50 text-green-800';
+  }
+  if (selected === choice) {
+    return 'border-red-400 bg-red-50 text-red-800';
+  }
+  return 'border-neutral-100 bg-neutral-50 text-neutral-300';
+}
 </script>
 
 <template>
@@ -52,13 +77,38 @@ watch(() => store.phase, async (phase) => {
     <!-- CARD FRONT -->
     <template v-else-if="store.phase === 'front' && store.currentCard">
       <ReviewProgress v-bind="store.progress" />
-      <div class="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm text-center min-h-48 flex items-center justify-center">
-        <p class="text-xl font-medium text-neutral-900 leading-relaxed">{{ store.currentCard.front }}</p>
-      </div>
-      <Button @click="store.revealCard()">{{ t('study.reveal') }}</Button>
+
+      <!-- QCM mode -->
+      <template v-if="store.currentCard.show_choices">
+        <div class="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm text-center min-h-36 flex items-center justify-center">
+          <p class="text-xl font-medium text-neutral-900 leading-relaxed">{{ store.currentCard.front }}</p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <button
+            v-for="choice in store.shuffledChoices"
+            :key="choice"
+            :disabled="store.selectedChoice !== null"
+            :class="[
+              'rounded-xl border-2 py-4 px-5 text-left font-medium transition-all duration-300',
+              choiceClass(choice),
+            ]"
+            @click="pickChoice(choice)"
+          >
+            {{ choice }}
+          </button>
+        </div>
+      </template>
+
+      <!-- Classic mode -->
+      <template v-else>
+        <div class="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm text-center min-h-48 flex items-center justify-center">
+          <p class="text-xl font-medium text-neutral-900 leading-relaxed">{{ store.currentCard.front }}</p>
+        </div>
+        <Button @click="store.revealCard()">{{ t('study.reveal') }}</Button>
+      </template>
     </template>
 
-    <!-- CARD BACK -->
+    <!-- CARD BACK (classic only) -->
     <template v-else-if="store.phase === 'back' && store.currentCard">
       <ReviewProgress v-bind="store.progress" />
       <div class="flex flex-col gap-3">

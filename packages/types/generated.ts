@@ -23,6 +23,9 @@ export interface CardDto {
   deck_id: number;
   front: string;
   back: string;
+  wrong_answer_1: string | null;
+  wrong_answer_2: string | null;
+  wrong_answer_3: string | null;
   explanation: string | null;
   source: string | null;
   tags: string[];
@@ -34,6 +37,7 @@ export interface CardWithProgressDto extends CardDto {
   repetition: number;
   ease_factor: number;
   next_review_at: string | null;
+  show_choices: boolean;
 }
 
 export interface ReviewSessionDto {
