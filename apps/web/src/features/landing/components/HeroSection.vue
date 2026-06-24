@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
+import { RouterLink } from 'vue-router';
+import { useAuthStore } from '@/features/auth/store/authStore';
 import { Button } from '@/design-system';
 const { t } = useI18n();
+const auth = useAuthStore();
 </script>
 
 <template>
@@ -16,8 +19,17 @@ const { t } = useI18n();
       </h1>
       <p class="max-w-xl text-lg text-neutral-400">{{ t('landing.hero.subtitle') }}</p>
       <div class="flex gap-4">
-        <Button size="lg">{{ t('landing.hero.cta_primary') }}</Button>
-        <Button variant="ghost" size="lg">{{ t('landing.hero.cta_secondary') }}</Button>
+        <RouterLink v-if="auth.isAuthenticated" to="/app/decks">
+          <Button size="lg">{{ t('study.my_decks') }}</Button>
+        </RouterLink>
+        <template v-else>
+          <RouterLink to="/register">
+            <Button size="lg">{{ t('landing.hero.cta_primary') }}</Button>
+          </RouterLink>
+          <RouterLink to="/login">
+            <Button variant="ghost" size="lg">{{ t('auth.login') }}</Button>
+          </RouterLink>
+        </template>
       </div>
     </div>
   </section>

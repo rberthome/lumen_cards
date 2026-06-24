@@ -54,7 +54,27 @@
   },
   "auth": {
     "login": "Connexion", "email": "Adresse e-mail", "password": "Mot de passe",
-    "submit": "Se connecter", "invalid_credentials": "Identifiants incorrects"
+    "submit": "Se connecter", "invalid_credentials": "Identifiants incorrects",
+    "name": "Nom complet", "password_confirm": "Confirmer le mot de passe",
+    "register": "Créer un compte", "register_subtitle": "Commencez votre voyage initiatique",
+    "already_account": "Déjà un compte ?", "no_account": "Pas encore de compte ?"
+  },
+  "study": {
+    "my_decks": "Mes decks", "my_stats": "Mes statistiques",
+    "cards": "cartes", "due_today": "à réviser", "up_to_date": "À jour",
+    "cards_due": "cartes à réviser aujourd'hui",
+    "review": "Réviser", "search_decks": "Rechercher un deck...",
+    "no_decks": "Aucun deck disponible",
+    "review_due": "Réviser ({count} dues)", "review_all": "Tout réviser",
+    "start_session": "Démarrer une session", "choose_size": "Combien de cartes voulez-vous réviser ?",
+    "size_all": "Toutes", "start": "Commencer",
+    "reveal": "Voir la réponse", "knew": "Je savais ✓", "didnt_know": "Je ne savais pas ✗",
+    "explanation": "Explication", "next": "Carte suivante",
+    "session_done": "Session terminée !",
+    "accuracy": "Précision", "cards_reviewed": "Cartes révisées", "streak": "Jours consécutifs",
+    "back_to_deck": "Retour", "restart": "Recommencer",
+    "streak": "Streak", "accuracy": "Précision", "cards_seen": "Cartes vues",
+    "mastered": "Maîtrisées", "in_progress": "En cours", "total_time": "Temps total"
   },
   "rgpd": {
     "right_to_forget": "Droit à l'oubli",
