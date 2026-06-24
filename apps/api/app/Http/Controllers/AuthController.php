@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Repositories\Auth\DTOs\MeDto;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,9 +20,9 @@ class AuthController extends Controller
         ]);
 
         $user  = User::create($data);
-        $token = $user->createToken('mobile')->plainTextToken;
+        $token = $user->createToken('app')->plainTextToken;
 
-        return response()->json(['token' => $token, 'user' => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email]], 201);
+        return response()->json(['token' => $token, 'user' => $this->buildMe($user)], 201);
     }
 
     public function login(Request $request): JsonResponse
@@ -31,15 +32,15 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        $user = User::where('email', $data['email'])->first();
+        $user = User::where('email', $data['email'])->with('role.permissions')->first();
 
         if (! $user || ! Hash::check($data['password'], $user->password)) {
             throw ValidationException::withMessages(['email' => ['Identifiants invalides.']]);
         }
 
-        $token = $user->createToken('mobile')->plainTextToken;
+        $token = $user->createToken('app')->plainTextToken;
 
-        return response()->json(['token' => $token, 'user' => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email]]);
+        return response()->json(['token' => $token, 'user' => $this->buildMe($user)]);
     }
 
     public function logout(Request $request): JsonResponse
@@ -51,8 +52,20 @@ class AuthController extends Controller
 
     public function me(Request $request): JsonResponse
     {
-        $user = $request->user();
+        $user = $request->user()->loadMissing('role.permissions');
 
-        return response()->json(['data' => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email]]);
+        return response()->json(['data' => $this->buildMe($user)]);
+    }
+
+    private function buildMe(User $user): array
+    {
+        return (new MeDto(
+            id:        $user->id,
+            name:      $user->name,
+            email:     $user->email,
+            role_slug: $user->role?->slug,
+            role_name: $user->role?->name,
+            permissions: $user->getPermissions(),
+        ))->toArray();
     }
 }
