@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { LumenMark } from "@/design-system";
 import { LocaleSwitcher } from "@/features/locale";
 
 // Coquille centrée et sobre pour les écrans d'authentification.
@@ -15,14 +16,9 @@ export function AuthShell({
     <main className="flex min-h-screen items-center justify-center px-6 py-12">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center text-center">
-          <span
-            className="mb-4 h-11 w-11 rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 38%, #FEF3C7 0%, #FBBF24 38%, #D97706 100%)",
-              boxShadow: "var(--shadow-gold)",
-            }}
-          />
+          <div className="mb-4">
+            <LumenMark />
+          </div>
           <h1 className="font-serif text-2xl font-semibold text-neutral-900">
             {title}
           </h1>
