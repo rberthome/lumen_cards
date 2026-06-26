@@ -124,6 +124,15 @@ export function DecksClient({
                       <Button
                         size="sm"
                         variant="secondary"
+                        onClick={() =>
+                          router.push(`/admin/decks/${d.id}/cards`)
+                        }
+                      >
+                        Cartes ({d.cardCount})
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="secondary"
                         onClick={() => {
                           setEditing(d);
                           setOpen(true);
