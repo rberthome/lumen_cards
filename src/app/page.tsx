@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/design-system";
 import { db } from "@/lib/db";
 import { getSession, logoutAction } from "@/features/auth";
@@ -30,11 +31,21 @@ export default async function Home() {
         </span>
       )}
 
-      <form action={logoutAction}>
-        <Button variant="secondary" type="submit">
-          Déconnexion
-        </Button>
-      </form>
+      <div className="flex items-center gap-3">
+        {user?.role === "admin" && (
+          <Link
+            href="/admin"
+            className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-gold-200 px-[22px] py-3 text-[15px] font-semibold text-gold-700 transition-colors hover:bg-gold-50"
+          >
+            ⚙️ Administration
+          </Link>
+        )}
+        <form action={logoutAction}>
+          <Button variant="secondary" type="submit">
+            Déconnexion
+          </Button>
+        </form>
+      </div>
     </main>
   );
 }
