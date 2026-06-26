@@ -31,6 +31,9 @@ export default async function AdminLayout({
           <Link href="/admin/decks" className={navLink}>
             <span className="text-base">📚</span> {t("decks")}
           </Link>
+          <Link href="/admin/users" className={navLink}>
+            <span className="text-base">👥</span> {t("users")}
+          </Link>
         </nav>
 
         <div className="flex flex-col gap-1 border-t border-neutral-100 pt-4">
