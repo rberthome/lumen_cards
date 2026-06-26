@@ -4,9 +4,17 @@
     "categories": "Categories",
     "decks": "Decks",
     "users": "Users",
+    "stats": "Stats",
     "admin": "Administration",
     "backToApp": "Back to app",
     "logout": "Logout"
+  },
+  "stats": {
+    "title": "My stats",
+    "streak": "Day streak",
+    "xp": "XP earned",
+    "mastered": "Known cards",
+    "due": "Cards to review"
   },
   "users": {
     "title": "Users",
