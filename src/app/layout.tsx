@@ -18,7 +18,10 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className="h-full antialiased">
-      <body className="min-h-full bg-neutral-50 font-sans text-neutral-900">
+      <body
+        className="min-h-full bg-neutral-50 font-sans text-neutral-900"
+        suppressHydrationWarning
+      >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
