@@ -1,5 +1,6 @@
 import "server-only";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import {
   SESSION_COOKIE,
   signSession,
@@ -29,4 +30,12 @@ export async function getSession(): Promise<SessionPayload | null> {
 export async function destroySession(): Promise<void> {
   const store = await cookies();
   store.delete(SESSION_COOKIE);
+}
+
+// Garde pour les zones réservées à l'admin (layouts, pages, Server Actions).
+export async function requireAdmin(): Promise<SessionPayload> {
+  const session = await getSession();
+  if (!session) redirect("/login");
+  if (session.role !== "admin") redirect("/");
+  return session;
 }

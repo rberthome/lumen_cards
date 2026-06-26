@@ -19,9 +19,33 @@ async function main() {
     },
   });
 
+  const categories = [
+    {
+      name: "Philosophie",
+      slug: "philosophie",
+      coverEmoji: "🕊️",
+      sortOrder: 1,
+    },
+    { name: "Kabbale", slug: "kabbale", coverEmoji: "✡️", sortOrder: 2 },
+    {
+      name: "Franc-maçonnerie",
+      slug: "franc-maconnerie",
+      coverEmoji: "🛠️",
+      sortOrder: 3,
+    },
+  ];
+  for (const c of categories) {
+    await db.category.upsert({
+      where: { slug: c.slug },
+      update: {},
+      create: c,
+    });
+  }
+
   console.log(
     `✓ Admin seedé : ${email} / changeme (à changer à la 1ʳᵉ connexion)`,
   );
+  console.log(`✓ ${categories.length} catégories seedées`);
 }
 
 main()
