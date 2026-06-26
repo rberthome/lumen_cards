@@ -9,4 +9,5 @@ export { Select } from "./components/Select";
 export type { SelectProps, SelectOption } from "./components/Select";
 export { Textarea } from "./components/Textarea";
 export type { TextareaProps } from "./components/Textarea";
+export { LumenMark } from "./components/LumenMark";
 export * from "./tokens";
