@@ -26,6 +26,15 @@
     "roleAdmin": "Administrator",
     "roleLearner": "Learner"
   },
+  "study": {
+    "reviewDue": "Review what's due ({count})",
+    "upToDate": "You're all caught up ✓",
+    "reviewAhead": "Review ahead",
+    "cardsDue": "{count} cards due",
+    "noDue": "Up to date",
+    "noDecks": "No deck available yet.",
+    "streakTitle": "{count} days in a row"
+  },
   "auth": {
     "loginSubtitle": "Invitation only",
     "email": "Email address",
