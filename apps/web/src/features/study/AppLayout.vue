@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { RouterView, RouterLink, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '@/features/auth/store/authStore';
@@ -15,6 +16,9 @@ const navItems = [
   { path: '/app/decks', label: 'study.my_decks', icon: '📚' },
   { path: '/app/stats', label: 'study.my_stats', icon: '📊' },
 ];
+
+// Lien vers le panel admin/modération, réservé aux comptes qui y ont accès.
+const panelLabel = computed(() => (auth.isAdmin ? t('nav.admin') : t('nav.moderation')));
 </script>
 
 <template>
@@ -40,6 +44,13 @@ const navItems = [
         </nav>
 
         <div class="flex items-center gap-3">
+          <RouterLink
+            v-if="auth.canAccessAdmin"
+            to="/admin"
+            class="flex items-center gap-1.5 rounded-lg border border-gold-200 px-3 py-1.5 text-sm font-medium text-gold-700 transition-colors hover:bg-gold-50"
+          >
+            ⚙️ {{ panelLabel }}
+          </RouterLink>
           <span
             v-if="stats && stats.streak_days > 0"
             class="flex items-center gap-1 rounded-full bg-gold-50 px-2.5 py-1 text-sm font-semibold text-gold-700"

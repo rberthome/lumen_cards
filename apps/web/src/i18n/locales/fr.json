@@ -2,7 +2,7 @@
   "app": { "name": "LumenCards", "tagline": "La lumière de la connaissance" },
   "nav": {
     "landing": "Accueil", "admin": "Administration", "login": "Connexion", "logout": "Déconnexion",
-    "users": "Utilisateurs", "stats": "Statistiques", "moderation": "Modération"
+    "users": "Utilisateurs", "stats": "Statistiques", "moderation": "Modération", "study": "Apprendre"
   },
   "landing": {
     "hero": {
@@ -68,6 +68,7 @@
     "review_due": "Réviser ({count} dues)", "review_all": "Tout réviser",
     "start_session": "Démarrer une session", "choose_size": "Combien de cartes voulez-vous réviser ?",
     "size_all": "Toutes", "start": "Commencer",
+    "mode_qcm": "Choix multiple", "mode_open": "Réponse libre",
     "reveal": "Voir la réponse", "knew": "Je savais ✓", "didnt_know": "Je ne savais pas ✗",
     "explanation": "Explication", "next": "Carte suivante",
     "session_done": "Session terminée !",

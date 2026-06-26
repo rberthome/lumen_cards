@@ -10,10 +10,10 @@ class RoleSeeder extends Seeder
 {
     public function run(): void
     {
-        // Modérateur : éditorial uniquement (créer/éditer decks+cartes, publier/dépublier).
+        // Modérateur : éditorial (créer/éditer decks+cartes, publier/dépublier) + catégories.
         $moderator = Role::firstOrCreate(
             ['slug' => 'moderator'],
-            ['name' => 'Modérateur', 'description' => 'Gestion éditoriale des decks et cartes', 'is_system' => true]
+            ['name' => 'Modérateur', 'description' => 'Gestion éditoriale des decks, cartes et catégories', 'is_system' => true]
         );
 
         $moderatorPermissions = [
@@ -22,6 +22,7 @@ class RoleSeeder extends Seeder
             ['deck', 'publish'],
             ['card', 'create'],
             ['card', 'edit'],
+            ['category', 'manage'],
         ];
 
         $moderatorIds = Permission::query()

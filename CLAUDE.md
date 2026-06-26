@@ -55,4 +55,23 @@ Les types de l'API sont générés automatiquement depuis les DTOs PHP annotés 
 **Ne jamais dupliquer les types manuellement** — toujours lancer `make types-generate` après modification d'un DTO PHP.
 
 ## Génération IA
-Utiliser l'API Claude (claude-sonnet-4-6) pour analyser une réflexion et générer des cartes front/back avec explication. Feature flag : `AI_CARD_GENERATION`.
+Utiliser l'API Claude (claude-sonnet-4-6) pour analyser une réflexion et générer des cartes front/back avec explication. Feature flag : `AI_CARD_GENERATION`. Réservé admins/modérateurs uniquement (V2).
+
+## Roadmap
+Voir `ROADMAP.md` à la racine pour le détail complet.
+- **V1** (web) : stabiliser + polish + gaps techniques (filtre catégories, is_published, modérateur, animations)
+- **V2** : génération IA (admin/modéro only), deck discovery, gamification avancée
+- **V3** : mobile Expo, parité V1 + push notifications cartes dues
+
+## Règles architecture — gaps V1 connus
+- `DeckRepository::findForUser` doit filtrer `is_published = true` et utiliser `category_id` FK (pas l'enum `category` legacy)
+- Le middleware `HasPermission` doit être utilisé pour les routes modérateur (pas `AdminMiddleware` générique)
+- Permissions et rôle `moderator` doivent être seedés avant tout test RBAC
+
+## Rôles et permissions
+- **Admin** : accès complet
+- **Modérateur** : créer/éditer decks+cartes, publier/dépublier decks, gérer les catégories — pas de gestion users
+- Permissions seedées : `deck:create`, `deck:edit`, `deck:publish`, `card:create`, `card:edit`, `category:manage`
+
+## Déploiement
+Proxmox local, accès sur invitation uniquement. Pas de scaling à prévoir.

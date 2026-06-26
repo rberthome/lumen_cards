@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 const props = defineProps<{
   modelValue?: string;
@@ -8,16 +8,24 @@ const props = defineProps<{
   label?: string;
   error?: string;
   disabled?: boolean;
+  autofocus?: boolean;
 }>();
 
 defineEmits<{ 'update:modelValue': [value: string] }>();
 
+const inputRef = ref<HTMLInputElement | null>(null);
 const showPassword = ref(false);
 const isPassword = computed(() => props.type === 'password');
 const inputType = computed(() => {
   if (isPassword.value) return showPassword.value ? 'text' : 'password';
   return props.type ?? 'text';
 });
+
+onMounted(() => {
+  if (props.autofocus) inputRef.value?.focus();
+});
+
+defineExpose({ focus: () => inputRef.value?.focus() });
 </script>
 
 <template>
@@ -25,6 +33,7 @@ const inputType = computed(() => {
     <label v-if="label" class="text-sm font-medium text-neutral-700">{{ label }}</label>
     <div class="relative">
       <input
+        ref="inputRef"
         :type="inputType"
         :value="modelValue"
         :placeholder="placeholder"

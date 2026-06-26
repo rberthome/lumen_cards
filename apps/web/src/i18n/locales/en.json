@@ -2,7 +2,7 @@
   "app": { "name": "LumenCards", "tagline": "The light of knowledge" },
   "nav": {
     "landing": "Home", "admin": "Administration", "login": "Login", "logout": "Logout",
-    "users": "Users", "stats": "Statistics", "moderation": "Moderation"
+    "users": "Users", "stats": "Statistics", "moderation": "Moderation", "study": "Learn"
   },
   "landing": {
     "hero": {
@@ -68,6 +68,7 @@
     "review_due": "Review ({count} due)", "review_all": "Review all",
     "start_session": "Start a session", "choose_size": "How many cards do you want to review?",
     "size_all": "All", "start": "Start",
+    "mode_qcm": "Multiple choice", "mode_open": "Free recall",
     "reveal": "Reveal answer", "knew": "I knew it ✓", "didnt_know": "I didn't know ✗",
     "explanation": "Explanation", "next": "Next card",
     "session_done": "Session complete!",

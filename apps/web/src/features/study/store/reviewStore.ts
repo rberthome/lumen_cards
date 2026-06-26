@@ -28,8 +28,15 @@ export const useReviewStore = defineStore('review', () => {
     incorrect: reviewLog.value.filter((r) => !r.knew).length,
   }));
 
+  // Progression en session : QCM à la première présentation, puis réponse ouverte
+  // dès qu'on re-présente une carte ratée (attempts > 0).
+  function _isQcm(card?: ReviewCard | null): boolean {
+    return !!card && card.show_choices && (card.attempts ?? 0) === 0;
+  }
+  const currentMode = computed<'qcm' | 'open'>(() => (_isQcm(currentCard.value) ? 'qcm' : 'open'));
+
   function _buildChoices(card: ReviewCard) {
-    if (!card.show_choices) { shuffledChoices.value = []; return; }
+    if (!_isQcm(card)) { shuffledChoices.value = []; return; }
     const opts = [card.back, card.wrong_answer_1, card.wrong_answer_2, card.wrong_answer_3]
       .filter((c): c is string => c !== null && c !== undefined);
     shuffledChoices.value = opts.sort(() => Math.random() - 0.5);
@@ -104,7 +111,7 @@ export const useReviewStore = defineStore('review', () => {
   return {
     sessionId, sessionSize, phase, queue, currentIndex, sessionStartTime,
     reviewLog, result, shuffledChoices, selectedChoice,
-    currentCard, progress,
+    currentCard, progress, currentMode,
     startSession, revealCard, selectChoice, answerCard, nextCard, setResult, reset,
   };
 });

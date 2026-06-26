@@ -77,8 +77,11 @@ function choiceClass(choice: string): string {
     </template>
 
     <!-- QCM mode -->
-    <template v-else-if="store.phase === 'front' && store.currentCard && store.currentCard.show_choices">
+    <template v-else-if="store.phase === 'front' && store.currentCard && store.currentMode === 'qcm'">
       <ReviewProgress v-bind="store.progress" />
+      <div class="flex justify-center">
+        <span class="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-600">{{ t('study.mode_qcm') }}</span>
+      </div>
       <div class="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm text-center min-h-36 flex items-center justify-center">
         <p class="text-xl font-medium text-neutral-900 leading-relaxed">{{ store.currentCard.front }}</p>
       </div>
@@ -98,9 +101,12 @@ function choiceClass(choice: string): string {
       </div>
     </template>
 
-    <!-- Classic mode — carte qui se retourne (front <-> back) -->
-    <template v-else-if="(store.phase === 'front' || store.phase === 'back') && store.currentCard && !store.currentCard.show_choices">
+    <!-- Classic mode — réponse ouverte, carte qui se retourne (front <-> back) -->
+    <template v-else-if="(store.phase === 'front' || store.phase === 'back') && store.currentCard && store.currentMode === 'open'">
       <ReviewProgress v-bind="store.progress" />
+      <div class="flex justify-center">
+        <span class="rounded-full bg-gold-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gold-700">{{ t('study.mode_open') }}</span>
+      </div>
 
       <FlipCard :flipped="store.phase === 'back'">
         <template #front>

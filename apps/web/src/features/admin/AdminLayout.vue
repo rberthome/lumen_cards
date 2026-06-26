@@ -49,6 +49,13 @@ const panelLabel = computed(() => (auth.isAdmin ? t('nav.admin') : t('nav.modera
       </nav>
 
       <div class="border-t border-neutral-100 pt-4">
+        <RouterLink
+          to="/app/decks"
+          class="mb-1 flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-neutral-600 transition-colors hover:bg-gold-50 hover:text-gold-700"
+        >
+          <span class="text-base">🎓</span>
+          {{ t('nav.study') }}
+        </RouterLink>
         <div class="px-3 pb-2 text-xs text-neutral-400">{{ auth.user?.name }}</div>
         <button
           class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900"
