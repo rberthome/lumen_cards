@@ -2,6 +2,7 @@
 
 import { useState, useTransition, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Modal, Input, Textarea, Button } from "@/design-system";
 import { createCard, updateCard } from "../actions";
 import type { CardListItem } from "../types";
@@ -38,6 +39,8 @@ export function CardFormModal({
   editing: CardListItem | null;
   onClose: () => void;
 }) {
+  const t = useTranslations("cards");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [form, setForm] = useState(() => initialForm(editing));
@@ -64,66 +67,59 @@ export function CardFormModal({
   }
 
   return (
-    <Modal
-      open
-      onClose={onClose}
-      title={editing ? "Modifier la carte" : "Nouvelle carte"}
-    >
+    <Modal open onClose={onClose} title={editing ? t("edit") : t("new")}>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <Input
-          label="Recto (question)"
+          label={t("fieldFront")}
           value={form.front}
           onChange={(e) => set("front", e.target.value)}
           required
         />
         <Textarea
-          label="Verso (bonne réponse)"
+          label={t("fieldBack")}
           rows={2}
           value={form.back}
           onChange={(e) => set("back", e.target.value)}
           required
         />
         <Textarea
-          label="Explication (optionnel)"
+          label={t("fieldExplanation")}
           rows={3}
           value={form.explanation}
           onChange={(e) => set("explanation", e.target.value)}
         />
         <div className="rounded-[var(--radius-md)] bg-neutral-50 p-3">
-          <p className="mb-2 text-xs text-neutral-500">
-            Mauvaises réponses — renseigne au moins la 1ʳᵉ pour activer le mode
-            QCM.
-          </p>
+          <p className="mb-2 text-xs text-neutral-500">{t("wrongHint")}</p>
           <div className="flex flex-col gap-2">
             <Input
               value={form.wrongAnswer1}
               onChange={(e) => set("wrongAnswer1", e.target.value)}
-              placeholder="Mauvaise réponse 1"
+              placeholder={t("wrongPlaceholder", { n: 1 })}
             />
             <Input
               value={form.wrongAnswer2}
               onChange={(e) => set("wrongAnswer2", e.target.value)}
-              placeholder="Mauvaise réponse 2"
+              placeholder={t("wrongPlaceholder", { n: 2 })}
             />
             <Input
               value={form.wrongAnswer3}
               onChange={(e) => set("wrongAnswer3", e.target.value)}
-              placeholder="Mauvaise réponse 3"
+              placeholder={t("wrongPlaceholder", { n: 3 })}
             />
           </div>
         </div>
         <Input
-          label="Source (optionnel)"
+          label={t("fieldSource")}
           value={form.source}
           onChange={(e) => set("source", e.target.value)}
         />
         {error && <p className="text-sm text-error">{error}</p>}
         <div className="mt-1 flex justify-end gap-3">
           <Button type="button" variant="secondary" onClick={onClose}>
-            Annuler
+            {tc("cancel")}
           </Button>
           <Button type="submit" disabled={pending}>
-            {pending ? "Enregistrement…" : "Enregistrer"}
+            {pending ? tc("saving") : tc("save")}
           </Button>
         </div>
       </form>

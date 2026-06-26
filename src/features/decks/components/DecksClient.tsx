@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Button } from "@/design-system";
 import { DeckFormModal } from "./DeckFormModal";
 import { deleteDeck, toggleDeckPublished } from "../actions";
@@ -17,6 +18,8 @@ export function DecksClient({
   decks: DeckListItem[];
   categories: CategoryOption[];
 }) {
+  const t = useTranslations("decks");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<DeckListItem | null>(null);
@@ -34,9 +37,7 @@ export function DecksClient({
 
   function onDelete(deck: DeckListItem) {
     if (
-      !confirm(
-        `Supprimer le deck « ${deck.title} » et ses ${deck.cardCount} carte(s) ?`,
-      )
+      !confirm(t("deleteConfirm", { title: deck.title, count: deck.cardCount }))
     )
       return;
     run(() => deleteDeck(deck.id));
@@ -48,7 +49,7 @@ export function DecksClient({
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <h1 className="font-serif text-2xl font-semibold text-neutral-900">
-          Decks
+          {t("title")}
         </h1>
         <Button
           disabled={noCategories}
@@ -57,14 +58,12 @@ export function DecksClient({
             setOpen(true);
           }}
         >
-          Nouveau deck
+          {t("new")}
         </Button>
       </div>
 
       {noCategories && (
-        <p className="text-sm text-neutral-500">
-          Crée d’abord une catégorie pour pouvoir ajouter des decks.
-        </p>
+        <p className="text-sm text-neutral-500">{t("needCategory")}</p>
       )}
       {error && <p className="text-sm text-error">{error}</p>}
 
@@ -72,11 +71,11 @@ export function DecksClient({
         <table className="w-full text-left text-sm">
           <thead className="border-b border-neutral-200 text-neutral-500">
             <tr>
-              <th className={th}>Deck</th>
-              <th className={th}>Catégorie</th>
-              <th className={th}>Cartes</th>
-              <th className={th}>Statut</th>
-              <th className={th} aria-label="Actions" />
+              <th className={th}>{t("colDeck")}</th>
+              <th className={th}>{t("colCategory")}</th>
+              <th className={th}>{t("colCards")}</th>
+              <th className={th}>{t("colStatus")}</th>
+              <th className={th} aria-label={tc("actions")} />
             </tr>
           </thead>
           <tbody>
@@ -86,7 +85,7 @@ export function DecksClient({
                   className="px-4 py-10 text-center text-neutral-400"
                   colSpan={5}
                 >
-                  Aucun deck pour l’instant.
+                  {t("empty")}
                 </td>
               </tr>
             ) : (
@@ -116,7 +115,7 @@ export function DecksClient({
                           : "rounded-full bg-neutral-100 px-3 py-1 text-xs font-semibold text-neutral-500"
                       }
                     >
-                      {d.isPublished ? "Publié" : "Brouillon"}
+                      {d.isPublished ? t("published") : t("draft")}
                     </button>
                   </td>
                   <td className={td}>
@@ -128,7 +127,7 @@ export function DecksClient({
                           router.push(`/admin/decks/${d.id}/cards`)
                         }
                       >
-                        Cartes ({d.cardCount})
+                        {t("cardsButton", { count: d.cardCount })}
                       </Button>
                       <Button
                         size="sm"
@@ -138,7 +137,7 @@ export function DecksClient({
                           setOpen(true);
                         }}
                       >
-                        Éditer
+                        {tc("edit")}
                       </Button>
                       <Button
                         size="sm"
@@ -146,7 +145,7 @@ export function DecksClient({
                         disabled={pending}
                         onClick={() => onDelete(d)}
                       >
-                        Supprimer
+                        {tc("delete")}
                       </Button>
                     </div>
                   </td>

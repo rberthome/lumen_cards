@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { requireAdmin, logoutAction } from "@/features/auth";
 
 const navLink =
@@ -11,6 +12,7 @@ export default async function AdminLayout({
   children: ReactNode;
 }) {
   await requireAdmin();
+  const t = await getTranslations("nav");
 
   return (
     <div className="flex min-h-screen bg-neutral-50">
@@ -19,25 +21,25 @@ export default async function AdminLayout({
           <span className="font-serif text-lg font-semibold text-gold-600">
             LumenCards
           </span>
-          <p className="text-xs text-neutral-400">Administration</p>
+          <p className="text-xs text-neutral-400">{t("admin")}</p>
         </div>
 
         <nav className="flex flex-1 flex-col gap-1">
           <Link href="/admin/categories" className={navLink}>
-            <span className="text-base">🗂️</span> Catégories
+            <span className="text-base">🗂️</span> {t("categories")}
           </Link>
           <Link href="/admin/decks" className={navLink}>
-            <span className="text-base">📚</span> Decks
+            <span className="text-base">📚</span> {t("decks")}
           </Link>
         </nav>
 
         <div className="flex flex-col gap-1 border-t border-neutral-100 pt-4">
           <Link href="/" className={navLink}>
-            <span className="text-base">🎓</span> Retour à l’app
+            <span className="text-base">🎓</span> {t("backToApp")}
           </Link>
           <form action={logoutAction}>
             <button type="submit" className={`${navLink} w-full`}>
-              <span className="text-base">↩</span> Déconnexion
+              <span className="text-base">↩</span> {t("logout")}
             </button>
           </form>
         </div>

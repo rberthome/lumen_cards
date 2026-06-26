@@ -1,12 +1,15 @@
 "use client";
 
 import { useActionState } from "react";
+import { useTranslations } from "next-intl";
 import { Button, Input } from "@/design-system";
 import { changePasswordAction, type AuthState } from "../actions";
 
 const initial: AuthState = {};
 
 export function ChangePasswordForm() {
+  const t = useTranslations("auth");
+  const tc = useTranslations("common");
   const [state, action, pending] = useActionState(
     changePasswordAction,
     initial,
@@ -17,7 +20,7 @@ export function ChangePasswordForm() {
       <Input
         name="newPassword"
         type="password"
-        label="Nouveau mot de passe"
+        label={t("newPassword")}
         autoComplete="new-password"
         autoFocus
         required
@@ -25,13 +28,13 @@ export function ChangePasswordForm() {
       <Input
         name="confirm"
         type="password"
-        label="Confirmer le mot de passe"
+        label={t("confirmPassword")}
         autoComplete="new-password"
         error={state.error}
         required
       />
       <Button type="submit" disabled={pending} className="mt-2 w-full">
-        {pending ? "Enregistrement…" : "Définir le mot de passe"}
+        {pending ? tc("saving") : t("setPassword")}
       </Button>
     </form>
   );

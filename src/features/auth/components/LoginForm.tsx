@@ -1,12 +1,14 @@
 "use client";
 
 import { useActionState } from "react";
+import { useTranslations } from "next-intl";
 import { Button, Input } from "@/design-system";
 import { loginAction, type AuthState } from "../actions";
 
 const initial: AuthState = {};
 
 export function LoginForm() {
+  const t = useTranslations("auth");
   const [state, action, pending] = useActionState(loginAction, initial);
 
   return (
@@ -14,8 +16,8 @@ export function LoginForm() {
       <Input
         name="email"
         type="email"
-        label="Adresse e-mail"
-        placeholder="vous@exemple.fr"
+        label={t("email")}
+        placeholder={t("emailPlaceholder")}
         autoComplete="email"
         autoFocus
         required
@@ -23,13 +25,13 @@ export function LoginForm() {
       <Input
         name="password"
         type="password"
-        label="Mot de passe"
+        label={t("password")}
         autoComplete="current-password"
         required
       />
       {state.error && <p className="text-sm text-error">{state.error}</p>}
       <Button type="submit" disabled={pending} className="mt-2 w-full">
-        {pending ? "Connexion…" : "Se connecter"}
+        {pending ? t("signingIn") : t("signIn")}
       </Button>
     </form>
   );

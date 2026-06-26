@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { Button } from "@/design-system";
 import { db } from "@/lib/db";
 import { getSession, logoutAction } from "@/features/auth";
 
 export default async function Home() {
+  const t = await getTranslations();
   const session = await getSession();
   const user = session
     ? await db.user.findUnique({ where: { id: session.userId } })
@@ -20,14 +22,12 @@ export default async function Home() {
         }}
       />
       <h1 className="mb-3 font-serif text-4xl font-semibold text-neutral-900">
-        Bienvenue, {user?.name ?? "initié"}
+        {t("home.welcome", { name: user?.name ?? t("home.fallbackName") })}
       </h1>
-      <p className="mb-2 text-base text-neutral-500">
-        La boucle de révision arrive avec les prochaines issues.
-      </p>
+      <p className="mb-2 text-base text-neutral-500">{t("home.subtitle")}</p>
       {user && (
         <span className="mb-10 rounded-full border border-gold-200 bg-gold-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gold-700">
-          {user.role === "admin" ? "Administrateur" : "Apprenant"}
+          {user.role === "admin" ? t("home.roleAdmin") : t("home.roleLearner")}
         </span>
       )}
 
@@ -37,12 +37,12 @@ export default async function Home() {
             href="/admin"
             className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-gold-200 px-[22px] py-3 text-[15px] font-semibold text-gold-700 transition-colors hover:bg-gold-50"
           >
-            ⚙️ Administration
+            ⚙️ {t("nav.admin")}
           </Link>
         )}
         <form action={logoutAction}>
           <Button variant="secondary" type="submit">
-            Déconnexion
+            {t("nav.logout")}
           </Button>
         </form>
       </div>

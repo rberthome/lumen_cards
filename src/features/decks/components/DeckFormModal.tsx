@@ -2,6 +2,7 @@
 
 import { useState, useTransition, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Modal, Input, Textarea, Select, Button } from "@/design-system";
 import { createDeck, updateDeck } from "../actions";
 import type { DeckListItem, CategoryOption } from "../types";
@@ -25,6 +26,8 @@ export function DeckFormModal({
   categories: CategoryOption[];
   onClose: () => void;
 }) {
+  const t = useTranslations("decks");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [form, setForm] = useState(() => initialForm(editing));
@@ -55,14 +58,10 @@ export function DeckFormModal({
   }
 
   return (
-    <Modal
-      open
-      onClose={onClose}
-      title={editing ? "Modifier le deck" : "Nouveau deck"}
-    >
+    <Modal open onClose={onClose} title={editing ? t("edit") : t("new")}>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <Input
-          label="Titre"
+          label={t("fieldTitle")}
           value={form.title}
           onChange={(e) => set("title", e.target.value)}
           required
@@ -70,17 +69,17 @@ export function DeckFormModal({
         <div className="flex gap-3">
           <div className="flex-1">
             <Select
-              label="Catégorie"
+              label={t("fieldCategory")}
               value={form.categoryId}
               onChange={(e) => set("categoryId", e.target.value)}
-              placeholder="Choisir une catégorie"
+              placeholder={t("choosePlaceholder")}
               options={categories.map((c) => ({ value: c.id, label: c.name }))}
               required
             />
           </div>
           <div className="w-24">
             <Input
-              label="Emoji"
+              label={tc("emoji")}
               value={form.coverEmoji}
               onChange={(e) => set("coverEmoji", e.target.value)}
               placeholder="📚"
@@ -88,7 +87,7 @@ export function DeckFormModal({
           </div>
         </div>
         <Textarea
-          label="Description"
+          label={t("fieldDescription")}
           rows={3}
           value={form.description}
           onChange={(e) => set("description", e.target.value)}
@@ -100,15 +99,15 @@ export function DeckFormModal({
             onChange={(e) => set("isPublished", e.target.checked)}
             className="h-4 w-4 rounded border-neutral-300 text-gold-600 focus:ring-2 focus:ring-gold-400"
           />
-          Publié (visible des apprenants)
+          {t("fieldPublished")}
         </label>
         {error && <p className="text-sm text-error">{error}</p>}
         <div className="mt-1 flex justify-end gap-3">
           <Button type="button" variant="secondary" onClick={onClose}>
-            Annuler
+            {tc("cancel")}
           </Button>
           <Button type="submit" disabled={pending}>
-            {pending ? "Enregistrement…" : "Enregistrer"}
+            {pending ? tc("saving") : tc("save")}
           </Button>
         </div>
       </form>
