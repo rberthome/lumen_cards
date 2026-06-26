@@ -1,0 +1,74 @@
+// LumenCards — schéma de données (réf. PROJECT.md §4)
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 Int            @id @default(autoincrement())
+  name               String
+  email              String         @unique
+  passwordHash       String
+  role               String         @default("user") // "admin" | "user"
+  mustChangePassword Boolean        @default(true)
+  xp                 Int            @default(0)
+  streakDays         Int            @default(0)
+  lastReviewAt       DateTime?
+  createdAt          DateTime       @default(now())
+  progress           CardProgress[]
+}
+
+model Category {
+  id         Int     @id @default(autoincrement())
+  name       String
+  slug       String  @unique
+  coverEmoji String?
+  sortOrder  Int     @default(0)
+  decks      Deck[]
+}
+
+model Deck {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  coverEmoji  String?
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  cards       Card[]
+}
+
+model Card {
+  id           Int            @id @default(autoincrement())
+  deckId       Int
+  deck         Deck           @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  front        String
+  back         String
+  explanation  String?
+  wrongAnswer1 String?
+  wrongAnswer2 String?
+  wrongAnswer3 String?
+  source       String?
+  createdAt    DateTime       @default(now())
+  progress     CardProgress[]
+}
+
+// Un par utilisateur × carte. Paliers d'espacement : level → 1/3/7/21/60 j.
+model CardProgress {
+  id             Int       @id @default(autoincrement())
+  userId         Int
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cardId         Int
+  card           Card      @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  level          Int       @default(0)
+  successCount   Int       @default(0)
+  nextReviewAt   DateTime  @default(now())
+  lastReviewedAt DateTime?
+
+  @@unique([userId, cardId])
+}

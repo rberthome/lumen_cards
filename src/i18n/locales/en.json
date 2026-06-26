@@ -1,0 +1,24 @@
+{
+  "app": { "name": "LumenCards", "tagline": "The light of knowledge" },
+  "nav": {
+    "decks": "Decks",
+    "stats": "Statistics",
+    "admin": "Administration",
+    "logout": "Logout"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "back": "Back",
+    "loading": "Loading...",
+    "retry": "Retry"
+  },
+  "errors": {
+    "generic": "Something went wrong",
+    "network": "Connection issue",
+    "unauthorized": "Unauthorized",
+    "not_found": "Not found"
+  }
+}
