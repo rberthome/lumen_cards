@@ -30,6 +30,12 @@ export async function StudyHeader({
               🔥 {streakDays}
             </span>
           )}
+          <Link
+            href="/stats"
+            className="text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-800"
+          >
+            📊 {t("stats")}
+          </Link>
           {isAdmin && (
             <Link
               href="/admin"

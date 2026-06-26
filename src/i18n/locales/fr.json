@@ -4,9 +4,17 @@
     "categories": "Catégories",
     "decks": "Decks",
     "users": "Utilisateurs",
+    "stats": "Stats",
     "admin": "Administration",
     "backToApp": "Retour à l’app",
     "logout": "Déconnexion"
+  },
+  "stats": {
+    "title": "Mes statistiques",
+    "streak": "Jours de série",
+    "xp": "XP gagné",
+    "mastered": "Cartes connues",
+    "due": "Cartes à réviser"
   },
   "users": {
     "title": "Utilisateurs",
