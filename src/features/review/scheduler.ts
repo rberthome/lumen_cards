@@ -59,3 +59,25 @@ export function isDue(
   if (!nextReviewAt) return true;
   return nextReviewAt.getTime() <= now.getTime();
 }
+
+export const XP_CORRECT = 10;
+export const XP_INCORRECT = 3;
+
+const dayNumber = (d: Date) =>
+  Math.floor(
+    new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime() / DAY_MS,
+  );
+
+// Série quotidienne : +1 si la dernière révision était hier, inchangée si déjà
+// aujourd'hui, sinon repart à 1.
+export function computeStreak(
+  lastReviewAt: Date | null,
+  currentStreak: number,
+  now: Date = new Date(),
+): number {
+  if (!lastReviewAt) return 1;
+  const diff = dayNumber(now) - dayNumber(lastReviewAt);
+  if (diff <= 0) return Math.max(currentStreak, 1);
+  if (diff === 1) return currentStreak + 1;
+  return 1;
+}

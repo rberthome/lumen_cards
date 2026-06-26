@@ -6,6 +6,7 @@ import {
   nextSchedule,
   reviewMode,
   isDue,
+  computeStreak,
 } from "../scheduler";
 
 const NOW = new Date("2026-06-01T12:00:00.000Z");
@@ -70,5 +71,20 @@ describe("isDue", () => {
   });
   it("pas due si l'échéance est future", () => {
     expect(isDue(addDays(NOW, 1), NOW)).toBe(false);
+  });
+});
+
+describe("computeStreak", () => {
+  it("première révision → 1", () => {
+    expect(computeStreak(null, 0, NOW)).toBe(1);
+  });
+  it("révisé hier → +1", () => {
+    expect(computeStreak(addDays(NOW, -1), 4, NOW)).toBe(5);
+  });
+  it("déjà révisé aujourd'hui → inchangé", () => {
+    expect(computeStreak(NOW, 4, NOW)).toBe(4);
+  });
+  it("trou de plusieurs jours → repart à 1", () => {
+    expect(computeStreak(addDays(NOW, -3), 4, NOW)).toBe(1);
   });
 });
