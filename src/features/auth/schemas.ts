@@ -7,11 +7,11 @@ export const loginSchema = z.object({
 
 export const changePasswordSchema = z
   .object({
-    newPassword: z.string().min(8, "8 caractères minimum"),
+    newPassword: z.string().min(8, "passwordMin"),
     confirm: z.string(),
   })
   .refine((d) => d.newPassword === d.confirm, {
-    message: "Les mots de passe ne correspondent pas",
+    message: "passwordMismatch",
     path: ["confirm"],
   });
 

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { LocaleSwitcher } from "@/features/locale";
 
 // Coquille centrée et sobre pour les écrans d'authentification.
 export function AuthShell({
@@ -31,6 +32,9 @@ export function AuthShell({
         </div>
         <div className="rounded-[var(--radius-lg)] border border-neutral-200 bg-white p-7 shadow-[var(--shadow-md)]">
           {children}
+        </div>
+        <div className="mt-6">
+          <LocaleSwitcher />
         </div>
       </div>
     </main>

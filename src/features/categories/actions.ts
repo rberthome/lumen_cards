@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { getTranslations } from "next-intl/server";
 import { db } from "@/lib/db";
 import { requireAdmin } from "@/features/auth";
 import { slugify } from "@/shared/utils/slugify";
@@ -8,6 +9,11 @@ import { categoryFormSchema, type CategoryFormInput } from "./schema";
 
 export interface CategoryActionResult {
   error?: string;
+}
+
+async function err(key?: string): Promise<CategoryActionResult> {
+  const t = await getTranslations("errors");
+  return { error: t(key ?? "invalid") };
 }
 
 async function uniqueSlug(name: string, excludeId?: number): Promise<string> {
@@ -28,7 +34,7 @@ export async function createCategory(
   await requireAdmin();
   const parsed = categoryFormSchema.safeParse(input);
   if (!parsed.success) {
-    return { error: parsed.error.issues[0]?.message ?? "Saisie invalide" };
+    return err(parsed.error.issues[0]?.message);
   }
   const { name, coverEmoji, sortOrder } = parsed.data;
   await db.category.create({
@@ -50,7 +56,7 @@ export async function updateCategory(
   await requireAdmin();
   const parsed = categoryFormSchema.safeParse(input);
   if (!parsed.success) {
-    return { error: parsed.error.issues[0]?.message ?? "Saisie invalide" };
+    return err(parsed.error.issues[0]?.message);
   }
   const { name, coverEmoji, sortOrder } = parsed.data;
   await db.category.update({
@@ -72,7 +78,7 @@ export async function deleteCategory(
   await requireAdmin();
   const deckCount = await db.deck.count({ where: { categoryId: id } });
   if (deckCount > 0) {
-    return { error: "Catégorie utilisée par des decks — déplace-les d'abord." };
+    return err("categoryInUse");
   }
   await db.category.delete({ where: { id } });
   revalidatePath("/admin/categories");

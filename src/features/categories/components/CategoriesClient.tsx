@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Button } from "@/design-system";
 import { CategoryFormModal } from "./CategoryFormModal";
 import { deleteCategory } from "../actions";
@@ -15,6 +16,8 @@ export function CategoriesClient({
 }: {
   categories: CategoryListItem[];
 }) {
+  const t = useTranslations("categories");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<CategoryListItem | null>(null);
@@ -23,7 +26,7 @@ export function CategoriesClient({
 
   function onDelete(cat: CategoryListItem) {
     setError(undefined);
-    if (!confirm(`Supprimer la catégorie « ${cat.name} » ?`)) return;
+    if (!confirm(t("deleteConfirm", { name: cat.name }))) return;
     startTransition(async () => {
       const res = await deleteCategory(cat.id);
       if (res.error) setError(res.error);
@@ -35,7 +38,7 @@ export function CategoriesClient({
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <h1 className="font-serif text-2xl font-semibold text-neutral-900">
-          Catégories
+          {t("title")}
         </h1>
         <Button
           onClick={() => {
@@ -43,7 +46,7 @@ export function CategoriesClient({
             setOpen(true);
           }}
         >
-          Nouvelle catégorie
+          {t("new")}
         </Button>
       </div>
 
@@ -53,11 +56,11 @@ export function CategoriesClient({
         <table className="w-full text-left text-sm">
           <thead className="border-b border-neutral-200 text-neutral-500">
             <tr>
-              <th className={th}>Catégorie</th>
-              <th className={th}>Slug</th>
-              <th className={th}>Decks</th>
-              <th className={th}>Ordre</th>
-              <th className={th} aria-label="Actions" />
+              <th className={th}>{t("colName")}</th>
+              <th className={th}>{tc("slug")}</th>
+              <th className={th}>{t("colDecks")}</th>
+              <th className={th}>{tc("order")}</th>
+              <th className={th} aria-label={tc("actions")} />
             </tr>
           </thead>
           <tbody>
@@ -67,7 +70,7 @@ export function CategoriesClient({
                   className="px-4 py-10 text-center text-neutral-400"
                   colSpan={5}
                 >
-                  Aucune catégorie pour l’instant.
+                  {t("empty")}
                 </td>
               </tr>
             ) : (
@@ -95,7 +98,7 @@ export function CategoriesClient({
                           setOpen(true);
                         }}
                       >
-                        Éditer
+                        {tc("edit")}
                       </Button>
                       <Button
                         size="sm"
@@ -103,7 +106,7 @@ export function CategoriesClient({
                         disabled={pending}
                         onClick={() => onDelete(c)}
                       >
-                        Supprimer
+                        {tc("delete")}
                       </Button>
                     </div>
                   </td>

@@ -2,11 +2,11 @@
 
 import { useState, useTransition, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Modal, Input, Button } from "@/design-system";
 import { createCategory, updateCategory } from "../actions";
 import type { CategoryListItem } from "../types";
 
-// Monté uniquement quand le dialogue est ouvert → l'état s'initialise à chaque ouverture.
 export function CategoryFormModal({
   editing,
   onClose,
@@ -14,6 +14,8 @@ export function CategoryFormModal({
   editing: CategoryListItem | null;
   onClose: () => void;
 }) {
+  const t = useTranslations("categories");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [name, setName] = useState(editing?.name ?? "");
@@ -38,14 +40,10 @@ export function CategoryFormModal({
   }
 
   return (
-    <Modal
-      open
-      onClose={onClose}
-      title={editing ? "Modifier la catégorie" : "Nouvelle catégorie"}
-    >
+    <Modal open onClose={onClose} title={editing ? t("edit") : t("new")}>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <Input
-          label="Nom"
+          label={t("fieldName")}
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
@@ -53,7 +51,7 @@ export function CategoryFormModal({
         <div className="flex gap-3">
           <div className="flex-1">
             <Input
-              label="Emoji"
+              label={tc("emoji")}
               value={coverEmoji}
               onChange={(e) => setCoverEmoji(e.target.value)}
               placeholder="✨"
@@ -61,7 +59,7 @@ export function CategoryFormModal({
           </div>
           <div className="w-24">
             <Input
-              label="Ordre"
+              label={tc("order")}
               type="number"
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
@@ -71,10 +69,10 @@ export function CategoryFormModal({
         {error && <p className="text-sm text-error">{error}</p>}
         <div className="mt-1 flex justify-end gap-3">
           <Button type="button" variant="secondary" onClick={onClose}>
-            Annuler
+            {tc("cancel")}
           </Button>
           <Button type="submit" disabled={pending}>
-            {pending ? "Enregistrement…" : "Enregistrer"}
+            {pending ? tc("saving") : tc("save")}
           </Button>
         </div>
       </form>

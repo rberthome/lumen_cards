@@ -1,24 +1,104 @@
 {
   "app": { "name": "LumenCards", "tagline": "La lumière de la connaissance" },
   "nav": {
+    "categories": "Catégories",
     "decks": "Decks",
-    "stats": "Statistiques",
     "admin": "Administration",
+    "backToApp": "Retour à l’app",
     "logout": "Déconnexion"
   },
   "common": {
     "save": "Enregistrer",
+    "saving": "Enregistrement…",
     "cancel": "Annuler",
     "delete": "Supprimer",
-    "confirm": "Confirmer",
+    "edit": "Éditer",
     "back": "Retour",
-    "loading": "Chargement...",
-    "retry": "Réessayer"
+    "emoji": "Emoji",
+    "order": "Ordre",
+    "slug": "Slug",
+    "actions": "Actions"
+  },
+  "home": {
+    "welcome": "Bienvenue, {name}",
+    "fallbackName": "initié",
+    "subtitle": "La boucle de révision arrive avec les prochaines issues.",
+    "roleAdmin": "Administrateur",
+    "roleLearner": "Apprenant"
+  },
+  "auth": {
+    "loginSubtitle": "Accès sur invitation",
+    "email": "Adresse e-mail",
+    "emailPlaceholder": "vous@exemple.fr",
+    "password": "Mot de passe",
+    "signIn": "Se connecter",
+    "signingIn": "Connexion…",
+    "changeTitle": "Nouveau mot de passe",
+    "changeSubtitle": "Choisis un mot de passe pour sécuriser ton compte.",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "setPassword": "Définir le mot de passe"
+  },
+  "categories": {
+    "title": "Catégories",
+    "new": "Nouvelle catégorie",
+    "edit": "Modifier la catégorie",
+    "colName": "Catégorie",
+    "colDecks": "Decks",
+    "empty": "Aucune catégorie pour l’instant.",
+    "fieldName": "Nom",
+    "deleteConfirm": "Supprimer la catégorie « {name} » ?"
+  },
+  "decks": {
+    "title": "Decks",
+    "new": "Nouveau deck",
+    "edit": "Modifier le deck",
+    "colDeck": "Deck",
+    "colCategory": "Catégorie",
+    "colCards": "Cartes",
+    "colStatus": "Statut",
+    "published": "Publié",
+    "draft": "Brouillon",
+    "empty": "Aucun deck pour l’instant.",
+    "needCategory": "Crée d’abord une catégorie pour pouvoir ajouter des decks.",
+    "cardsButton": "Cartes ({count})",
+    "deleteConfirm": "Supprimer le deck « {title} » et ses {count} carte(s) ?",
+    "fieldTitle": "Titre",
+    "fieldCategory": "Catégorie",
+    "choosePlaceholder": "Choisir une catégorie",
+    "fieldDescription": "Description",
+    "fieldPublished": "Publié (visible des apprenants)"
+  },
+  "cards": {
+    "backToDecks": "← Decks",
+    "title": "{deck} — cartes",
+    "new": "Nouvelle carte",
+    "edit": "Modifier la carte",
+    "colFront": "Recto",
+    "colBack": "Verso",
+    "colMode": "Mode",
+    "qcm": "QCM",
+    "free": "Libre",
+    "empty": "Aucune carte. Ajoute la première.",
+    "deleteConfirm": "Supprimer cette carte ?",
+    "fieldFront": "Recto (question)",
+    "fieldBack": "Verso (bonne réponse)",
+    "fieldExplanation": "Explication (optionnel)",
+    "fieldSource": "Source (optionnel)",
+    "wrongHint": "Mauvaises réponses — renseigne au moins la 1ʳᵉ pour activer le mode QCM.",
+    "wrongPlaceholder": "Mauvaise réponse {n}"
   },
   "errors": {
     "generic": "Une erreur est survenue",
-    "network": "Problème de connexion",
-    "unauthorized": "Accès non autorisé",
-    "not_found": "Introuvable"
+    "invalid": "Saisie invalide",
+    "invalidCredentials": "Identifiants invalides",
+    "nameRequired": "Nom requis",
+    "titleRequired": "Titre requis",
+    "categoryRequired": "Catégorie requise",
+    "frontRequired": "Recto requis",
+    "backRequired": "Verso requis",
+    "passwordMin": "8 caractères minimum",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "categoryInUse": "Catégorie utilisée par des decks — déplace-les d’abord."
   }
 }

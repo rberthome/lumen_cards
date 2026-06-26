@@ -1,24 +1,104 @@
 {
   "app": { "name": "LumenCards", "tagline": "The light of knowledge" },
   "nav": {
+    "categories": "Categories",
     "decks": "Decks",
-    "stats": "Statistics",
     "admin": "Administration",
+    "backToApp": "Back to app",
     "logout": "Logout"
   },
   "common": {
     "save": "Save",
+    "saving": "Saving…",
     "cancel": "Cancel",
     "delete": "Delete",
-    "confirm": "Confirm",
+    "edit": "Edit",
     "back": "Back",
-    "loading": "Loading...",
-    "retry": "Retry"
+    "emoji": "Emoji",
+    "order": "Order",
+    "slug": "Slug",
+    "actions": "Actions"
+  },
+  "home": {
+    "welcome": "Welcome, {name}",
+    "fallbackName": "initiate",
+    "subtitle": "The review loop is coming in upcoming issues.",
+    "roleAdmin": "Administrator",
+    "roleLearner": "Learner"
+  },
+  "auth": {
+    "loginSubtitle": "Invitation only",
+    "email": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…",
+    "changeTitle": "New password",
+    "changeSubtitle": "Choose a password to secure your account.",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "setPassword": "Set password"
+  },
+  "categories": {
+    "title": "Categories",
+    "new": "New category",
+    "edit": "Edit category",
+    "colName": "Category",
+    "colDecks": "Decks",
+    "empty": "No category yet.",
+    "fieldName": "Name",
+    "deleteConfirm": "Delete category “{name}”?"
+  },
+  "decks": {
+    "title": "Decks",
+    "new": "New deck",
+    "edit": "Edit deck",
+    "colDeck": "Deck",
+    "colCategory": "Category",
+    "colCards": "Cards",
+    "colStatus": "Status",
+    "published": "Published",
+    "draft": "Draft",
+    "empty": "No deck yet.",
+    "needCategory": "Create a category first to add decks.",
+    "cardsButton": "Cards ({count})",
+    "deleteConfirm": "Delete deck “{title}” and its {count} card(s)?",
+    "fieldTitle": "Title",
+    "fieldCategory": "Category",
+    "choosePlaceholder": "Choose a category",
+    "fieldDescription": "Description",
+    "fieldPublished": "Published (visible to learners)"
+  },
+  "cards": {
+    "backToDecks": "← Decks",
+    "title": "{deck} — cards",
+    "new": "New card",
+    "edit": "Edit card",
+    "colFront": "Front",
+    "colBack": "Back",
+    "colMode": "Mode",
+    "qcm": "MCQ",
+    "free": "Free",
+    "empty": "No cards. Add the first one.",
+    "deleteConfirm": "Delete this card?",
+    "fieldFront": "Front (question)",
+    "fieldBack": "Back (correct answer)",
+    "fieldExplanation": "Explanation (optional)",
+    "fieldSource": "Source (optional)",
+    "wrongHint": "Wrong answers — fill at least the 1st to enable MCQ mode.",
+    "wrongPlaceholder": "Wrong answer {n}"
   },
   "errors": {
     "generic": "Something went wrong",
-    "network": "Connection issue",
-    "unauthorized": "Unauthorized",
-    "not_found": "Not found"
+    "invalid": "Invalid input",
+    "invalidCredentials": "Invalid credentials",
+    "nameRequired": "Name required",
+    "titleRequired": "Title required",
+    "categoryRequired": "Category required",
+    "frontRequired": "Front required",
+    "backRequired": "Back required",
+    "passwordMin": "8 characters minimum",
+    "passwordMismatch": "Passwords do not match",
+    "categoryInUse": "Category used by decks — move them first."
   }
 }

@@ -1,12 +1,18 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { getTranslations } from "next-intl/server";
 import { db } from "@/lib/db";
 import { requireAdmin } from "@/features/auth";
 import { deckFormSchema, type DeckFormInput } from "./schema";
 
 export interface DeckActionResult {
   error?: string;
+}
+
+async function err(key?: string): Promise<DeckActionResult> {
+  const t = await getTranslations("errors");
+  return { error: t(key ?? "invalid") };
 }
 
 function clean(input: DeckFormInput) {
@@ -25,7 +31,7 @@ export async function createDeck(
   await requireAdmin();
   const parsed = deckFormSchema.safeParse(input);
   if (!parsed.success) {
-    return { error: parsed.error.issues[0]?.message ?? "Saisie invalide" };
+    return err(parsed.error.issues[0]?.message);
   }
   await db.deck.create({ data: clean(parsed.data) });
   revalidatePath("/admin/decks");
@@ -39,7 +45,7 @@ export async function updateDeck(
   await requireAdmin();
   const parsed = deckFormSchema.safeParse(input);
   if (!parsed.success) {
-    return { error: parsed.error.issues[0]?.message ?? "Saisie invalide" };
+    return err(parsed.error.issues[0]?.message);
   }
   await db.deck.update({ where: { id }, data: clean(parsed.data) });
   revalidatePath("/admin/decks");

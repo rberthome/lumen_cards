@@ -1,12 +1,18 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { getTranslations } from "next-intl/server";
 import { db } from "@/lib/db";
 import { requireAdmin } from "@/features/auth";
 import { cardFormSchema, type CardFormInput } from "./schema";
 
 export interface CardActionResult {
   error?: string;
+}
+
+async function err(key?: string): Promise<CardActionResult> {
+  const t = await getTranslations("errors");
+  return { error: t(key ?? "invalid") };
 }
 
 const nz = (s?: string) => s?.trim() || null;
@@ -34,7 +40,7 @@ export async function createCard(
   await requireAdmin();
   const parsed = cardFormSchema.safeParse(input);
   if (!parsed.success) {
-    return { error: parsed.error.issues[0]?.message ?? "Saisie invalide" };
+    return err(parsed.error.issues[0]?.message);
   }
   await db.card.create({ data: { deckId, ...clean(parsed.data) } });
   revalidate(deckId);
@@ -49,7 +55,7 @@ export async function updateCard(
   await requireAdmin();
   const parsed = cardFormSchema.safeParse(input);
   if (!parsed.success) {
-    return { error: parsed.error.issues[0]?.message ?? "Saisie invalide" };
+    return err(parsed.error.issues[0]?.message);
   }
   await db.card.update({ where: { id }, data: clean(parsed.data) });
   revalidate(deckId);

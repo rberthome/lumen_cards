@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Button } from "@/design-system";
 import { CardFormModal } from "./CardFormModal";
 import { deleteCard } from "../actions";
@@ -24,6 +25,8 @@ export function CardsClient({
   deckTitle: string;
   cards: CardListItem[];
 }) {
+  const t = useTranslations("cards");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<CardListItem | null>(null);
@@ -32,7 +35,7 @@ export function CardsClient({
 
   function onDelete(card: CardListItem) {
     setError(undefined);
-    if (!confirm("Supprimer cette carte ?")) return;
+    if (!confirm(t("deleteConfirm"))) return;
     startTransition(async () => {
       const res = await deleteCard(card.id, deckId);
       if (res.error) setError(res.error);
@@ -47,12 +50,12 @@ export function CardsClient({
           href="/admin/decks"
           className="text-sm text-neutral-500 hover:text-neutral-800"
         >
-          ← Decks
+          {t("backToDecks")}
         </Link>
       </div>
       <div className="flex items-center justify-between">
         <h1 className="font-serif text-2xl font-semibold text-neutral-900">
-          {deckTitle} — cartes
+          {t("title", { deck: deckTitle })}
         </h1>
         <Button
           onClick={() => {
@@ -60,7 +63,7 @@ export function CardsClient({
             setOpen(true);
           }}
         >
-          Nouvelle carte
+          {t("new")}
         </Button>
       </div>
 
@@ -70,10 +73,10 @@ export function CardsClient({
         <table className="w-full text-left text-sm">
           <thead className="border-b border-neutral-200 text-neutral-500">
             <tr>
-              <th className={th}>Recto</th>
-              <th className={th}>Verso</th>
-              <th className={th}>Mode</th>
-              <th className={th} aria-label="Actions" />
+              <th className={th}>{t("colFront")}</th>
+              <th className={th}>{t("colBack")}</th>
+              <th className={th}>{t("colMode")}</th>
+              <th className={th} aria-label={tc("actions")} />
             </tr>
           </thead>
           <tbody>
@@ -83,7 +86,7 @@ export function CardsClient({
                   className="px-4 py-10 text-center text-neutral-400"
                   colSpan={4}
                 >
-                  Aucune carte. Ajoute la première.
+                  {t("empty")}
                 </td>
               </tr>
             ) : (
@@ -101,11 +104,11 @@ export function CardsClient({
                   <td className={td}>
                     {c.wrongAnswer1 ? (
                       <span className="rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-semibold text-indigo-600">
-                        QCM
+                        {t("qcm")}
                       </span>
                     ) : (
                       <span className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-semibold text-neutral-500">
-                        Libre
+                        {t("free")}
                       </span>
                     )}
                   </td>
@@ -119,7 +122,7 @@ export function CardsClient({
                           setOpen(true);
                         }}
                       >
-                        Éditer
+                        {tc("edit")}
                       </Button>
                       <Button
                         size="sm"
@@ -127,7 +130,7 @@ export function CardsClient({
                         disabled={pending}
                         onClick={() => onDelete(c)}
                       >
-                        Supprimer
+                        {tc("delete")}
                       </Button>
                     </div>
                   </td>

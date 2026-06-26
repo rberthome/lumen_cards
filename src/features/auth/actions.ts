@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { db } from "@/lib/db";
 import { hashPassword, verifyPassword } from "./password";
 import { createSession, getSession, destroySession } from "./session";
@@ -14,11 +15,12 @@ export async function loginAction(
   _prev: AuthState,
   formData: FormData,
 ): Promise<AuthState> {
+  const t = await getTranslations("errors");
   const parsed = loginSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
   });
-  if (!parsed.success) return { error: "Identifiants invalides" };
+  if (!parsed.success) return { error: t("invalidCredentials") };
 
   const user = await db.user.findUnique({
     where: { email: parsed.data.email },
@@ -27,7 +29,7 @@ export async function loginAction(
     !user ||
     !(await verifyPassword(parsed.data.password, user.passwordHash))
   ) {
-    return { error: "Identifiants invalides" };
+    return { error: t("invalidCredentials") };
   }
 
   await createSession({
@@ -55,7 +57,8 @@ export async function changePasswordAction(
     confirm: formData.get("confirm"),
   });
   if (!parsed.success) {
-    return { error: parsed.error.issues[0]?.message ?? "Saisie invalide" };
+    const t = await getTranslations("errors");
+    return { error: t(parsed.error.issues[0]?.message ?? "invalid") };
   }
 
   await db.user.update({
