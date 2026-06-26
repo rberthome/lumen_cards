@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  @keyframes lc-spin { to { transform: rotate(360deg); } }
+  @keyframes lc-toast-in { from { opacity: 0; transform: translate(-50%, 16px); } to { opacity: 1; transform: translate(-50%, 0); } }
+  @keyframes lc-fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes lc-modal-in { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes lc-shimmer { 0% { background-position: -120% 0; } 100% { background-position: 220% 0; } }
+</style>
+</helmet>
+<div style="position:relative; min-height:100vh; background:#F8FAFC; font-family:system-ui,-apple-system,'Segoe UI',sans-serif; color:#334155; -webkit-font-smoothing:antialiased; padding-bottom:96px; transition:background .35s ease, color .35s ease;">
+
+  <!-- top glow (dark only) -->
+  <div style="position:absolute; top:0; left:0; right:0; height:420px; pointer-events:none; opacity:0; background:radial-gradient(ellipse 60% 100% at 50% -20%, rgba(251,191,36,.16), transparent 70%); transition:opacity .35s ease;"></div>
+
+  <!-- theme toggle -->
+  <a href="Systeme visuel - Dark.dc.html" style="position:fixed; top:18px; right:18px; z-index:70; display:inline-flex; align-items:center; gap:8px; font-family:system-ui,sans-serif; font-size:13px; font-weight:600; padding:9px 14px; border-radius:9999px; cursor:pointer; box-shadow:0 4px 14px rgba(15,23,42,.12); text-decoration:none; color:#334155; background:#FFFFFF; border:1px solid #E2E8F0;"><span style="font-size:15px;">🌙</span><span>Sombre</span></a>
+
+  <!-- ============ COVER ============ -->
+  <header style="position:relative; max-width:920px; margin:0 auto; padding:72px 24px 40px; text-align:center;">
+    <div style="display:inline-flex; align-items:center; gap:14px; margin-bottom:28px;">
+      <div style="width:44px; height:44px; border-radius:50%; background:radial-gradient(circle at 50% 38%, #FEF3C7 0%, #FBBF24 38%, #D97706 100%); box-shadow:0 4px 20px rgba(245,158,11,.45); position:relative;">
+        <div style="position:absolute; inset:0; border-radius:50%; background:repeating-conic-gradient(from 0deg, rgba(255,255,255,.55) 0deg 3deg, transparent 3deg 18deg); mix-blend-mode:overlay;"></div>
+      </div>
+      <span style="font-family:Georgia,'Times New Roman',serif; font-size:30px; font-weight:600; letter-spacing:.01em; color:#0F172A;">LumenCards</span>
+    </div>
+    <h1 style="font-family:Georgia,serif; font-size:46px; line-height:1.1; font-weight:600; color:#0F172A; margin:0 0 16px; letter-spacing:-.01em;">Système visuel</h1>
+    <p style="font-size:17px; line-height:1.6; color:#64748B; max-width:540px; margin:0 auto 22px;">Le langage de design de LumenCards — fondations et composants vivants. La boussole : trois mots.</p>
+    <div style="display:inline-flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+      <span style="font-family:Georgia,serif; font-size:14px; font-style:italic; color:#B45309; background:#FFFBEB; border:1px solid #FDE68A; padding:7px 16px; border-radius:9999px;">sobre</span>
+      <span style="font-family:Georgia,serif; font-size:14px; font-style:italic; color:#B45309; background:#FFFBEB; border:1px solid #FDE68A; padding:7px 16px; border-radius:9999px;">initiatique</span>
+      <span style="font-family:Georgia,serif; font-size:14px; font-style:italic; color:#B45309; background:#FFFBEB; border:1px solid #FDE68A; padding:7px 16px; border-radius:9999px;">lumineux</span>
+    </div>
+  </header>
+
+  <main style="position:relative; max-width:920px; margin:0 auto; padding:0 24px; display:flex; flex-direction:column; gap:28px;">
+
+    <!-- ============ PRINCIPES ============ -->
+    <section style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:32px; box-shadow:0 1px 2px rgba(15,23,42,.04); transition:background .35s ease, border-color .35s ease;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#B45309; margin-bottom:8px;">Principes</div>
+      <h2 style="font-family:Georgia,serif; font-size:26px; font-weight:600; color:#0F172A; margin:0 0 22px;">La lumière comme récompense</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;">
+        <div>
+          <div style="font-family:Georgia,serif; font-size:18px; color:#0F172A; margin-bottom:6px;">Le neutre porte l'écran</div>
+          <p style="margin:0; font-size:14px; line-height:1.6; color:#64748B;">~90 % de la surface est sombre/claire et calme. Le repos du fond donne sa gravité au contenu.</p>
+        </div>
+        <div>
+          <div style="font-family:Georgia,serif; font-size:18px; color:#0F172A; margin-bottom:6px;">L'or est rare</div>
+          <p style="margin:0; font-size:14px; line-height:1.6; color:#64748B;">L'or ne sert qu'au savoir, à la marque et à la récompense (XP, streak, bonne réponse). Jamais décoratif.</p>
+        </div>
+        <div>
+          <div style="font-family:Georgia,serif; font-size:18px; color:#0F172A; margin-bottom:6px;">Serif = contenu, sans = action</div>
+          <p style="margin:0; font-size:14px; line-height:1.6; color:#64748B;">Georgia pour la marque, les titres et les cartes. System-ui pour labels et boutons : on lit la pensée en serif, on agit en sans.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COULEURS ============ -->
+    <section style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:32px; box-shadow:0 1px 2px rgba(15,23,42,.04); transition:background .35s ease, border-color .35s ease;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#B45309; margin-bottom:8px;">Couleurs</div>
+      <h2 style="font-family:Georgia,serif; font-size:26px; font-weight:600; color:#0F172A; margin:0 0 8px;">Un rôle par couleur</h2>
+      <p style="font-size:14px; line-height:1.6; color:#64748B; margin:0 0 24px; max-width:560px;">L'or éclaire, l'indigo explique, le neutre soutient. Les couleurs sémantiques ne parlent qu'au moment du jugement.</p>
+
+      <div style="font-size:13px; font-weight:600; color:#334155; margin-bottom:10px;">Or — accent · marque · XP</div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); gap:10px; margin-bottom:24px;">
+        <div><div style="height:64px; border-radius:10px; background:#FFFBEB; border:1px solid #E2E8F0;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">gold-50</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#FFFBEB</div></div>
+        <div><div style="height:64px; border-radius:10px; background:#FBBF24;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">gold-400</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#FBBF24</div></div>
+        <div><div style="height:64px; border-radius:10px; background:#F59E0B;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">gold-500</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#F59E0B</div></div>
+        <div><div style="height:64px; border-radius:10px; background:#D97706;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">gold-600</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#D97706</div></div>
+        <div><div style="height:64px; border-radius:10px; background:#B45309;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">gold-700</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#B45309</div></div>
+      </div>
+
+      <div style="font-size:13px; font-weight:600; color:#334155; margin-bottom:10px;">Indigo — savoir · explications · info</div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); gap:10px; margin-bottom:24px;">
+        <div><div style="height:64px; border-radius:10px; background:#EEF2FF; border:1px solid #E2E8F0;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">indigo-50</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#EEF2FF</div></div>
+        <div><div style="height:64px; border-radius:10px; background:#4F46E5;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">indigo-600</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#4F46E5</div></div>
+        <div><div style="height:64px; border-radius:10px; background:#312E81;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">indigo-900</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#312E81</div></div>
+      </div>
+
+      <div style="font-size:13px; font-weight:600; color:#334155; margin-bottom:10px;">Neutres — ~90 % de l'écran</div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); gap:10px; margin-bottom:24px;">
+        <div><div style="height:64px; border-radius:10px; background:#FFFFFF; border:1px solid #E2E8F0;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">neutral-0</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#FFFFFF</div></div>
+        <div><div style="height:64px; border-radius:10px; background:#F8FAFC; border:1px solid #E2E8F0;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">neutral-50</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#F8FAFC</div></div>
+        <div><div style="height:64px; border-radius:10px; background:#E2E8F0;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">neutral-200</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#E2E8F0</div></div>
+        <div><div style="height:64px; border-radius:10px; background:#64748B;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">neutral-500</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#64748B</div></div>
+        <div><div style="height:64px; border-radius:10px; background:#334155;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">neutral-700</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#334155</div></div>
+        <div><div style="height:64px; border-radius:10px; background:#0F172A; border:1px solid #E2E8F0;"></div><div style="font-size:12px; color:#0F172A; margin-top:6px;">neutral-900</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#0F172A</div></div>
+      </div>
+
+      <div style="font-size:13px; font-weight:600; color:#334155; margin-bottom:10px;">Sémantiques — le moment du jugement</div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px;">
+        <div style="display:flex; align-items:center; gap:10px; border:1px solid #E2E8F0; border-radius:10px; padding:10px;"><div style="width:32px; height:32px; border-radius:8px; background:#22C55E;"></div><div><div style="font-size:13px; color:#0F172A;">Succès</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#22C55E</div></div></div>
+        <div style="display:flex; align-items:center; gap:10px; border:1px solid #E2E8F0; border-radius:10px; padding:10px;"><div style="width:32px; height:32px; border-radius:8px; background:#EF4444;"></div><div><div style="font-size:13px; color:#0F172A;">Erreur</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#EF4444</div></div></div>
+        <div style="display:flex; align-items:center; gap:10px; border:1px solid #E2E8F0; border-radius:10px; padding:10px;"><div style="width:32px; height:32px; border-radius:8px; background:#3B82F6;"></div><div><div style="font-size:13px; color:#0F172A;">Info</div><div style="font-size:11px; color:#94A3B8; font-family:ui-monospace,monospace;">#3B82F6</div></div></div>
+      </div>
+    </section>
+
+    <!-- ============ TYPOGRAPHIE ============ -->
+    <section style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:32px; box-shadow:0 1px 2px rgba(15,23,42,.04); transition:background .35s ease, border-color .35s ease;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#B45309; margin-bottom:8px;">Typographie</div>
+      <h2 style="font-family:Georgia,serif; font-size:26px; font-weight:600; color:#0F172A; margin:0 0 24px;">Deux voix</h2>
+
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 18px; padding-bottom:18px; border-bottom:1px solid #F1F5F9;">
+          <div style="font-family:Georgia,serif; font-size:46px; line-height:1.1; color:#0F172A;">Display</div>
+          <div style="font-size:12px; color:#94A3B8; font-family:ui-monospace,monospace;">Georgia · 46 / 1.1 · 600</div>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 18px; padding-bottom:18px; border-bottom:1px solid #F1F5F9;">
+          <div style="font-family:Georgia,serif; font-size:32px; line-height:1.15; color:#0F172A;">Titre H1</div>
+          <div style="font-size:12px; color:#94A3B8; font-family:ui-monospace,monospace;">Georgia · 32 / 1.15 · 600</div>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 18px; padding-bottom:18px; border-bottom:1px solid #F1F5F9;">
+          <div style="font-family:Georgia,serif; font-size:24px; line-height:1.2; color:#0F172A;">Titre H2 · question de carte</div>
+          <div style="font-size:12px; color:#94A3B8; font-family:ui-monospace,monospace;">Georgia · 24 / 1.2 · 600</div>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 18px; padding-bottom:18px; border-bottom:1px solid #F1F5F9;">
+          <div style="font-size:16px; line-height:1.6; color:#334155;">Corps de texte — l'interface parle en sans-serif, claire et calme.</div>
+          <div style="font-size:12px; color:#94A3B8; font-family:ui-monospace,monospace;">system-ui · 16 / 1.6 · 400</div>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 18px; padding-bottom:18px; border-bottom:1px solid #F1F5F9;">
+          <div style="font-size:14px; line-height:1.6; color:#64748B;">Secondaire — métadonnées, aides, compteurs.</div>
+          <div style="font-size:12px; color:#94A3B8; font-family:ui-monospace,monospace;">system-ui · 14 / 1.6 · 400</div>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 18px;">
+          <div style="font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#B45309;">Label · badge de mode</div>
+          <div style="font-size:12px; color:#94A3B8; font-family:ui-monospace,monospace;">system-ui · 12 · 600 · +.12em</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FONDATIONS ============ -->
+    <section style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:32px; box-shadow:0 1px 2px rgba(15,23,42,.04); transition:background .35s ease, border-color .35s ease;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#B45309; margin-bottom:8px;">Fondations</div>
+      <h2 style="font-family:Georgia,serif; font-size:26px; font-weight:600; color:#0F172A; margin:0 0 24px;">Espacement, rayons, ombres</h2>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px;">
+        <div>
+          <div style="font-size:13px; font-weight:600; color:#334155; margin-bottom:14px;">Échelle d'espacement · base 4</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; align-items:center; gap:12px;"><div style="width:4px; height:18px; background:#F59E0B; border-radius:2px;"></div><span style="font-size:13px; color:#64748B;">4 · xs</span></div>
+            <div style="display:flex; align-items:center; gap:12px;"><div style="width:8px; height:18px; background:#F59E0B; border-radius:2px;"></div><span style="font-size:13px; color:#64748B;">8 · sm</span></div>
+            <div style="display:flex; align-items:center; gap:12px;"><div style="width:16px; height:18px; background:#F59E0B; border-radius:2px;"></div><span style="font-size:13px; color:#64748B;">16 · md</span></div>
+            <div style="display:flex; align-items:center; gap:12px;"><div style="width:24px; height:18px; background:#F59E0B; border-radius:2px;"></div><span style="font-size:13px; color:#64748B;">24 · lg</span></div>
+            <div style="display:flex; align-items:center; gap:12px;"><div style="width:32px; height:18px; background:#F59E0B; border-radius:2px;"></div><span style="font-size:13px; color:#64748B;">32 · xl</span></div>
+            <div style="display:flex; align-items:center; gap:12px;"><div style="width:48px; height:18px; background:#F59E0B; border-radius:2px;"></div><span style="font-size:13px; color:#64748B;">48 · 2xl</span></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px; font-weight:600; color:#334155; margin-bottom:14px;">Rayons</div>
+          <div style="display:flex; flex-wrap:wrap; gap:14px;">
+            <div style="text-align:center;"><div style="width:56px; height:56px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px;"></div><div style="font-size:11px; color:#94A3B8; margin-top:6px;">6 · sm</div></div>
+            <div style="text-align:center;"><div style="width:56px; height:56px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px;"></div><div style="font-size:11px; color:#94A3B8; margin-top:6px;">10 · md</div></div>
+            <div style="text-align:center;"><div style="width:56px; height:56px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:16px;"></div><div style="font-size:11px; color:#94A3B8; margin-top:6px;">16 · lg</div></div>
+            <div style="text-align:center;"><div style="width:56px; height:56px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:9999px;"></div><div style="font-size:11px; color:#94A3B8; margin-top:6px;">full</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px; font-weight:600; color:#334155; margin-bottom:14px;">Ombres</div>
+          <div style="display:flex; flex-wrap:wrap; gap:18px;">
+            <div style="text-align:center;"><div style="width:64px; height:48px; background:#fff; border:1px solid transparent; border-radius:10px; box-shadow:0 1px 2px rgba(15,23,42,.18);"></div><div style="font-size:11px; color:#94A3B8; margin-top:10px;">sm</div></div>
+            <div style="text-align:center;"><div style="width:64px; height:48px; background:#fff; border:1px solid transparent; border-radius:10px; box-shadow:0 4px 12px rgba(15,23,42,.22);"></div><div style="font-size:11px; color:#94A3B8; margin-top:10px;">md</div></div>
+            <div style="text-align:center;"><div style="width:64px; height:48px; background:#fff; border:1px solid transparent; border-radius:10px; box-shadow:0 12px 32px rgba(15,23,42,.28);"></div><div style="font-size:11px; color:#94A3B8; margin-top:10px;">lg</div></div>
+            <div style="text-align:center;"><div style="width:64px; height:48px; background:#fff; border-radius:10px; box-shadow:0 6px 24px rgba(245,158,11,.40);"></div><div style="font-size:11px; color:#B45309; margin-top:10px;">gold glow</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BOUTONS ============ -->
+    <section style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:32px; box-shadow:0 1px 2px rgba(15,23,42,.04); transition:background .35s ease, border-color .35s ease;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#B45309; margin-bottom:8px;">Composants live</div>
+      <h2 style="font-family:Georgia,serif; font-size:26px; font-weight:600; color:#0F172A; margin:0 0 4px;">Boutons</h2>
+      <p style="font-size:14px; color:#64748B; margin:0 0 24px;">Survole pour voir hover / actif. États repos · hover · actif · désactivé.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:24px;">
+        <div>
+          <div style="font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#94A3B8; margin-bottom:12px;">Primaire (or)</div>
+          <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+            <button style="font-family:system-ui,sans-serif; font-size:15px; font-weight:600; color:#fff; background:#D97706; border:none; padding:12px 22px; border-radius:10px; cursor:pointer; box-shadow:0 2px 8px rgba(217,119,6,.30); transition:all .15s;" style-hover="filter:brightness(1.05); box-shadow:0 6px 18px rgba(217,119,6,.45); transform:translateY(-1px);" style-active="transform:translateY(0); box-shadow:0 1px 4px rgba(217,119,6,.3);">Réviser maintenant</button>
+            <button disabled style="font-family:system-ui,sans-serif; font-size:15px; font-weight:600; color:#94A3B8; background:#F1F5F9; border:none; padding:12px 22px; border-radius:10px; cursor:not-allowed;">Désactivé</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#94A3B8; margin-bottom:12px;">Secondaire (contour)</div>
+          <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+            <button style="font-family:system-ui,sans-serif; font-size:15px; font-weight:600; color:#334155; background:#fff; border:1px solid #E2E8F0; padding:12px 22px; border-radius:10px; cursor:pointer; transition:all .15s;" style-hover="border-color:#CBD5E1; background:#F8FAFC;" style-active="background:#F1F5F9;">Voir le deck</button>
+            <button disabled style="font-family:system-ui,sans-serif; font-size:15px; font-weight:600; color:#CBD5E1; background:#fff; border:1px solid #F1F5F9; padding:12px 22px; border-radius:10px; cursor:not-allowed;">Désactivé</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#94A3B8; margin-bottom:12px;">Discret (ghost)</div>
+          <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+            <button style="font-family:system-ui,sans-serif; font-size:15px; font-weight:600; color:#4F46E5; background:transparent; border:none; padding:12px 18px; border-radius:10px; cursor:pointer; transition:all .15s;" style-hover="background:#EEF2FF;">Passer cette carte</button>
+            <button style="font-family:system-ui,sans-serif; font-size:15px; font-weight:600; color:#64748B; background:transparent; border:none; padding:12px 18px; border-radius:10px; cursor:pointer; transition:all .15s;" style-hover="background:#F1F5F9;">Annuler</button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:24px; display:flex; flex-wrap:wrap; gap:14px;">
+        <button onClick="{{ showToast }}" style="font-family:system-ui,sans-serif; font-size:14px; font-weight:600; color:#fff; background:#0F172A; border:none; padding:11px 20px; border-radius:10px; cursor:pointer;">Déclencher un toast →</button>
+        <button onClick="{{ openModal }}" style="font-family:system-ui,sans-serif; font-size:14px; font-weight:600; color:#334155; background:#fff; border:1px solid #E2E8F0; padding:11px 20px; border-radius:10px; cursor:pointer;">Ouvrir une modale →</button>
+      </div>
+    </section>
+
+    <!-- ============ INPUTS ============ -->
+    <section style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:32px; box-shadow:0 1px 2px rgba(15,23,42,.04); transition:background .35s ease, border-color .35s ease;">
+      <h2 style="font-family:Georgia,serif; font-size:22px; font-weight:600; color:#0F172A; margin:0 0 20px;">Champs de saisie</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;">
+        <div>
+          <label style="display:block; font-size:13px; font-weight:600; color:#334155; margin-bottom:7px;">Repos</label>
+          <input placeholder="Ta réponse…" style="width:100%; font-family:system-ui,sans-serif; font-size:15px; color:#0F172A; background:#fff; border:1px solid #E2E8F0; border-radius:10px; padding:12px 14px; outline:none; transition:all .15s;" style-focus="border-color:#F59E0B; box-shadow:0 0 0 3px rgba(245,158,11,.22);" />
+        </div>
+        <div>
+          <label style="display:block; font-size:13px; font-weight:600; color:#334155; margin-bottom:7px;">Focus (clique)</label>
+          <input value="Liberté transcendantale" style="width:100%; font-family:system-ui,sans-serif; font-size:15px; color:#0F172A; background:#fff; border:1px solid #F59E0B; border-radius:10px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(245,158,11,.22);" />
+        </div>
+        <div>
+          <label style="display:block; font-size:13px; font-weight:600; color:#334155; margin-bottom:7px;">Erreur</label>
+          <input value="" placeholder="Champ requis" style="width:100%; font-family:system-ui,sans-serif; font-size:15px; color:#0F172A; background:#fff; border:1px solid #EF4444; border-radius:10px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(239,68,68,.18);" />
+          <div style="font-size:12px; color:#EF4444; margin-top:6px;">Ce champ est requis.</div>
+        </div>
+        <div>
+          <label style="display:block; font-size:13px; font-weight:600; color:#94A3B8; margin-bottom:7px;">Désactivé</label>
+          <input value="Verrouillé" disabled style="width:100%; font-family:system-ui,sans-serif; font-size:15px; color:#94A3B8; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:12px 14px; cursor:not-allowed;" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BADGES + LOADER + PROGRESS ============ -->
+    <section style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:32px; box-shadow:0 1px 2px rgba(15,23,42,.04); transition:background .35s ease, border-color .35s ease;">
+      <h2 style="font-family:Georgia,serif; font-size:22px; font-weight:600; color:#0F172A; margin:0 0 20px;">Badges, indicateurs, état</h2>
+
+      <div style="font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#94A3B8; margin-bottom:12px;">Badges de mode & étiquettes</div>
+      <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:26px; align-items:center;">
+        <span style="display:inline-flex; align-items:center; gap:6px; font-family:system-ui,sans-serif; font-size:12px; font-weight:600; letter-spacing:.04em; color:#4F46E5; background:#EEF2FF; padding:6px 12px; border-radius:9999px;">🃏 Choix multiple</span>
+        <span style="display:inline-flex; align-items:center; gap:6px; font-family:system-ui,sans-serif; font-size:12px; font-weight:600; letter-spacing:.04em; color:#B45309; background:#FFFBEB; border:1px solid #FDE68A; padding:6px 12px; border-radius:9999px;">📖 Réponse libre</span>
+        <span style="display:inline-flex; align-items:center; gap:6px; font-family:system-ui,sans-serif; font-size:12px; font-weight:600; color:#15803D; background:#F0FDF4; padding:6px 12px; border-radius:9999px;">✓ Acquise</span>
+        <span style="display:inline-flex; align-items:center; gap:6px; font-family:system-ui,sans-serif; font-size:12px; font-weight:600; color:#B91C1C; background:#FEF2F2; padding:6px 12px; border-radius:9999px;">✗ À revoir</span>
+        <span style="display:inline-flex; align-items:center; gap:6px; font-family:system-ui,sans-serif; font-size:13px; font-weight:700; color:#B45309; background:#FFFBEB; border:1px solid #FDE68A; padding:6px 12px; border-radius:9999px;">🔥 7 jours</span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:28px;">
+        <div>
+          <div style="font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#94A3B8; margin-bottom:12px;">Barre de progression</div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="flex:1; height:8px; background:#F1F5F9; border-radius:9999px; overflow:hidden;"><div style="width:42%; height:100%; background:linear-gradient(90deg,#FBBF24,#D97706); border-radius:9999px;"></div></div>
+            <span style="font-size:13px; font-weight:600; color:#334155; white-space:nowrap;">8 / 19</span>
+          </div>
+          <div style="display:flex; gap:14px; margin-top:14px;">
+            <span style="font-size:13px; font-weight:600; color:#15803D;">✓ 6</span>
+            <span style="font-size:13px; font-weight:600; color:#B91C1C;">✗ 2</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#94A3B8; margin-bottom:12px;">Chargement</div>
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:28px; height:28px; border-radius:50%; border:3px solid #FEF3C7; border-top-color:#D97706; animation:lc-spin .8s linear infinite;"></div>
+            <span style="font-size:14px; color:#64748B;">Préparation de la session…</span>
+          </div>
+          <div style="height:14px; margin-top:18px; border-radius:7px; background:linear-gradient(90deg,#F1F5F9 0%,#E2E8F0 50%,#F1F5F9 100%); background-size:200% 100%; animation:lc-shimmer 1.4s linear infinite;"></div>
+          <div style="height:14px; width:70%; margin-top:8px; border-radius:7px; background:linear-gradient(90deg,#F1F5F9 0%,#E2E8F0 50%,#F1F5F9 100%); background-size:200% 100%; animation:lc-shimmer 1.4s linear infinite;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ APERÇU CARTE DECK ============ -->
+    <section style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:32px; box-shadow:0 1px 2px rgba(15,23,42,.04); transition:background .35s ease, border-color .35s ease;">
+      <h2 style="font-family:Georgia,serif; font-size:22px; font-weight:600; color:#0F172A; margin:0 0 4px;">Composition — carte de deck</h2>
+      <p style="font-size:14px; color:#64748B; margin:0 0 22px;">Comment les fondations se combinent. (L'écran complet vient à l'étape suivante.)</p>
+      <div style="max-width:380px;">
+        <div style="background:#fff; border:1px solid #E2E8F0; border-radius:16px; padding:22px; box-shadow:0 4px 12px rgba(15,23,42,.10); display:flex; gap:16px; align-items:flex-start; transition:all .15s;" style-hover="box-shadow:0 12px 32px rgba(15,23,42,.18); transform:translateY(-2px); border-color:#FDE68A;">
+          <div style="width:52px; height:52px; border-radius:12px; background:#EEF2FF; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;">🕊️</div>
+          <div style="flex:1;">
+            <div style="font-family:Georgia,serif; font-size:19px; font-weight:600; color:#0F172A; margin-bottom:4px;">Kant — La raison pure</div>
+            <div style="font-size:13px; color:#64748B; margin-bottom:12px;">42 cartes · catégorie Philosophie</div>
+            <div style="display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:#B45309; background:#FFFBEB; border:1px solid #FDE68A; padding:5px 11px; border-radius:9999px;">⏳ 7 cartes dues</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ TOAST (live) ============ -->
+  <sc-if value="{{ toastVisible }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; left:50%; bottom:28px; transform:translateX(-50%); z-index:60; animation:lc-toast-in .25s ease;">
+      <div style="display:flex; align-items:center; gap:12px; background:#0F172A; color:#fff; padding:14px 20px; border-radius:12px; box-shadow:0 12px 32px rgba(15,23,42,.40); font-family:system-ui,sans-serif; font-size:14px;">
+        <span style="font-size:18px;">✨</span>
+        <span>+12 XP — bonne réponse enregistrée</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ MODAL (live) ============ -->
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed; inset:0; z-index:50; background:rgba(15,23,42,.55); display:flex; align-items:center; justify-content:center; padding:24px; animation:lc-fade-in .2s ease;">
+      <div onClick="{{ stop }}" style="background:#fff; border:1px solid transparent; border-radius:18px; padding:28px; max-width:380px; width:100%; box-shadow:0 24px 60px rgba(15,23,42,.45); animation:lc-modal-in .25s ease;">
+        <div style="font-size:32px; margin-bottom:12px;">🗂️</div>
+        <h3 style="font-family:Georgia,serif; font-size:22px; font-weight:600; color:#0F172A; margin:0 0 8px;">Terminer la session ?</h3>
+        <p style="font-size:14px; line-height:1.6; color:#64748B; margin:0 0 22px;">Il reste 11 cartes dues. Ta progression est sauvegardée — tu pourras reprendre quand tu veux.</p>
+        <div style="display:flex; gap:12px; justify-content:flex-end;">
+          <button onClick="{{ closeModal }}" style="font-family:system-ui,sans-serif; font-size:14px; font-weight:600; color:#64748B; background:transparent; border:none; padding:11px 18px; border-radius:10px; cursor:pointer;">Continuer</button>
+          <button onClick="{{ closeModal }}" style="font-family:system-ui,sans-serif; font-size:14px; font-weight:600; color:#fff; background:#D97706; border:none; padding:11px 20px; border-radius:10px; cursor:pointer; box-shadow:0 2px 8px rgba(217,119,6,.30);">Terminer</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { toastVisible: false, modalOpen: false };
+  _t = null;
+  showToast = () => { clearTimeout(this._t); this.setState({ toastVisible: true }); this._t = setTimeout(() => this.setState({ toastVisible: false }), 2600); };
+  openModal = () => this.setState({ modalOpen: true });
+  closeModal = () => this.setState({ modalOpen: false });
+  stop = (e) => { e.stopPropagation(); };
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    return { toastVisible: this.state.toastVisible, modalOpen: this.state.modalOpen, showToast: this.showToast, openModal: this.openModal, closeModal: this.closeModal, stop: this.stop };
+  }
+}
+</script>
+</body>
+</html>
