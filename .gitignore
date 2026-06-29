@@ -39,6 +39,9 @@ yarn-error.log*
 *.db-journal
 /prisma/*.db
 
+# seeds de contenu privé (jamais commités)
+/prisma/seeds-private/
+
 # vercel
 .vercel
 
