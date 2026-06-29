@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { logoutAction } from "@/features/auth";
+import { ThemeToggle, getTheme } from "@/features/theme";
 
 export async function StudyHeader({
   streakDays,
@@ -11,13 +12,14 @@ export async function StudyHeader({
 }) {
   const t = await getTranslations("nav");
   const ts = await getTranslations("study");
+  const theme = await getTheme();
 
   return (
-    <header className="border-b border-neutral-200 bg-white">
+    <header className="border-b border-line bg-surface">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-3">
         <Link
           href="/"
-          className="font-serif text-lg font-semibold text-gold-600"
+          className="font-serif text-lg font-semibold text-accent-strong"
         >
           LumenCards
         </Link>
@@ -25,29 +27,30 @@ export async function StudyHeader({
           {streakDays > 0 && (
             <span
               title={ts("streakTitle", { count: streakDays })}
-              className="flex items-center gap-1 rounded-full bg-gold-50 px-2.5 py-1 text-sm font-semibold text-gold-700"
+              className="flex items-center gap-1 rounded-full bg-accent-soft px-2.5 py-1 text-sm font-semibold text-accent-strong"
             >
               🔥 {streakDays}
             </span>
           )}
           <Link
             href="/stats"
-            className="text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-800"
+            className="text-sm font-medium text-muted transition-colors hover:text-foreground"
           >
             📊 {t("stats")}
           </Link>
           {isAdmin && (
             <Link
               href="/admin"
-              className="text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-800"
+              className="text-sm font-medium text-muted transition-colors hover:text-foreground"
             >
               ⚙️ {t("admin")}
             </Link>
           )}
+          <ThemeToggle initial={theme} />
           <form action={logoutAction}>
             <button
               type="submit"
-              className="text-sm text-neutral-400 transition-colors hover:text-neutral-700"
+              className="text-sm text-muted transition-colors hover:text-foreground"
             >
               {t("logout")}
             </button>

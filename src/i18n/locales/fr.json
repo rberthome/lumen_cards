@@ -1,5 +1,8 @@
 {
-  "app": { "name": "LumenCards", "tagline": "La lumière de la connaissance" },
+  "app": {
+    "name": "LumenCards",
+    "tagline": "La lumière de la connaissance"
+  },
   "nav": {
     "categories": "Catégories",
     "decks": "Decks",
@@ -160,5 +163,10 @@
     "passwordMin": "8 caractères minimum",
     "passwordMismatch": "Les mots de passe ne correspondent pas",
     "categoryInUse": "Catégorie utilisée par des decks — déplace-les d’abord."
+  },
+  "theme": {
+    "label": "Thème",
+    "light": "Clair",
+    "dark": "Sombre"
   }
 }

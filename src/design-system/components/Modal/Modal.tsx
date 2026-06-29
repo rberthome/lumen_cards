@@ -76,10 +76,10 @@ export function Modal({ open, onClose, title, children }: ModalProps) {
         aria-modal="true"
         aria-label={title}
         tabIndex={-1}
-        className="relative z-10 w-full max-w-md rounded-[var(--radius-lg)] bg-white p-7 shadow-[var(--shadow-lg)] focus:outline-none"
+        className="relative z-10 w-full max-w-md rounded-[var(--radius-lg)] border border-line bg-surface p-7 shadow-[var(--shadow-lg)] focus:outline-none"
       >
         {title && (
-          <h2 className="mb-5 font-serif text-xl font-semibold text-neutral-900">
+          <h2 className="mb-5 font-serif text-xl font-semibold text-foreground">
             {title}
           </h2>
         )}
