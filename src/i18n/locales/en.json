@@ -84,7 +84,10 @@
     "incorrectLabel": "To review",
     "backHome": "Back home",
     "nothingDue": "Nothing to review right now ✓",
-    "progress": "{current} / {total}"
+    "progress": "{current} / {total}",
+    "cardsTotal": "{count} cards",
+    "newLabel": "New",
+    "filterAll": "All"
   },
   "auth": {
     "loginSubtitle": "Invitation only",
@@ -97,7 +100,10 @@
     "changeSubtitle": "Choose a password to secure your account.",
     "newPassword": "New password",
     "confirmPassword": "Confirm password",
-    "setPassword": "Set password"
+    "setPassword": "Set password",
+    "invitationNote": "This space is reserved for invited members. Contact an administrator to join.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
   },
   "categories": {
     "title": "Categories",

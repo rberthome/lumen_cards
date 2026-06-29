@@ -66,7 +66,7 @@ export function CategoryFormModal({
             />
           </div>
         </div>
-        {error && <p className="text-sm text-error">{error}</p>}
+        {error && <p className="text-sm text-incorrect">{error}</p>}
         <div className="mt-1 flex justify-end gap-3">
           <Button type="button" variant="secondary" onClick={onClose}>
             {tc("cancel")}

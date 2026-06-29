@@ -92,16 +92,16 @@ export function DeckFormModal({
           value={form.description}
           onChange={(e) => set("description", e.target.value)}
         />
-        <label className="flex items-center gap-2 text-sm text-neutral-700">
+        <label className="flex items-center gap-2 text-sm text-foreground">
           <input
             type="checkbox"
             checked={form.isPublished}
             onChange={(e) => set("isPublished", e.target.checked)}
-            className="h-4 w-4 rounded border-neutral-300 text-gold-600 focus:ring-2 focus:ring-gold-400"
+            className="h-4 w-4 rounded border-line accent-[var(--color-accent-strong)] focus:ring-2 focus:ring-gold-400"
           />
           {t("fieldPublished")}
         </label>
-        {error && <p className="text-sm text-error">{error}</p>}
+        {error && <p className="text-sm text-incorrect">{error}</p>}
         <div className="mt-1 flex justify-end gap-3">
           <Button type="button" variant="secondary" onClick={onClose}>
             {tc("cancel")}

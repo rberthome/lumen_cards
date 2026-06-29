@@ -67,7 +67,7 @@ export function UserFormModal({ onClose }: { onClose: () => void }) {
           onChange={(e) => set("password", e.target.value)}
           required
         />
-        {error && <p className="text-sm text-error">{error}</p>}
+        {error && <p className="text-sm text-incorrect">{error}</p>}
         <div className="mt-1 flex justify-end gap-3">
           <Button type="button" variant="secondary" onClick={onClose}>
             {tc("cancel")}

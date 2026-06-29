@@ -88,8 +88,8 @@ export function CardFormModal({
           value={form.explanation}
           onChange={(e) => set("explanation", e.target.value)}
         />
-        <div className="rounded-[var(--radius-md)] bg-neutral-50 p-3">
-          <p className="mb-2 text-xs text-neutral-500">{t("wrongHint")}</p>
+        <div className="rounded-[var(--radius-md)] bg-info-soft p-3">
+          <p className="mb-2 text-xs font-medium text-info">{t("wrongHint")}</p>
           <div className="flex flex-col gap-2">
             <Input
               value={form.wrongAnswer1}
@@ -113,7 +113,7 @@ export function CardFormModal({
           value={form.source}
           onChange={(e) => set("source", e.target.value)}
         />
-        {error && <p className="text-sm text-error">{error}</p>}
+        {error && <p className="text-sm text-incorrect">{error}</p>}
         <div className="mt-1 flex justify-end gap-3">
           <Button type="button" variant="secondary" onClick={onClose}>
             {tc("cancel")}

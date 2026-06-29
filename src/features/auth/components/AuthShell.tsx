@@ -7,10 +7,12 @@ import { ThemeToggle, getTheme } from "@/features/theme";
 export async function AuthShell({
   title,
   subtitle,
+  footer,
   children,
 }: {
   title: string;
   subtitle?: string;
+  footer?: string;
   children: ReactNode;
 }) {
   const theme = await getTheme();
@@ -30,6 +32,11 @@ export async function AuthShell({
         <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-7 shadow-[var(--shadow-md)]">
           {children}
         </div>
+        {footer && (
+          <p className="mt-5 text-center text-xs leading-relaxed text-muted">
+            {footer}
+          </p>
+        )}
         <div className="mt-6 flex items-center justify-center gap-4">
           <LocaleSwitcher />
           <ThemeToggle initial={theme} />

@@ -10,7 +10,7 @@ export default async function StatsPage() {
   const stats = await getLearnerStats(session.userId);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <StudyHeader
         streakDays={stats.streakDays}
         isAdmin={session.role === "admin"}
