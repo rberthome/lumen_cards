@@ -19,7 +19,13 @@ function choiceClass(
   return `${base} border-line bg-surface text-muted opacity-60`;
 }
 
-function choiceIcon(choice: string, back: string, selected: string | null) {
+function choiceIcon(
+  choice: string,
+  back: string,
+  selected: string | null,
+  locked: boolean,
+) {
+  if (!locked) return "";
   if (choice === back) return "✓";
   if (choice === selected) return "✗";
   return "";
@@ -56,7 +62,7 @@ export function QcmView({
           >
             <span>{choice}</span>
             <span className="text-lg">
-              {choiceIcon(choice, card.back, selected)}
+              {choiceIcon(choice, card.back, selected, locked)}
             </span>
           </button>
         ))}
