@@ -1,5 +1,8 @@
 {
-  "app": { "name": "LumenCards", "tagline": "La lumière de la connaissance" },
+  "app": {
+    "name": "LumenCards",
+    "tagline": "La lumière de la connaissance"
+  },
   "nav": {
     "categories": "Catégories",
     "decks": "Decks",
@@ -81,7 +84,10 @@
     "incorrectLabel": "À revoir",
     "backHome": "Retour à l’accueil",
     "nothingDue": "Rien à réviser pour l’instant ✓",
-    "progress": "{current} / {total}"
+    "progress": "{current} / {total}",
+    "cardsTotal": "{count} cartes",
+    "newLabel": "Nouvelles",
+    "filterAll": "Toutes"
   },
   "auth": {
     "loginSubtitle": "Accès sur invitation",
@@ -94,7 +100,10 @@
     "changeSubtitle": "Choisis un mot de passe pour sécuriser ton compte.",
     "newPassword": "Nouveau mot de passe",
     "confirmPassword": "Confirmer le mot de passe",
-    "setPassword": "Définir le mot de passe"
+    "setPassword": "Définir le mot de passe",
+    "invitationNote": "Cet espace est réservé aux membres invités. Contacte un administrateur pour rejoindre.",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe"
   },
   "categories": {
     "title": "Catégories",
@@ -160,5 +169,10 @@
     "passwordMin": "8 caractères minimum",
     "passwordMismatch": "Les mots de passe ne correspondent pas",
     "categoryInUse": "Catégorie utilisée par des decks — déplace-les d’abord."
+  },
+  "theme": {
+    "label": "Thème",
+    "light": "Clair",
+    "dark": "Sombre"
   }
 }

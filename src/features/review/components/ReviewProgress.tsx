@@ -1,3 +1,5 @@
+import { Progress } from "@/design-system";
+
 export function ReviewProgress({
   current,
   total,
@@ -9,24 +11,16 @@ export function ReviewProgress({
   correct: number;
   incorrect: number;
 }) {
-  const pct = total > 0 ? Math.round((current / total) * 100) : 0;
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center justify-between text-sm text-neutral-500">
-        <span>
-          {current} / {total}
-        </span>
-        <div className="flex gap-3">
-          <span className="text-[#15803D]">✓ {correct}</span>
-          <span className="text-error">✗ {incorrect}</span>
-        </div>
+    <div className="flex items-center gap-3.5">
+      <Progress value={current} max={total} className="flex-1" />
+      <div className="flex flex-shrink-0 gap-3.5 text-[13px] font-bold">
+        <span className="text-correct">✓ {correct}</span>
+        <span className="text-incorrect">✗ {incorrect}</span>
       </div>
-      <div className="h-2 w-full overflow-hidden rounded-full bg-neutral-100">
-        <div
-          className="h-full rounded-full bg-gradient-to-r from-gold-400 to-gold-600 transition-all duration-300"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
+      <span className="flex-shrink-0 text-[13px] text-muted">
+        {current} / {total}
+      </span>
     </div>
   );
 }

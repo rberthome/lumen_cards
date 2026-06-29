@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import "./globals.css";
 import { Providers } from "@/lib/providers";
+import { getTheme } from "@/features/theme";
 
 export const metadata: Metadata = {
   title: "LumenCards",
@@ -15,11 +16,15 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const locale = await getLocale();
   const messages = await getMessages();
+  const theme = await getTheme();
 
   return (
-    <html lang={locale} className="h-full antialiased">
+    <html
+      lang={locale}
+      className={`h-full antialiased${theme === "dark" ? " dark" : ""}`}
+    >
       <body
-        className="min-h-full bg-neutral-50 font-sans text-neutral-900"
+        className="min-h-full bg-background font-sans text-foreground"
         suppressHydrationWarning
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
