@@ -1,101 +1,14 @@
-networks:
-  lumen:
-    driver: bridge
-
+# Un seul service : app Next + SQLite sur un volume. Réf. PROJECT.md §8.
 services:
-  # ── API Laravel (FrankenPHP) ──────────────────────────────────
-  api:
-    build:
-      context: apps/api
-      args:
-        UID: ${UID:-1000}
+  app:
+    build: .
+    ports:
+      - "3000:3000"
     environment:
-      XDG_CONFIG_HOME: /tmp
-      APP_ENV: local
-      APP_URL: http://localhost:${API_PORT:-8001}
-      DB_CONNECTION: pgsql
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_DATABASE: ${DB_DATABASE:-lumen_cards}
-      DB_USERNAME: ${DB_USERNAME:-lumen}
-      DB_PASSWORD: ${DB_PASSWORD:-secret}
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
+      DATABASE_URL: "file:/data/prod.db"
     volumes:
-      - ./apps/api:/app
-    networks:
-      - lumen
-    ports:
-      - ${API_PORT:-8001}:8080
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_started
-
-  # ── Web Vue.js (Vite dev server) ──────────────────────────────
-  web:
-    image: node:20-alpine
-    working_dir: /app
-    command: sh -c "npm install && npm run dev -- --host"
-    environment:
-      API_PROXY_TARGET: http://api:8080
-    volumes:
-      - ./apps/web:/app
-      - ./packages:/packages
-      - web_node_modules:/app/node_modules
-    networks:
-      - lumen
-    ports:
-      - ${WEB_PORT:-3000}:3000
-    depends_on:
-      - api
-
-  # ── PostgreSQL ────────────────────────────────────────────────
-  db:
-    image: postgres:17-alpine
-    environment:
-      POSTGRES_DB: ${DB_DATABASE:-lumen_cards}
-      POSTGRES_USER: ${DB_USERNAME:-lumen}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    networks:
-      - lumen
-    ports:
-      - ${DB_PORT:-5432}:5432
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-lumen} -d ${DB_DATABASE:-lumen_cards}"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
-  # ── PostgreSQL (tests) ────────────────────────────────────────
-  db-testing:
-    image: postgres:17-alpine
-    environment:
-      POSTGRES_DB: lumen_cards_testing
-      POSTGRES_USER: ${DB_USERNAME:-lumen}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
-    networks:
-      - lumen
-
-  # ── Redis (cache + sessions) ──────────────────────────────────
-  redis:
-    image: redis:7-alpine
-    networks:
-      - lumen
-    ports:
-      - ${REDIS_PORT:-6379}:6379
-
-  # ── Mailpit (emails dev) ──────────────────────────────────────
-  mailpit:
-    image: axllent/mailpit:latest
-    networks:
-      - lumen
-    ports:
-      - ${MAILPIT_PORT:-8025}:8025
+      - lumen_data:/data
+    restart: unless-stopped
 
 volumes:
-  db_data:
-  web_node_modules:
+  lumen_data:
