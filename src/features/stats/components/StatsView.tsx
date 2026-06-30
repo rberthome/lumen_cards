@@ -1,6 +1,8 @@
+import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 import { Card, Icon, type IconName } from "@/design-system";
 import type { LearnerStats } from "../repository";
+import { MasteredHelp } from "./MasteredHelp";
 
 // Encart héros du streak : dégradé "or de marque", identique en clair et sombre.
 function StreakHero({
@@ -43,11 +45,13 @@ function StatCard({
   label,
   icon,
   tone,
+  info,
 }: {
   value: number;
   label: string;
   icon: IconName;
   tone: "correct" | "accent";
+  info?: ReactNode;
 }) {
   const tones = {
     correct: "bg-correct/10 border-correct/25 text-correct",
@@ -57,8 +61,9 @@ function StatCard({
     <Card
       elevation="none"
       padding="none"
-      className={`flex flex-col items-center gap-1 p-5 text-center ${tones[tone]}`}
+      className={`relative flex flex-col items-center gap-1 p-5 text-center ${tones[tone]}`}
     >
+      {info && <span className="absolute right-2.5 top-2.5">{info}</span>}
       <Icon name={icon} size={24} />
       <span className="font-serif text-2xl font-semibold leading-none">
         {value}
@@ -89,6 +94,7 @@ export async function StatsView({ stats }: { stats: LearnerStats }) {
           label={t("mastered")}
           icon="correct"
           tone="correct"
+          info={<MasteredHelp />}
         />
         <StatCard
           value={stats.due}

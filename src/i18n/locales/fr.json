@@ -17,7 +17,14 @@
     "streak": "Jours de série",
     "xp": "XP gagné",
     "mastered": "Cartes connues",
-    "due": "Cartes à réviser"
+    "due": "Cartes à réviser",
+    "masteredHelp": {
+      "aria": "En savoir plus sur les cartes connues",
+      "title": "Cartes connues",
+      "p1": "Une carte est comptée « connue » après {threshold} bonnes réponses au total.",
+      "p2": "Les révisions sont espacées à des paliers de plus en plus longs : une même carte ne revient qu'à son échéance, donc réviser plusieurs fois le même jour ne compte qu'une fois.",
+      "p3": "Au plus tôt, une carte devient « connue » au bout de {minDays} jours, le temps d'enchaîner {threshold} réussites au fil des révisions espacées."
+    }
   },
   "users": {
     "title": "Utilisateurs",
