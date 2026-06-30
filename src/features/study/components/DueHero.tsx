@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { Icon } from "@/design-system";
 
 // Bandeau d'appel à l'action « réviser ce qui est dû » — dégradé or de marque.
 export async function DueHero({ dueTotal }: { dueTotal: number }) {
@@ -30,7 +31,7 @@ export async function DueHero({ dueTotal }: { dueTotal: number }) {
           href="/review"
           className="mt-4 inline-flex w-fit items-center justify-center gap-2 rounded-[var(--radius-md)] bg-gold-400 px-7 py-3.5 text-[15px] font-bold text-[#1a1206] transition-all hover:-translate-y-px hover:bg-gold-500"
         >
-          🃏 {t("reviewDue", { count: dueTotal })}
+<Icon name="cards" size={18} /> {t("reviewDue", { count: dueTotal })}
         </Link>
       </div>
     </div>

@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Button, Modal, Card, Badge } from "@/design-system";
+import { Button, Modal, Card, Badge, Icon } from "@/design-system";
 import { UserFormModal } from "./UserFormModal";
 import { resetUserPassword, deleteUser } from "../actions";
 import type { UserListItem } from "../types";
@@ -85,8 +85,8 @@ export function UsersClient({ users }: { users: UserListItem[] }) {
                   <tr key={u.id} className="border-b border-line last:border-0">
                     <td className={td}>
                       <div className="flex items-center gap-3">
-                        <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-info-soft text-sm">
-                          🎓
+                        <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-info-soft text-info">
+                          <Icon name="graduation" size={16} />
                         </span>
                         <div className="min-w-0">
                           <div className="truncate font-medium text-foreground">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { Icon } from "@/design-system";
 import type { DeckDetail } from "../learnerRepository";
 
 // En-tête sticky avec retour à l'accueil, titre du deck et catégorie.
@@ -12,9 +13,9 @@ export async function DeckDetailHeader({ deck }: { deck: DeckDetail }) {
         <Link
           href="/"
           aria-label={t("back")}
-          className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-line bg-background text-lg text-foreground transition-colors hover:bg-surface-2"
+          className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-line bg-background text-foreground transition-colors hover:bg-surface-2"
         >
-          ←
+          <Icon name="back" size={20} />
         </Link>
         <div className="min-w-0 flex-1">
           <div className="truncate font-serif text-lg font-semibold text-foreground">

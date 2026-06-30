@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button, Input, Loader } from "@/design-system";
+import { Button, Icon, Input, Loader } from "@/design-system";
 import { changePasswordAction, type AuthState } from "../actions";
 
 const initial: AuthState = {};
@@ -34,9 +34,9 @@ export function ChangePasswordForm() {
           aria-label={showPw ? t("hidePassword") : t("showPassword")}
           aria-pressed={showPw}
           onClick={() => setShowPw((v) => !v)}
-          className="absolute right-3 top-[34px] text-base text-muted transition-colors hover:text-foreground"
+          className="absolute right-3 top-[34px] text-muted transition-colors hover:text-foreground"
         >
-          {showPw ? "🙈" : "👁️"}
+          <Icon name={showPw ? "hide" : "reveal"} size={18} />
         </button>
       </div>
       <Input

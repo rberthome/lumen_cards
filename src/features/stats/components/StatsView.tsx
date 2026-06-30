@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { Card } from "@/design-system";
+import { Card, Icon, type IconName } from "@/design-system";
 import type { LearnerStats } from "../repository";
 
 // Encart héros du streak : dégradé "or de marque", identique en clair et sombre.
@@ -16,7 +16,9 @@ function StreakHero({
 }) {
   return (
     <div className="flex items-center gap-5 rounded-[var(--radius-lg)] bg-gradient-to-br from-[#1E1A0E] to-[#3B2A06] p-7">
-      <span className="text-5xl leading-none">🔥</span>
+      <span className="leading-none text-gold-200">
+        <Icon name="streak" size={48} />
+      </span>
       <div className="flex-1">
         <div className="mb-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-gold-400">
           {label}
@@ -44,7 +46,7 @@ function StatCard({
 }: {
   value: number;
   label: string;
-  icon: string;
+  icon: IconName;
   tone: "correct" | "accent";
 }) {
   const tones = {
@@ -57,7 +59,7 @@ function StatCard({
       padding="none"
       className={`flex flex-col items-center gap-1 p-5 text-center ${tones[tone]}`}
     >
-      <span className="text-2xl">{icon}</span>
+      <Icon name={icon} size={24} />
       <span className="font-serif text-2xl font-semibold leading-none">
         {value}
       </span>
@@ -85,10 +87,15 @@ export async function StatsView({ stats }: { stats: LearnerStats }) {
         <StatCard
           value={stats.mastered}
           label={t("mastered")}
-          icon="✓"
+          icon="correct"
           tone="correct"
         />
-        <StatCard value={stats.due} label={t("due")} icon="⏳" tone="accent" />
+        <StatCard
+          value={stats.due}
+          label={t("due")}
+          icon="due"
+          tone="accent"
+        />
       </div>
     </section>
   );

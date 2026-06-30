@@ -1,4 +1,4 @@
-import { Button } from "@/design-system";
+import { Button, Icon } from "@/design-system";
 import type { SessionCard } from "../sessionTypes";
 import { FlipCard } from "./FlipCard";
 import { Explanation, type T } from "./reviewParts";
@@ -10,7 +10,7 @@ function FlipFront({ text, t }: { text: string; t: T }) {
         {text}
       </p>
       <p className="mt-6 flex items-center gap-1.5 text-[13px] text-muted">
-        <span className="text-base">👆</span> {t("reveal")}
+        <Icon name="reveal" size={16} /> {t("reveal")}
       </p>
     </>
   );

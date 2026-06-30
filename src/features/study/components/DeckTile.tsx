@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Badge, Card } from "@/design-system";
+import { Badge, Card, Icon } from "@/design-system";
 import type { StudyDeck } from "../repository";
 
 // Tuile de deck cliquable menant au détail du deck.
@@ -28,11 +28,11 @@ export function DeckTile({
         </div>
         {deck.due > 0 ? (
           <Badge variant="free" className="flex-shrink-0 whitespace-nowrap">
-            ⏳ {dueLabel}
+            <Icon name="due" size={13} /> {dueLabel}
           </Badge>
         ) : (
           <Badge variant="acquired" className="flex-shrink-0 whitespace-nowrap">
-            ✓ {doneLabel}
+            <Icon name="correct" size={13} /> {doneLabel}
           </Badge>
         )}
       </Card>
