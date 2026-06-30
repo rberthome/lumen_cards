@@ -1,52 +1,50 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-node_modules/
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
-# Laravel API
-apps/api/.env
-apps/api/storage/*.key
-apps/api/vendor/
+# testing
+/coverage
 
-# Monorepo root env
-.env
+# next.js
+/.next/
+/out/
 
-# Vue.js build
-apps/web/dist/
+# production
+/build
 
-# Expo
-.expo/
-dist/
-web-build/
-expo-env.d.ts
-
-# Native
-.kotlin/
-*.orig.*
-*.jks
-*.p8
-*.p12
-*.key
-*.mobileprovision
-
-# Metro
-.metro-health-check*
-
-# debug
-npm-debug.*
-yarn-debug.*
-yarn-error.*
-
-# macOS
+# misc
 .DS_Store
 *.pem
 
-# local env files
-.env*.local
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+!.env.example
+
+# database (SQLite — fichier local / volume Docker)
+*.db
+*.db-journal
+/prisma/*.db
+
+# seeds de contenu privé (jamais commités)
+/prisma/seeds-private/
+
+# vercel
+.vercel
 
 # typescript
 *.tsbuildinfo
-
-# generated native folders
-/ios
-/android
+next-env.d.ts

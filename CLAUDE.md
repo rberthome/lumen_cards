@@ -1,58 +1,41 @@
-@AGENTS.md
-
 # LumenCards — Règles Claude
 
-## Structure monorepo
+App **full-stack Next.js** (App Router + RSC) de révision par répétition espacée.
+Le cadre complet (fonctionnel, visuel, archi) est dans **`PROJECT.md`** — le lire en premier.
+Plan de travail : **`ISSUES.md`** + issues GitHub (milestones Socle → Boucle → Finitions).
 
-```
-lumen_cards/                    ← git root
-  apps/
-    mobile/                     ← Expo + React Native (TypeScript)
-    api/                        ← Laravel 13 (PHP 8.5) — pattern myeventease
-  packages/
-    types/                      ← Types TS générés depuis les DTOs PHP
-      generated.ts              ← AUTO-GENERATED — voir npm run types:generate
-      index.ts
-  Makefile                      ← make mobile | api | types-generate | lint
-  .github/workflows/            ← CI séparée mobile + api
-```
+## Stack
 
-**Commandes principales :**
-- `make mobile` — Expo dev server
-- `make api` — Docker Compose Laravel
-- `make types-generate` — génère `packages/types/generated.ts` depuis PHP DTOs
-- `make api-migrate` — reset + reseed BDD
+- **Next.js 16** (App Router, React Server Components, TypeScript) — full-stack : Server Actions + Route Handlers.
+- **Prisma + SQLite** (1 fichier, WAL) — accès via `src/lib/db.ts`.
+- **Tailwind v4** (tokens dans `src/app/globals.css` `@theme`), **React Query**, **zod**, **react-hook-form**, **next-intl**, **zustand**.
+- Déploiement : VM Proxmox → `docker compose` → 1 conteneur (`output: standalone`) + volume `/data`.
 
-## Domaine
-Flashcards d'apprentissage philosophique, maçonnique et spirituel. Thèmes : Kant, Kabbale, symbolisme maçonnique, philosophie de l'initiation. Approche Duolingo : progression gamifiée, statistiques, répétition espacée, génération IA.
+## Commandes
 
-## Règles strictes — Mobile (apps/mobile)
-- Tout composant UI vient de `src/design-system/` — zéro style inline ad hoc
-- Toute requête HTTP passe par React Query — jamais de `fetch()` nu dans un composant
-- Toute string visible passe par `src/i18n/` — zéro texte en dur dans le JSX (fr.json + en.json)
-- Tout nouveau comportement conditionnel a un feature flag dans `featureFlags.config.ts`
-- Les types API viennent de `@lumen_cards/types` (généré depuis Laravel)
+- `npm run dev` — serveur de dev
+- `npm run build` / `npm start` — build + serveur de prod
+- `npm run typecheck` / `npm run lint` / `npm run test`
+- `npm run db:migrate` (prisma migrate dev) · `npm run db:generate`
 
-## Règles strictes — API (apps/api)
-- Pattern Repository : Interface → Implémentation → bindé dans AppServiceProvider
-- DTOs : `readonly class XxxDto implements ArrayableDto` avec `#[TypeScript]` annotation
-- Controllers : injectent le repository, retournent `JsonResponse`
-- Aucun code métier dans les controllers — tout dans les Services/Repositories
+## Structure (`src/`)
 
-## Architecture mobile (apps/mobile/src/features)
-- `cards/`        — types Card, Deck, CardReview
-- `deck/`         — gestion des decks thématiques
-- `review/`       — session de révision, logique spaced repetition (SM-2 backend)
-- `stats/`        — statistiques, niveaux (Apprenti → Grand Maître), XP
-- `ai-generator/` — génération de cartes depuis une réflexion utilisateur (API Claude)
+`app/` routes · `features/<feature>/` (components/hooks/store/api/types/**tests**/index.ts, copier `_template/`) · `design-system/` (tokens + composants) · `config/` (env zod, featureFlags) · `i18n/` (next-intl, fr+en) · `lib/` (db, queryClient, logger) · `shared/`.
 
-## Gamification (niveaux maçonniques)
-Apprenti (0–500 XP) → Compagnon (501–2000) → Maître (2001–5000) → Grand Maître (5001+)
-XP : knew=true → 10 XP × streak multiplier, knew=false → 3 XP
+## Règles strictes
 
-## Types partagés
-Les types de l'API sont générés automatiquement depuis les DTOs PHP annotés `#[TypeScript]`.
-**Ne jamais dupliquer les types manuellement** — toujours lancer `make types-generate` après modification d'un DTO PHP.
+- Tout composant UI vient du **`design-system/`** — zéro style inline ad hoc.
+- Toute requête côté client passe par **React Query** — jamais de `fetch()` nu dans un composant.
+- Toute string visible passe par **`i18n/`** (fr + en) — zéro texte en dur dans le JSX.
+- Tout comportement conditionnel a un **feature flag** (`config/featureFlags`).
+- Aucune logique métier dans les composants — `features/*/api` (Server Actions) ou `hooks`.
+- **Server Components par défaut**, `"use client"` seulement si interactif ; chaque segment qui charge des données a `<Suspense>` + `loading.tsx` + `error.tsx`.
+- ESLint SOLID : `max-lines 200`, `complexity 10`, `no-explicit-any`.
 
-## Génération IA
-Utiliser l'API Claude (claude-sonnet-4-6) pour analyser une réflexion et générer des cartes front/back avec explication. Feature flag : `AI_CARD_GENERATION`.
+## Domaine & gamification
+
+Flashcards philo/maçonnique/spirituel (Kant, Kabbale, symbolisme). Répétition espacée = **paliers fixes 1/3/7/21/60 j**. Mode carte : QCM si `successCount < 3`, sinon réponse libre. XP : réussite 10 / échec 3 ; streak quotidien. Auth = comptes créés par l'admin (`mustChangePassword`).
+
+## Legacy
+
+Le code v0 (Laravel + Vue + Expo) est archivé dans la branche **`legacy/v0`** + tag `v0.0.0`. Y repomper le contenu maçonnique (seeders) et les bouts utiles, ne pas réécrire de zéro.

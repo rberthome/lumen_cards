@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* Bascule de thème pilotée par la classe .dark sur <html> (pas prefers-color-scheme). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design system LumenCards — réf. docs/design/systeme-visuel-{light,dark}.html */
+@theme {
+  /* Or — accent · marque · XP */
+  --color-gold-50: #fffbeb;
+  --color-gold-200: #fde68a;
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+  --color-gold-700: #b45309;
+
+  /* Indigo — savoir · explications · info */
+  --color-indigo-50: #eef2ff;
+  --color-indigo-600: #4f46e5;
+  --color-indigo-900: #312e81;
+
+  /* Neutres — ~90 % de l'écran */
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-700: #334155;
+  --color-neutral-900: #0f172a;
+
+  /* Sémantiques — le moment du jugement */
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info-base: #3b82f6;
+
+  /* Voix typographiques */
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Rayons */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+/*
+ * Tokens sémantiques (PROJECT.md §5) — pointent vers des variables runtime
+ * (--lc-*) qui basculent sous .dark. `inline` => les utilitaires Tailwind
+ * (bg-surface, text-foreground, border-line…) référencent directement la var,
+ * donc le thème suit la classe .dark sans recompilation.
+ */
+@theme inline {
+  --color-background: var(--lc-background);
+  --color-surface: var(--lc-surface);
+  --color-surface-2: var(--lc-surface-2);
+  --color-line: var(--lc-line);
+  --color-field: var(--lc-field);
+  --color-foreground: var(--lc-foreground);
+  --color-muted: var(--lc-muted);
+  --color-accent: var(--lc-accent);
+  --color-accent-strong: var(--lc-accent-strong);
+  --color-accent-soft: var(--lc-accent-soft);
+  --color-accent-line: var(--lc-accent-line);
+  --color-info: var(--lc-info);
+  --color-info-soft: var(--lc-info-soft);
+  --color-correct: var(--lc-correct);
+  --color-incorrect: var(--lc-incorrect);
+
+  --shadow-sm: var(--lc-shadow-sm);
+  --shadow-md: var(--lc-shadow-md);
+  --shadow-lg: var(--lc-shadow-lg);
+  --shadow-gold: var(--lc-shadow-gold);
+}
+
+/* Thème clair (défaut) */
+:root {
+  --lc-background: #f8fafc; /* neutral-50  */
+  --lc-surface: #ffffff; /* neutral-0   */
+  --lc-surface-2: #f1f5f9; /* neutral-100 */
+  --lc-line: #e2e8f0; /* neutral-200 */
+  --lc-field: #ffffff; /* fond des champs */
+  --lc-foreground: #0f172a; /* neutral-900 */
+  --lc-muted: #64748b; /* neutral-500 */
+  --lc-accent: #f59e0b; /* gold-500    */
+  --lc-accent-strong: #d97706; /* gold-600    */
+  --lc-accent-soft: #fffbeb; /* gold-50     */
+  --lc-accent-line: #fde68a; /* gold-200    */
+  --lc-info: #4f46e5; /* indigo-600  */
+  --lc-info-soft: #eef2ff; /* indigo-50   */
+  --lc-correct: #22c55e; /* success     */
+  --lc-incorrect: #ef4444; /* error       */
+
+  --lc-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --lc-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.1);
+  --lc-shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.16);
+  --lc-shadow-gold: 0 6px 24px rgba(245, 158, 11, 0.4);
+}
+
+/* Thème sombre — valeurs extraites de systeme-visuel-dark.html */
+.dark {
+  --lc-background: #0b1120;
+  --lc-surface: #141d2e;
+  --lc-surface-2: #1b2740;
+  --lc-line: #28344c;
+  --lc-field: #1b2740;
+  --lc-foreground: #f1f5f9;
+  --lc-muted: #94a3b8;
+  --lc-accent: #f59e0b;
+  --lc-accent-strong: #d97706;
+  --lc-accent-soft: #1a1206;
+  --lc-accent-line: #3a2c0a;
+  --lc-info: #a5b4fc;
+  --lc-info-soft: #1e1b3a;
+  --lc-correct: #4ade80;
+  --lc-incorrect: #f87171;
+
+  --lc-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --lc-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --lc-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55);
+  --lc-shadow-gold: 0 6px 24px rgba(245, 158, 11, 0.28);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes lc-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
