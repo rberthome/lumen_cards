@@ -1,4 +1,4 @@
-import { Button } from "@/design-system";
+import { Button, Icon, type IconName } from "@/design-system";
 import type { SessionCard } from "../sessionTypes";
 import { Explanation, QuestionCard, type T } from "./reviewParts";
 
@@ -24,11 +24,11 @@ function choiceIcon(
   back: string,
   selected: string | null,
   locked: boolean,
-) {
-  if (!locked) return "";
-  if (choice === back) return "✓";
-  if (choice === selected) return "✗";
-  return "";
+): IconName | null {
+  if (!locked) return null;
+  if (choice === back) return "correct";
+  if (choice === selected) return "incorrect";
+  return null;
 }
 
 export function QcmView({
@@ -61,9 +61,10 @@ export function QcmView({
             className={choiceClass(choice, card.back, selected, locked)}
           >
             <span>{choice}</span>
-            <span className="text-lg">
-              {choiceIcon(choice, card.back, selected, locked)}
-            </span>
+            {(() => {
+              const icon = choiceIcon(choice, card.back, selected, locked);
+              return icon ? <Icon name={icon} size={18} /> : null;
+            })()}
           </button>
         ))}
       </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { Icon } from "@/design-system";
 import { logoutAction } from "@/features/auth";
 import { ThemeToggle, getTheme } from "@/features/theme";
 
@@ -29,21 +30,21 @@ export async function StudyHeader({
               title={ts("streakTitle", { count: streakDays })}
               className="flex items-center gap-1 rounded-full bg-accent-soft px-2.5 py-1 text-sm font-semibold text-accent-strong"
             >
-              🔥 {streakDays}
+              <Icon name="streak" size={15} /> {streakDays}
             </span>
           )}
           <Link
             href="/stats"
-            className="text-sm font-medium text-muted transition-colors hover:text-foreground"
+            className="flex items-center gap-1 text-sm font-medium text-muted transition-colors hover:text-foreground"
           >
-            📊 {t("stats")}
+            <Icon name="stats" size={16} /> {t("stats")}
           </Link>
           {isAdmin && (
             <Link
               href="/admin"
-              className="text-sm font-medium text-muted transition-colors hover:text-foreground"
+              className="flex items-center gap-1 text-sm font-medium text-muted transition-colors hover:text-foreground"
             >
-              ⚙️ {t("admin")}
+              <Icon name="settings" size={16} /> {t("admin")}
             </Link>
           )}
           <ThemeToggle initial={theme} />

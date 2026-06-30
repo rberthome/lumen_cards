@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { LumenMark } from "@/design-system";
+import { LumenMark, Icon } from "@/design-system";
 import { ThemeToggle, getTheme } from "@/features/theme";
 import { requireAdmin, logoutAction } from "@/features/auth";
 
@@ -38,23 +38,23 @@ export default async function AdminLayout({
 
         <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-2.5 py-3.5">
           <Link href="/admin/categories" className={navLink}>
-            <span className="text-base">🗂️</span> {t("categories")}
+            <Icon name="categories" size={18} /> {t("categories")}
           </Link>
           <Link href="/admin/decks" className={navLink}>
-            <span className="text-base">📚</span> {t("decks")}
+            <Icon name="decks" size={18} /> {t("decks")}
           </Link>
           <Link href="/admin/users" className={navLink}>
-            <span className="text-base">👥</span> {t("users")}
+            <Icon name="users" size={18} /> {t("users")}
           </Link>
           <Link href="/" className={navLink}>
-            <span className="text-base">🎓</span> {t("backToApp")}
+            <Icon name="graduation" size={18} /> {t("backToApp")}
           </Link>
         </nav>
 
         <div className="flex flex-col gap-3 border-t border-white/10 px-4 py-4">
           <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-sm">
-              🎓
+            <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/10">
+              <Icon name="graduation" size={16} />
             </span>
             <span className="truncate text-sm font-semibold text-neutral-50">
               {tu("roleAdmin")}

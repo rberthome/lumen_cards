@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { Icon } from "@/design-system";
 import type { DeckDetail } from "../learnerRepository";
 import { DeckDetailHeader } from "./DeckDetailHeader";
 import { DeckDetailHero } from "./DeckDetailHero";
@@ -28,7 +29,7 @@ export async function DeckDetailView({ deck }: { deck: DeckDetail }) {
               href={`/review/${deck.id}`}
               className="flex w-full items-center justify-center gap-2.5 rounded-[var(--radius-lg)] bg-gold-400 px-4 py-4 text-[15px] font-bold text-[#1a1206] shadow-[var(--shadow-gold)] transition-all hover:-translate-y-px hover:bg-gold-500"
             >
-              🃏 {reviewLabel}
+<Icon name="cards" size={18} /> {reviewLabel}
             </Link>
             <DeckCardList cards={deck.cards} />
           </>

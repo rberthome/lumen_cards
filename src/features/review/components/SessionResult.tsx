@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import confetti from "canvas-confetti";
 import { useTranslations } from "next-intl";
-import { Badge, Button, Progress } from "@/design-system";
+import { Badge, Button, Icon, Progress } from "@/design-system";
 import type { ReviewResultSummary } from "../sessionTypes";
 
 function XpCard({
@@ -41,16 +41,16 @@ function ScoreGrid({
           <p className="font-serif text-3xl font-semibold leading-none text-correct">
             {correct}
           </p>
-          <p className="mt-1 text-[13px] font-medium text-correct">
-            ✓ {t("correctLabel")}
+          <p className="mt-1 flex items-center justify-center gap-1 text-[13px] font-medium text-correct">
+            <Icon name="correct" size={14} /> {t("correctLabel")}
           </p>
         </div>
         <div className="rounded-[var(--radius-md)] bg-incorrect/15 p-4 text-center">
           <p className="font-serif text-3xl font-semibold leading-none text-incorrect">
             {incorrect}
           </p>
-          <p className="mt-1 text-[13px] font-medium text-incorrect">
-            ✗ {t("incorrectLabel")}
+          <p className="mt-1 flex items-center justify-center gap-1 text-[13px] font-medium text-incorrect">
+            <Icon name="incorrect" size={14} /> {t("incorrectLabel")}
           </p>
         </div>
       </div>
@@ -89,7 +89,9 @@ export function SessionResult({
   return (
     <div className="mx-auto flex max-w-md flex-col gap-6 px-6 py-12">
       <div className="text-center">
-        <div className="mb-3 text-5xl">🎓</div>
+        <div className="mb-3 flex justify-center text-accent-strong">
+          <Icon name="graduation" size={48} />
+        </div>
         <h1 className="font-serif text-3xl font-semibold text-foreground">
           {t("sessionDone")}
         </h1>
@@ -99,7 +101,7 @@ export function SessionResult({
 
       <div className="flex items-center justify-center">
         <Badge variant="streak">
-          🔥 {t("streakLabel", { count: result.streakDays })}
+          <Icon name="streak" size={14} /> {t("streakLabel", { count: result.streakDays })}
         </Badge>
       </div>
 

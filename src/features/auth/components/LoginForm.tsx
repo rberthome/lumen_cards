@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button, Input, Loader } from "@/design-system";
+import { Button, Icon, Input, Loader } from "@/design-system";
 import { loginAction, type AuthState } from "../actions";
 
 const initial: AuthState = {};
@@ -37,9 +37,9 @@ export function LoginForm() {
           aria-label={showPw ? t("hidePassword") : t("showPassword")}
           aria-pressed={showPw}
           onClick={() => setShowPw((v) => !v)}
-          className="absolute right-3 top-[34px] text-base text-muted transition-colors hover:text-foreground"
+          className="absolute right-3 top-[34px] text-muted transition-colors hover:text-foreground"
         >
-          {showPw ? "🙈" : "👁️"}
+          <Icon name={showPw ? "hide" : "reveal"} size={18} />
         </button>
       </div>
       {state.error && (
@@ -47,7 +47,7 @@ export function LoginForm() {
           role="alert"
           className="flex items-center gap-2 text-sm text-incorrect"
         >
-          <span aria-hidden>⚠️</span>
+          <Icon name="warning" size={16} />
           {state.error}
         </p>
       )}

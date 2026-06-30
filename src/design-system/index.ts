@@ -14,6 +14,8 @@ export { Card } from "./components/Card";
 export type { CardProps } from "./components/Card";
 export { Badge } from "./components/Badge";
 export type { BadgeProps, BadgeVariant } from "./components/Badge";
+export { Icon } from "./components/Icon";
+export type { IconProps, IconName } from "./components/Icon";
 export { Progress } from "./components/Progress";
 export { Loader } from "./components/Loader";
 export { Skeleton } from "./components/Skeleton";

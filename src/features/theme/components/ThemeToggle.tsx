@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { Icon } from "@/design-system";
 import { THEME_COOKIE, type Theme } from "../theme";
 
 const MAX_AGE = 60 * 60 * 24 * 365;
@@ -27,7 +28,8 @@ export function ThemeToggle({ initial }: { initial: Theme }) {
       aria-label={t("label")}
       className="flex items-center gap-1 rounded-full border border-line px-2.5 py-1 text-sm font-medium text-muted transition-colors hover:text-foreground"
     >
-      {isDark ? `☀️ ${t("light")}` : `🌙 ${t("dark")}`}
+      <Icon name={isDark ? "themeLight" : "themeDark"} size={16} />
+      {isDark ? t("light") : t("dark")}
     </button>
   );
 }
