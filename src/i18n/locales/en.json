@@ -17,7 +17,14 @@
     "streak": "Day streak",
     "xp": "XP earned",
     "mastered": "Known cards",
-    "due": "Cards to review"
+    "due": "Cards to review",
+    "masteredHelp": {
+      "aria": "Learn more about known cards",
+      "title": "Known cards",
+      "p1": "A card counts as “known” after {threshold} correct answers in total.",
+      "p2": "Reviews are spaced out at increasingly long intervals: a card only comes back when it is due, so reviewing it several times on the same day only counts once.",
+      "p3": "At the earliest, a card becomes “known” after {minDays} days — the time it takes to get {threshold} correct answers across the spaced reviews."
+    }
   },
   "users": {
     "title": "Users",
